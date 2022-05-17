@@ -1,4 +1,6 @@
-# Laravel-npm_non-root
+# portfolio_ts
+
+Laravel8 × Vue.js3.2 × Typescript4.6 ポートフォリオ
 
 ## バージョン
 - FrontEnd
@@ -14,8 +16,8 @@
 ## Usage
 
 ```bash
-$ git clone git@github.com:watter46/Laravel-npm_non-root.git
-$ cd Laravel-npm_non-root
+$ git clone git@github.com:watter46/portfolio_ts.git
+$ cd portfolio_ts
 $ make create-project
 ```
 
