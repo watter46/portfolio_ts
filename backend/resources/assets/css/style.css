@@ -1,0 +1,129 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/*
+    addInputComponent CSS
+*/
+.addInput-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.addInput-flex__add {
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addInput-flex__input {
+    width: 80%;
+    height: 30px;
+    border-radius: 15px;
+    border: none;
+    margin-right: 1%;
+}
+
+/* 
+    cardComponent CSS
+*/
+
+.card-border {
+    border: 3px solid aliceblue;
+}
+
+.card-flex {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.card-flex__show {
+    width: 90%;
+    height: 100%;
+    text-align: center;
+}
+
+.card-flex__delete {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*
+    buttonCircle CSS
+*/
+.buttonCircle {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: inherit;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.buttonCircle:hover {
+    background-color: rgba(202, 202, 202);
+}
+
+/*
+    plusButton CSS
+*/
+.buttonCircle-plus {
+  display: inline-block;
+  color: #333;
+  line-height: 1;
+  width: 0.2em;
+  height: 1.2em;
+  background: currentColor;
+  border-radius: 0.1em;
+  position: relative;
+}
+
+.buttonCircle-plus::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: inherit;
+  transform: rotate(90deg);
+}
+
+/*
+    crossButton Component CSS
+*/
+.buttonCircle-cross {
+  display: inline-block;
+  color: #333;
+  line-height: 1;
+  width: 0.2em;
+  height: 1.2em;
+  background: currentColor;
+  border-radius: 0.1em;
+  position: relative;
+  transform: rotate(45deg);
+}
+
+.buttonCircle-cross::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: inherit;
+  transform: rotate(90deg);
+}
