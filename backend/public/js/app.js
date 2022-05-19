@@ -17650,12 +17650,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _Functions_Title_getMaxTitleId__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Functions/Title/getMaxTitleId */ "./resources/ts/components/Todo/Functions/Title/getMaxTitleId.ts");
 /* harmony import */ var _Functions_Task_getMaxTaskId__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Functions/Task/getMaxTaskId */ "./resources/ts/components/Todo/Functions/Task/getMaxTaskId.ts");
-/* harmony import */ var _ChangeGrid_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ChangeGrid.vue */ "./resources/ts/components/Todo/ChangeGrid.vue");
+/* harmony import */ var _Functions_Comment_getMaxCommentId__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Functions/Comment/getMaxCommentId */ "./resources/ts/components/Todo/Functions/Comment/getMaxCommentId.ts");
+/* harmony import */ var _ChangeGrid_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ChangeGrid.vue */ "./resources/ts/components/Todo/ChangeGrid.vue");
  // import AddTitle from './Title/AddTitle.vue'
 // import TitleComponent from './Title/TitleComponent.vue'
 
 
- // import getMaxCommentId from './Functions/Comment/getMaxCommentId'
+
 
 
  // ===================================================================================
@@ -17663,7 +17664,11 @@ __webpack_require__.r(__webpack_exports__);
 /**
 * @type {array} testList 全てのデータ配列
 */
-// const testList = ref([])
+// const testList: Ref<TitleType[]> = ref([])
+// const testList: Ref<TitleType[]> = ref([
+//                       {id: 1987654, title: 'title1', tasks: [{id: 3456789, task: 'task1'}]},
+//                       {id: 2252, title: 'title2', tasks: [{id: 3456456789, task: 'task1'}]},
+//                     ])
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   setup: function setup(__props, _ref) {
@@ -17709,17 +17714,26 @@ __webpack_require__.r(__webpack_exports__);
         task: 'task5',
         comments: []
       }]
-    } // {id: 3, title: 'title3', tasks: [
-    //                                   {id: 6, task: 'task6', comments: []},
-    //                                   {id: 7, task: 'task7', comments: [
-    //                                                                     {
-    //                                                                         id: 6,
-    //                                                                         comment: 'comment6'
-    //                                                                     }
-    //                                                                    ]
-    //                                   },
-    //                                 ]},
-    ]);
+    }, {
+      id: 3,
+      title: 'title3',
+      tasks: [{
+        id: 6,
+        task: 'task6',
+        comments: []
+      }, {
+        id: 7,
+        task: 'task7',
+        comments: [{
+          id: 6,
+          comment: 'comment6'
+        }]
+      }]
+    }, {
+      id: 4,
+      title: 'title4',
+      tasks: []
+    }]);
     /**
     * タイトルidの最大値
     */
@@ -17733,8 +17747,8 @@ __webpack_require__.r(__webpack_exports__);
     /**
     * コメントidの最大値
     */
-    // const maxCommentId = ref<number>()
 
+    var maxCommentId = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     /**
     * Grid幅
     */
@@ -17747,9 +17761,9 @@ __webpack_require__.r(__webpack_exports__);
     */
 
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.watchEffect)(function () {
-      maxTitleId.value = (0,_Functions_Title_getMaxTitleId__WEBPACK_IMPORTED_MODULE_1__["default"])(testList.value, 'id');
-      maxTaskId.value = (0,_Functions_Task_getMaxTaskId__WEBPACK_IMPORTED_MODULE_2__["default"])(testList.value, 'tasks', 'id'); // maxCommentId.value = getMaxCommentId(testList.value, 'tasks', 'comments', 'id')
-      // console.log(JSON.stringify(testList.value, null, 2))
+      maxTitleId.value = (0,_Functions_Title_getMaxTitleId__WEBPACK_IMPORTED_MODULE_1__["default"])(testList.value);
+      maxTaskId.value = (0,_Functions_Task_getMaxTaskId__WEBPACK_IMPORTED_MODULE_2__["default"])(testList.value);
+      maxCommentId.value = (0,_Functions_Comment_getMaxCommentId__WEBPACK_IMPORTED_MODULE_3__["default"])(testList.value); // console.log(JSON.stringify(testList.value, null, 2))
     }); // watchEffect(() => {
     //     maxTitleId.value = getMaxTitleId(testList.value, 'id')
     //     maxTaskId.value = getMaxTaskId(testList.value, 'tasks', 'id')
@@ -17800,11 +17814,12 @@ __webpack_require__.r(__webpack_exports__);
       testList: testList,
       maxTitleId: maxTitleId,
       maxTaskId: maxTaskId,
+      maxCommentId: maxCommentId,
       gridCols: gridCols,
       is_divide: is_divide,
       gridChange: gridChange,
       divideChange: divideChange,
-      ChangeGrid: _ChangeGrid_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+      ChangeGrid: _ChangeGrid_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -17919,13 +17934,21 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" グリッドを変更する "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChangeGrid"], {
     onGridChange: $setup.gridChange,
     onDivideChange: $setup.divideChange
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <AddTitle style=\"background-color: grey; height: 50px;\" /> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" maxTitleId: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.maxTitleId), 1
   /* TEXT */
-  ), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" maxTaskId: {{ maxTaskId }}<br>\n    maxCommentId: {{ maxCommentId }} ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <draggable  class=\"grid gap-1\"\n              :class=\"gridCols\"\n              :list=\"testList\"\n              :group=\"{name: 'title'}\"\n              animation=\"600\"\n              item-key=\"id\">\n    <template #item=\"{ element, index }\">\n      <TitleComponent :id=\"element.id\"\n                      :title=\"element.title\"\n                      :task-list=\"element.tasks\"\n                      :title-index=\"index\" />\n    </template>\n  </draggable> ")], 64
+  ), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" maxTaskId: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.maxTaskId), 1
+  /* TEXT */
+  ), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" maxCommentId: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.maxCommentId), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <draggable  class=\"grid gap-1\"\n              :class=\"gridCols\"\n              :list=\"testList\"\n              :group=\"{name: 'title'}\"\n              animation=\"600\"\n              item-key=\"id\">\n    <template #item=\"{ element, index }\">\n      <TitleComponent :id=\"element.id\"\n                      :title=\"element.title\"\n                      :task-list=\"element.tasks\"\n                      :title-index=\"index\" />\n    </template>\n  </draggable> ")], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -17955,18 +17978,16 @@ app.mount('#app');
 
 /***/ }),
 
-/***/ "./resources/ts/components/Todo/Functions/Task/getMaxTaskId.ts":
-/*!*********************************************************************!*\
-  !*** ./resources/ts/components/Todo/Functions/Task/getMaxTaskId.ts ***!
-  \*********************************************************************/
+/***/ "./resources/ts/components/Todo/Functions/Comment/getMaxCommentId.ts":
+/*!***************************************************************************!*\
+  !*** ./resources/ts/components/Todo/Functions/Comment/getMaxCommentId.ts ***!
+  \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ getMaxTitleId)
+/* harmony export */   "default": () => (/* binding */ getMaxCommentId)
 /* harmony export */ });
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '../IsKeyExists/isNestKeyExists'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -17979,52 +18000,53 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-
-
-function getMaxTitleId(list, listKey, key) {
-  var returnMaxTaskId = function returnMaxTaskId(list, listKey, key) {
-    if (Object(function webpackMissingModule() { var e = new Error("Cannot find module '../IsKeyExists/isNestKeyExists'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(list, listKey, key)) {
-      var toRawArray = (0,vue__WEBPACK_IMPORTED_MODULE_1__.toRaw)(list);
-      var listKeyInList = toRawArray.flatMap(function (list) {
-        return list[listKey];
-      }).filter(function (exclude_undefined) {
-        return exclude_undefined;
-      });
-      var idList = listKeyInList.flatMap(function (listKeyInList) {
-        return listKeyInList[key];
-      }).filter(function (exclude_undefined) {
-        return exclude_undefined;
-      });
-      return Math.max.apply(Math, _toConsumableArray(idList));
-    } else {
-      return 0;
-    }
-  };
-  /**
-  * @type {number} maxTaskId タスクidの最大値
-  */
-
-
-  var maxTaskId = returnMaxTaskId(list, listKey, key);
+function getMaxCommentId(list) {
+  var tasksList = list.flatMap(function (titles) {
+    return titles.tasks;
+  });
+  var commentList = tasksList.flatMap(function (tasks) {
+    return tasks === null || tasks === void 0 ? void 0 : tasks.comments;
+  });
+  var commentIdList = commentList.flatMap(function (comments) {
+    return typeof comments !== 'undefined' ? comments.id : 0;
+  });
+  var maxTaskId = commentIdList.length ? Math.max.apply(Math, _toConsumableArray(commentIdList)) : 0;
   return maxTaskId;
 }
 
 /***/ }),
 
-/***/ "./resources/ts/components/Todo/Functions/Title/IsKeyExists/isKeyExists.ts":
-/*!*********************************************************************************!*\
-  !*** ./resources/ts/components/Todo/Functions/Title/IsKeyExists/isKeyExists.ts ***!
-  \*********************************************************************************/
+/***/ "./resources/ts/components/Todo/Functions/Task/getMaxTaskId.ts":
+/*!*********************************************************************!*\
+  !*** ./resources/ts/components/Todo/Functions/Task/getMaxTaskId.ts ***!
+  \*********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ isKeyExists)
+/* harmony export */   "default": () => (/* binding */ getMaxTaskId)
 /* harmony export */ });
-function isKeyExists(list, key) {
-  return list.some(function (listContents) {
-    return key in listContents;
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function getMaxTaskId(list) {
+  var tasksList = list.flatMap(function (titles) {
+    return titles.tasks;
   });
+  var taskIdList = tasksList.flatMap(function (tasks) {
+    return typeof tasks !== 'undefined' ? tasks.id : 0;
+  });
+  var maxTaskId = taskIdList.length ? Math.max.apply(Math, _toConsumableArray(taskIdList)) : 0;
+  return maxTaskId;
 }
 
 /***/ }),
@@ -18039,7 +18061,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getMaxTitleId)
 /* harmony export */ });
-/* harmony import */ var _IsKeyExists_isKeyExists__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IsKeyExists/isKeyExists */ "./resources/ts/components/Todo/Functions/Title/IsKeyExists/isKeyExists.ts");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -18052,22 +18073,11 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-
-function getMaxTitleId(list, key) {
-  var returnMaxTitleId = function returnMaxTitleId(list, key) {
-    if ((0,_IsKeyExists_isKeyExists__WEBPACK_IMPORTED_MODULE_0__["default"])(list, key)) {
-      var idList = list.map(function (title) {
-        return title.id ? title.id : 0;
-      });
-      console.log("getMax true");
-      return Math.max.apply(Math, _toConsumableArray(idList.flat()));
-    } else {
-      console.log("getMax false");
-      return 0;
-    }
-  };
-
-  var maxTitleId = returnMaxTitleId(list, key);
+function getMaxTitleId(list) {
+  var titleIdList = list.map(function (titles) {
+    return titles.id;
+  });
+  var maxTitleId = titleIdList.length ? Math.max.apply(Math, _toConsumableArray(titleIdList)) : 0;
   return maxTitleId;
 }
 

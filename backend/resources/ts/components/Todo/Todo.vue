@@ -7,8 +7,8 @@
 
   <div class="d-flex justify-content-center">
     maxTitleId: {{ maxTitleId }}<br>
-    <!-- maxTaskId: {{ maxTaskId }}<br>
-    maxCommentId: {{ maxCommentId }} -->
+    maxTaskId: {{ maxTaskId }}<br>
+    maxCommentId: {{ maxCommentId }}
   </div>
 
   <!-- <draggable  class="grid gap-1"
@@ -32,7 +32,7 @@ import draggable from 'vuedraggable'
 // import TitleComponent from './Title/TitleComponent.vue'
 import getMaxTitleId from './Functions/Title/getMaxTitleId'
 import getMaxTaskId from './Functions/Task/getMaxTaskId'
-// import getMaxCommentId from './Functions/Comment/getMaxCommentId'
+import getMaxCommentId from './Functions/Comment/getMaxCommentId'
 import ChangeGrid from './ChangeGrid.vue'
 
 import { Ref, ref, provide, watchEffect, onMounted, onUpdated } from 'vue'
@@ -43,7 +43,11 @@ import type { TitleType } from './Functions/type'
     /**
     * @type {array} testList 全てのデータ配列
     */
-    // const testList = ref([])
+    // const testList: Ref<TitleType[]> = ref([])
+    // const testList: Ref<TitleType[]> = ref([
+    //                       {id: 1987654, title: 'title1', tasks: [{id: 3456789, task: 'task1'}]},
+    //                       {id: 2252, title: 'title2', tasks: [{id: 3456456789, task: 'task1'}]},
+    //                     ])
 
     const testList: Ref<TitleType[]> = ref([
                           {id: 1, title: 'title1', tasks: [
@@ -82,16 +86,17 @@ import type { TitleType } from './Functions/type'
                                                             },
                                                             {id: 5, task: 'task5', comments: []},
                                                           ]},
-                          // {id: 3, title: 'title3', tasks: [
-                          //                                   {id: 6, task: 'task6', comments: []},
-                          //                                   {id: 7, task: 'task7', comments: [
-                          //                                                                     {
-                          //                                                                         id: 6,
-                          //                                                                         comment: 'comment6'
-                          //                                                                     }
-                          //                                                                    ]
-                          //                                   },
-                          //                                 ]},
+                          {id: 3, title: 'title3', tasks: [
+                                                            {id: 6, task: 'task6', comments: []},
+                                                            {id: 7, task: 'task7', comments: [
+                                                                                              {
+                                                                                                  id: 6,
+                                                                                                  comment: 'comment6'
+                                                                                              }
+                                                                                             ]
+                                                            },
+                                                          ]},
+                          {id: 4, title: 'title4', tasks:[]}
                         ])
 
     /**
@@ -107,7 +112,7 @@ import type { TitleType } from './Functions/type'
     /**
     * コメントidの最大値
     */
-    // const maxCommentId = ref<number>()
+    const maxCommentId = ref<number>()
 
     /**
     * Grid幅
@@ -124,9 +129,9 @@ import type { TitleType } from './Functions/type'
     * タイトル、タスク、コメントが追加されるとタイトル、タスク、コメントの最大値を更新
     */
     watchEffect(() => {
-        maxTitleId.value = getMaxTitleId(testList.value, 'id')
-        maxTaskId.value = getMaxTaskId(testList.value, 'tasks', 'id')
-        // maxCommentId.value = getMaxCommentId(testList.value, 'tasks', 'comments', 'id')
+        maxTitleId.value = getMaxTitleId(testList.value)
+        maxTaskId.value = getMaxTaskId(testList.value)
+        maxCommentId.value = getMaxCommentId(testList.value)
         // console.log(JSON.stringify(testList.value, null, 2))
       }
     )
