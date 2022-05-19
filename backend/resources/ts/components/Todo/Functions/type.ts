@@ -4,13 +4,13 @@ export type TitleType = {
   tasks?: TaskType[];
 };
 
-type TaskType = {
+export type TaskType = {
   id: number;
   task: string;
   comments?: CommentType[];
 }
 
-type CommentType = {
+export type CommentType = {
   id: number;
   comment: string;
 };

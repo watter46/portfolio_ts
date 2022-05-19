@@ -1,65 +1,79 @@
 <script setup lang="ts">
 import { reactive, onMounted} from 'vue'
 
-  interface Emits {
-    (e: "gridChange", gridCols: string ): void
-    (e: "divideChange", is_divide: boolean ): void
-  }
+/*
+  type
+*/
+interface Emits {
+  (e: "gridChange", gridCols: string ): void
+  (e: "divideChange", is_divide: boolean ): void
+}
 
-  const grids = reactive({
-    gridCols1: false,
-    gridCols2: false,
-    gridCols3: false,
-    gridCols4: false,
-  })
+/*
+  emit
+*/
+const emit = defineEmits<Emits>();
 
-  const comment_divide = reactive({
-    is_divide: false
-  })
+/*
+  data
+*/
+const grids = reactive({
+  gridCols1: false,
+  gridCols2: false,
+  gridCols3: false,
+  gridCols4: false,
+})
 
+const comment_divide = reactive({
+  is_divide: false
+})
 
-  const emit = defineEmits<Emits>();
+/*
+  methods
+*/
+const changeGridColsTo1 = () => {
+  grids.gridCols1 = true
+  grids.gridCols2 = false
+  grids.gridCols3 = false
+  grids.gridCols4 = false
+  emitToTodo('grid-cols-1')
+}
+const changeGridColsTo2 = () => {
+  grids.gridCols1 = false
+  grids.gridCols2 = true
+  grids.gridCols3 = false
+  grids.gridCols4 = false
+  emitToTodo('grid-cols-2')
+}
+const changeGridColsTo3 = () => {
+  grids.gridCols1 = false
+  grids.gridCols2 = false
+  grids.gridCols3 = true
+  grids.gridCols4 = false
+  emitToTodo('grid-cols-3')
+}
+const changeGridColsTo4 = () => {
+  grids.gridCols1 = false
+  grids.gridCols2 = false
+  grids.gridCols3 = false
+  grids.gridCols4 = true
+  emitToTodo('grid-cols-4')
+}
 
-  const divideComment = () => {
-    comment_divide.is_divide ? comment_divide.is_divide = false : comment_divide.is_divide = true
-    emitChange()
-  }
+const divideComment = () => {
+  comment_divide.is_divide ? comment_divide.is_divide = false : comment_divide.is_divide = true
+  emitToTodo()
+}
 
-  const emitChange = (emitGridCols = 'grid-cols-2') => {
-    emit("gridChange", emitGridCols)
-    emit("divideChange", comment_divide.is_divide)
-  }
+const emitToTodo = (emitGridCols = 'grid-cols-2') => {
+  emit("gridChange", emitGridCols)
+  emit("divideChange", comment_divide.is_divide)
+}
 
-  onMounted(emitChange)
-
-  const changeGridColsTo1 = () => {
-    grids.gridCols1 = true
-    grids.gridCols2 = false
-    grids.gridCols3 = false
-    grids.gridCols4 = false
-    emitChange('grid-cols-1')
-  }
-  const changeGridColsTo2 = () => {
-    grids.gridCols1 = false
-    grids.gridCols2 = true
-    grids.gridCols3 = false
-    grids.gridCols4 = false
-    emitChange('grid-cols-2')
-  }
-  const changeGridColsTo3 = () => {
-    grids.gridCols1 = false
-    grids.gridCols2 = false
-    grids.gridCols3 = true
-    grids.gridCols4 = false
-    emitChange('grid-cols-3')
-  }
-  const changeGridColsTo4 = () => {
-    grids.gridCols1 = false
-    grids.gridCols2 = false
-    grids.gridCols3 = false
-    grids.gridCols4 = true
-    emitChange('grid-cols-4')
-  }
+/*
+  mounted
+*/
+onMounted(emitToTodo)
 </script>
 
 <template>
