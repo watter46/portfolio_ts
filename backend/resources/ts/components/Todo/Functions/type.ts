@@ -14,3 +14,15 @@ export type CommentType = {
   id: number;
   comment: string;
 };
+
+export type StateType = {
+  testList: TitleType[];
+  maxTitleId: number;
+  maxTaskId: number;
+  maxCommentId: number;
+}
+
+export type GridStateType = {
+  gridCols: string;
+  is_divide: boolean;
+}

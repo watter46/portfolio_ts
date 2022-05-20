@@ -1,128 +1,50 @@
-
-
 <script setup lang="ts">
 import draggable from 'vuedraggable'
 import AddTitle from './Title/AddTitle.vue'
-// import TitleComponent from './Title/TitleComponent.vue'
+import TitleComponent from './Title/TitleComponent.vue'
 import getMaxTitleId from './Functions/Title/getMaxTitleId'
 import getMaxTaskId from './Functions/Task/getMaxTaskId'
 import getMaxCommentId from './Functions/Comment/getMaxCommentId'
 import ChangeGrid from './ChangeGrid.vue'
 
-import { Ref, ref, provide, watchEffect, onMounted, onUpdated } from 'vue'
-import type { TitleType } from './Functions/type'
+import { Ref, ref, reactive, provide, watchEffect } from 'vue'
+import type { GridStateType } from './Functions/type'
 
-/**
-* @type {array} testList 全てのデータ配列
-*/
-// const testList: Ref<TitleType[]> = ref([])
-// const testList: Ref<TitleType[]> = ref([
-//                       {id: 1987654, title: 'title1', tasks: [{id: 3456789, task: 'task1'}]},
-//                       {id: 2252, title: 'title2', tasks: [{id: 3456456789, task: 'task1'}]},
-//                     ])
+import { state } from './Store/state'
+import { StateKey } from './Store/key'
 
-const testList: Ref<TitleType[]> = ref([
-                      {id: 1, title: 'title1', tasks: [
-                                                        {id: 1, task: 'task1', comments: [
-                                                                                            {
-                                                                                              id: 1,
-                                                                                              comment: 'comment1'
-                                                                                            },
-                                                                                            {
-                                                                                              id: 2,
-                                                                                              comment: 'comment2'
-                                                                                            },
-                                                                                            {
-                                                                                              id: 3,
-                                                                                              comment: 'comment3'
-                                                                                            },
-                                                                                          ]
-                                                        },
-                                                        // {id: 2, task: 'task2', comments: [
-                                                        //                                    {
-                                                        //                                       id: 4,
-                                                        //                                       comment: 'comment4'
-                                                        //                                    }
-                                                        //                                  ]
-                                                        // },
-                                                        // {id: 3, task: 'task3', comments: []},
-                                                      ]
-                      },
-                      {id: 2, title: 'title2', tasks: [
-                                                        {id: 4, task: 'task4', comments: [
-                                                                                          {
-                                                                                              id: 5,
-                                                                                              comment: 'comment5'
-                                                                                          }
-                                                                                          ]
-                                                        },
-                                                        {id: 5, task: 'task5', comments: []},
-                                                      ]},
-                      {id: 3, title: 'title3', tasks: [
-                                                        {id: 6, task: 'task6', comments: []},
-                                                        {id: 7, task: 'task7', comments: [
-                                                                                          {
-                                                                                              id: 6,
-                                                                                              comment: 'comment6'
-                                                                                          }
-                                                                                          ]
-                                                        },
-                                                      ]},
-                      {id: 4, title: 'title4', tasks:[]}
-                    ])
-
-/**
-* タイトルidの最大値
-*/
-const maxTitleId = ref<number>()
-
-/**
-* タスクidの最大値
-*/
-const maxTaskId = ref<number>()
-
-/**
-* コメントidの最大値
-*/
-const maxCommentId = ref<number>()
-
-/**
-* Grid幅
-*/
-let gridCols = ref<string>("")
-
-let is_divide = ref<boolean>()
+const gridState = reactive<GridStateType>({
+  gridCols: "",
+  is_divide: false
+})
 
 
-/**
-* タイトル、タスク、コメントが追加されるとタイトル、タスク、コメントの最大値を更新
-*/
 watchEffect(() => {
-    maxTitleId.value = getMaxTitleId(testList.value)
-    maxTaskId.value = getMaxTaskId(testList.value)
-    maxCommentId.value = getMaxCommentId(testList.value)
-    // console.log(JSON.stringify(testList.value, null, 2))
+    state.maxTitleId = getMaxTitleId(state.testList)
+    state.maxTaskId = getMaxTaskId(state.testList)
+    state.maxCommentId = getMaxCommentId(state.testList)
+    // console.log(JSON.stringify(state.testList, null, 2))
   }
 )
 
 // grid幅を変える
 const gridChange = (emitGridCols: string) => {
-  gridCols.value = emitGridCols
+  gridState.gridCols = emitGridCols
 }
 
 const divideChange = (emit_is_divide: boolean) => {
-  is_divide.value = emit_is_divide
+  gridState.is_divide = emit_is_divide
 }
 
 
 // provide('divideComment', is_divide)
 
-/**
-* リアクティブな全てのデータとタスクの最大値と入力されたタイトルをprovideする
-* @param {testList: array, titleInput: string= maxTaskId: number}
-*/
-provide('addTitle-testList', testList)
-provide('addTitle-maxTitleId', maxTitleId)
+// provide('addTitle-testList', state.testList)
+// provide('addTitle-maxTitleId', state.maxTitleId)
+provide(StateKey, state)
+
+// provide(key, gridState)
+
 
 // provide('deleteTitle', testList)
 
@@ -151,14 +73,14 @@ provide('addTitle-maxTitleId', maxTitleId)
   <AddTitle style="background-color: grey; height: 50px;" />
 
   <div class="d-flex justify-content-center">
-    maxTitleId: {{ maxTitleId }}<br>
-    maxTaskId: {{ maxTaskId }}<br>
-    maxCommentId: {{ maxCommentId }}
+    maxTitleId: {{ state.maxTitleId }}<br>
+    maxTaskId: {{ state.maxTaskId }}<br>
+    maxCommentId: {{ state.maxCommentId }}
   </div>
 
-  <!-- <draggable  class="grid gap-1"
-              :class="gridCols"
-              :list="testList"
+  <draggable  class="grid gap-1"
+              :class="gridState.gridCols"
+              :list="state.testList"
               :group="{name: 'title'}"
               animation="600"
               item-key="id">
@@ -168,5 +90,5 @@ provide('addTitle-maxTitleId', maxTitleId)
                       :task-list="element.tasks"
                       :title-index="index" />
     </template>
-  </draggable> -->
+  </draggable>
 </template>

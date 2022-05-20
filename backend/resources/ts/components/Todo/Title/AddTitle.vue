@@ -1,22 +1,19 @@
 <script setup lang="ts">
+import type { StateType, TitleType } from '../Functions/type'
 import { inject, ref } from 'vue'
-import type { TitleType } from '../Functions/type'
+import { key } from '../Store/key'
 
+const state = inject(key) as StateType
 
 const titleInput = ref("")
 
-
-const testList = inject('addTitle-testList') as TitleType[]
-const maxTitleId = inject('addTitle-maxTitleId') as number
-
-
 const addTitle = (input: string) => {
   const addTitleObject: TitleType = {
-    id: maxTitleId + 1,
+    id: state.maxTitleId + 1,
     title: input,
     tasks: []
   }
-  testList.push(addTitleObject)
+  state.testList.push(addTitleObject)
   titleInput.value = ""
 }
 </script>
