@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { inject, onUpdated } from 'vue'
 import { StateType, TaskType } from '../Functions/type'
-import { key } from '../Store/key'
+import { key as StateKey } from '../Store/InjectionKey/StateKey'
 
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const state = inject(key) as StateType
+const state = inject(StateKey) as StateType
 
 const deleteTitle = () => {
   const deleteIndex = state.testList.findIndex(list => list.id === props.id)

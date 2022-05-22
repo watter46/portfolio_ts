@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { StateType, TitleType } from '../Functions/type'
 import { inject, ref } from 'vue'
-import { key } from '../Store/key'
+import { key as StateKey } from '../Store/InjectionKey/StateKey'
 
-const state = inject(key) as StateType
+const state = inject(StateKey) as StateType
 
 const titleInput = ref("")
 
