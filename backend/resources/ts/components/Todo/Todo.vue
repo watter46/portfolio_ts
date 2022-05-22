@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { GridStateType } from './Functions/type'
+
 import draggable from 'vuedraggable'
 import AddTitle from './Title/AddTitle.vue'
 import TitleComponent from './Title/TitleComponent.vue'
@@ -7,11 +9,10 @@ import getMaxTaskId from './Functions/Task/getMaxTaskId'
 import getMaxCommentId from './Functions/Comment/getMaxCommentId'
 import ChangeGrid from './ChangeGrid.vue'
 
-import { Ref, ref, reactive, provide, watchEffect } from 'vue'
-import type { GridStateType } from './Functions/type'
-
+import { reactive, provide, watchEffect, toRefs } from 'vue'
 import { state } from './Store/state'
-import { StateKey } from './Store/key'
+import { key as StateKey } from './Store/InjectionKey/StateKey'
+import { key as GridStateKey } from './Store/InjectionKey/GridStateKey'
 
 const gridState = reactive<GridStateType>({
   gridCols: "",
@@ -23,11 +24,11 @@ watchEffect(() => {
     state.maxTitleId = getMaxTitleId(state.testList)
     state.maxTaskId = getMaxTaskId(state.testList)
     state.maxCommentId = getMaxCommentId(state.testList)
+    
     // console.log(JSON.stringify(state.testList, null, 2))
   }
 )
 
-// grid幅を変える
 const gridChange = (emitGridCols: string) => {
   gridState.gridCols = emitGridCols
 }
@@ -37,32 +38,9 @@ const divideChange = (emit_is_divide: boolean) => {
 }
 
 
-// provide('divideComment', is_divide)
-
-// provide('addTitle-testList', state.testList)
-// provide('addTitle-maxTitleId', state.maxTitleId)
 provide(StateKey, state)
 
-// provide(key, gridState)
-
-
-// provide('deleteTitle', testList)
-
-/**
-* リアクティブな全てのデータとタスクの最大値をprovideする
-* @param {testList: array, maxTaskId: number}
-*/
-// provide('addTask', { testList, maxTaskId })
-
-// provide('deleteTask', testList)
-
-/**
-* リアクティブな全てのデータとタスクの最大値をprovideする
-* @param {testList: array, maxTaskId: number}
-*/
-// provide('addComment', { testList, maxCommentId })
-
-// provide('deleteComment', testList)
+provide(GridStateKey, gridState)
 </script>
 
 <template>
@@ -78,7 +56,7 @@ provide(StateKey, state)
     maxCommentId: {{ state.maxCommentId }}
   </div>
 
-  <draggable  class="grid gap-1"
+  <draggable  class="grid gap-3"
               :class="gridState.gridCols"
               :list="state.testList"
               :group="{name: 'title'}"
