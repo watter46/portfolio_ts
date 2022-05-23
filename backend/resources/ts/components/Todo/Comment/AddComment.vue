@@ -2,9 +2,12 @@
 import type { CommentType, StateType, TaskType } from '../Functions/type'
 import { key as StateKey } from '../Store/InjectionKey/StateKey'
 import { inject, ref } from 'vue'
+import { getCommentPosition } from '../Functions/Comment/getCommentPosition'
 
 
 interface Props {
+  commentList: CommentType[],
+  taskId: number,
   titleIndex: number,
   taskIndex: number
 }
@@ -18,8 +21,12 @@ const state = inject(StateKey) as StateType
 
 
 const addComment = (input: string) => {
+  const comment_position = getCommentPosition(props.commentList)
+
   const addListObject: CommentType = {
     id: state.maxCommentId + 1,
+    task_id: props.taskId,
+    comment_position: comment_position,
     comment: input,
   }
 

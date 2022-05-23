@@ -4,16 +4,15 @@ import type { GridStateType } from './Functions/type'
 import draggable from 'vuedraggable'
 import AddTitle from './Title/AddTitle.vue'
 import TitleComponent from './Title/TitleComponent.vue'
-import getMaxTitleId from './Functions/Title/getMaxTitleId'
-import getMaxTaskId from './Functions/Task/getMaxTaskId'
-import getMaxCommentId from './Functions/Comment/getMaxCommentId'
+import { getMaxTitleId } from './Functions/Title/getMaxTitleId'
+import { getMaxTaskId } from './Functions/Task/getMaxTaskId'
+import { getMaxCommentId } from './Functions/Comment/getMaxCommentId'
 import ChangeGrid from './ChangeGrid.vue'
 
 import { reactive, provide, watchEffect, ref, onMounted, onBeforeMount  } from 'vue'
 import { state } from './Store/state'
 import { key as StateKey } from './Store/InjectionKey/StateKey'
 import { key as GridStateKey } from './Store/InjectionKey/GridStateKey'
-import { HtmlAttributes } from 'csstype'
 
 const gridState = reactive<GridStateType>({
   gridCols: "",
@@ -25,7 +24,6 @@ watchEffect(() => {
     state.maxTitleId = getMaxTitleId(state.testList)
     state.maxTaskId = getMaxTaskId(state.testList)
     state.maxCommentId = getMaxCommentId(state.testList)
-    
     // console.log(JSON.stringify(state.testList, null, 2))
   }
 )

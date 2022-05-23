@@ -39,7 +39,9 @@ defineProps<Props>();
       </div>
       
       <AddTask class="my-3"
-                :title-index="titleIndex" />
+               :task-list="taskList"
+               :title-id="id"
+               :title-index="titleIndex" />
       <draggable :list="taskList"
                  :group="{name: 'task'}"
                  animation="600"

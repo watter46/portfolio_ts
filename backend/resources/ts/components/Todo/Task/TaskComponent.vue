@@ -43,7 +43,9 @@ const classSwitching__arrow = computed(() => gridState.is_divide ? 'arrow' : '')
                       :task-index="taskIndex" />
         </div>
 
-      <AddComment :title-index="titleIndex"
+      <AddComment :comment-list="commentList"
+                  :task-id="id"
+                  :title-index="titleIndex"
                   :task-index="taskIndex" />
     </div>
 

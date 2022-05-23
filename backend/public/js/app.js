@@ -17592,6 +17592,10 @@ __webpack_require__.r(__webpack_exports__);
       return emitToTodo('grid-cols-4');
     };
 
+    var is_display = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return comment_divide.is_divide ? 'displayNone' : '';
+    });
+
     var divideComment = function divideComment() {
       comment_divide.is_divide ? comment_divide.is_divide = false : comment_divide.is_divide = true;
       emitToTodo();
@@ -17611,6 +17615,7 @@ __webpack_require__.r(__webpack_exports__);
       changeGridColsTo2: changeGridColsTo2,
       changeGridColsTo3: changeGridColsTo3,
       changeGridColsTo4: changeGridColsTo4,
+      is_display: is_display,
       divideComment: divideComment,
       emitToTodo: emitToTodo
     };
@@ -17637,11 +17642,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
+/* harmony import */ var _Functions_Comment_getCommentPosition__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Functions/Comment/getCommentPosition */ "./resources/ts/components/Todo/Functions/Comment/getCommentPosition.ts");
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   props: {
+    commentList: {
+      type: Array,
+      required: true
+    },
+    taskId: {
+      type: Number,
+      required: true
+    },
     titleIndex: {
       type: Number,
       required: true
@@ -17659,8 +17674,11 @@ __webpack_require__.r(__webpack_exports__);
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(_Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_1__.key);
 
     var addComment = function addComment(input) {
+      var comment_position = (0,_Functions_Comment_getCommentPosition__WEBPACK_IMPORTED_MODULE_2__.getCommentPosition)(props.commentList);
       var addListObject = {
         id: state.maxCommentId + 1,
+        task_id: props.taskId,
+        comment_position: comment_position,
         comment: input
       };
       var taskList = state.testList[props.titleIndex].tasks;
@@ -17871,11 +17889,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
+/* harmony import */ var _Functions_Task_getTaskPosition__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Functions/Task/getTaskPosition */ "./resources/ts/components/Todo/Functions/Task/getTaskPosition.ts");
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   props: {
+    taskList: {
+      type: Array,
+      required: true
+    },
+    titleId: {
+      type: Number,
+      required: true
+    },
     titleIndex: {
       type: Number,
       required: true
@@ -17891,8 +17919,13 @@ __webpack_require__.r(__webpack_exports__);
     var addTask = function addTask(input) {
       var _state$testList$props;
 
+      var task_position = (0,_Functions_Task_getTaskPosition__WEBPACK_IMPORTED_MODULE_2__.getTaskPosition)(props.taskList);
       var addListObject = {
         id: state.maxTaskId + 1,
+        title_id: props.titleId,
+        task_position: task_position,
+        done: false,
+        is_showing: false,
         task: input,
         comments: []
       };
@@ -18126,7 +18159,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
+/* harmony import */ var _Functions_Title_getTitlePosition__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Functions/Title/getTitlePosition */ "./resources/ts/components/Todo/Functions/Title/getTitlePosition.ts");
+/* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
+
 
 
 
@@ -18134,12 +18169,14 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(_Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_1__.key);
+    var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(_Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_2__.key);
     var titleInput = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("");
 
     var addTitle = function addTitle(input) {
+      var title_position = (0,_Functions_Title_getTitlePosition__WEBPACK_IMPORTED_MODULE_1__.getTitlePosition)(state.testList);
       var addTitleObject = {
         id: state.maxTitleId + 1,
+        title_position: title_position,
         title: input,
         tasks: []
       };
@@ -18235,6 +18272,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   props: {
     id: {
@@ -18253,7 +18291,15 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var __returned__ = {};
+    var props = __props;
+    var test = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+      value: props.title,
+      edit: false
+    });
+    var __returned__ = {
+      props: props,
+      test: test
+    };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
       value: true
@@ -18376,9 +18422,9 @@ __webpack_require__.r(__webpack_exports__);
       is_divide: false
     });
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.watchEffect)(function () {
-      _Store_state__WEBPACK_IMPORTED_MODULE_8__.state.maxTitleId = (0,_Functions_Title_getMaxTitleId__WEBPACK_IMPORTED_MODULE_4__["default"])(_Store_state__WEBPACK_IMPORTED_MODULE_8__.state.testList);
-      _Store_state__WEBPACK_IMPORTED_MODULE_8__.state.maxTaskId = (0,_Functions_Task_getMaxTaskId__WEBPACK_IMPORTED_MODULE_5__["default"])(_Store_state__WEBPACK_IMPORTED_MODULE_8__.state.testList);
-      _Store_state__WEBPACK_IMPORTED_MODULE_8__.state.maxCommentId = (0,_Functions_Comment_getMaxCommentId__WEBPACK_IMPORTED_MODULE_6__["default"])(_Store_state__WEBPACK_IMPORTED_MODULE_8__.state.testList); // console.log(JSON.stringify(state.testList, null, 2))
+      _Store_state__WEBPACK_IMPORTED_MODULE_8__.state.maxTitleId = (0,_Functions_Title_getMaxTitleId__WEBPACK_IMPORTED_MODULE_4__.getMaxTitleId)(_Store_state__WEBPACK_IMPORTED_MODULE_8__.state.testList);
+      _Store_state__WEBPACK_IMPORTED_MODULE_8__.state.maxTaskId = (0,_Functions_Task_getMaxTaskId__WEBPACK_IMPORTED_MODULE_5__.getMaxTaskId)(_Store_state__WEBPACK_IMPORTED_MODULE_8__.state.testList);
+      _Store_state__WEBPACK_IMPORTED_MODULE_8__.state.maxCommentId = (0,_Functions_Comment_getMaxCommentId__WEBPACK_IMPORTED_MODULE_6__.getMaxCommentId)(_Store_state__WEBPACK_IMPORTED_MODULE_8__.state.testList); // console.log(JSON.stringify(state.testList, null, 2))
     });
 
     var gridChange = function gridChange(emitGridCols) {
@@ -18425,7 +18471,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "gridButton-flex"
+  "class": "gridButton-flex grid grid-cols-4",
+  style: {
+    "border": "1px solid red"
+  }
 };
 var _hoisted_2 = {
   "class": "switch"
@@ -18485,12 +18534,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "gridButton-flex-frame me-2",
     onClick: $setup.changeGridColsTo2
   }, _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "gridButton-flex-frame me-2",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["gridButton-flex-frame me-2", $setup.is_display]),
     onClick: $setup.changeGridColsTo3
-  }, _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "gridButton-flex-frame",
+  }, _hoisted_9, 2
+  /* CLASS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["gridButton-flex-frame", $setup.is_display]),
     onClick: $setup.changeGridColsTo4
-  }, _hoisted_11)]);
+  }, _hoisted_11, 2
+  /* CLASS */
+  )]);
 }
 
 /***/ }),
@@ -18800,14 +18853,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["id", "task", "title-index", "task-index"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AddComment"], {
+    "comment-list": $props.commentList,
+    "task-id": $props.id,
     "title-index": $props.titleIndex,
     "task-index": $props.taskIndex
   }, null, 8
   /* PROPS */
-  , ["title-index", "task-index"])], 2
+  , ["comment-list", "task-id", "title-index", "task-index"])], 2
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($setup.classSwitching__colSpan1),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["", $setup.classSwitching__colSpan1]),
     style: {
       "border": "1px solid red"
     }
@@ -18954,13 +19009,30 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "card-flex__show"
 };
-var _hoisted_2 = {
-  "class": "h2"
-};
+var _hoisted_2 = ["textContent"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
-  /* TEXT */
-  )]);
+  var _directive_focus = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("focus");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [!$setup.test.edit ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    key: 0,
+    textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.test.value),
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $setup.test.edit = true;
+    })
+  }, null, 8
+  /* PROPS */
+  , _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.test.edit ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+    key: 1,
+    type: "text",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $setup.test.value = $event;
+    }),
+    onBlur: _cache[2] || (_cache[2] = function ($event) {
+      return $setup.test.edit = false;
+    })
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.test.value], [_directive_focus]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -19003,10 +19075,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["id", "title", "title-index"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AddTask"], {
     "class": "my-3",
+    "task-list": $props.taskList,
+    "title-id": $props.id,
     "title-index": $props.titleIndex
   }, null, 8
   /* PROPS */
-  , ["title-index"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["draggable"], {
+  , ["task-list", "title-id", "title-index"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["draggable"], {
     list: $props.taskList,
     group: {
       name: 'task'
@@ -19132,7 +19206,30 @@ __webpack_require__.r(__webpack_exports__);
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)(_components_MainComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
 app.use(_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
+app.directive('focus', {
+  mounted: function mounted(el) {
+    el.focus();
+  }
+});
 app.mount('#app');
+
+/***/ }),
+
+/***/ "./resources/ts/components/Todo/Functions/Comment/getCommentPosition.ts":
+/*!******************************************************************************!*\
+  !*** ./resources/ts/components/Todo/Functions/Comment/getCommentPosition.ts ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getCommentPosition": () => (/* binding */ getCommentPosition)
+/* harmony export */ });
+var getCommentPosition = function getCommentPosition(commentList) {
+  var new_comment_position = commentList.length ? commentList.slice(-1)[0].comment_position + 1024 : 1024;
+  return new_comment_position;
+};
 
 /***/ }),
 
@@ -19145,7 +19242,7 @@ app.mount('#app');
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ getMaxCommentId)
+/* harmony export */   "getMaxCommentId": () => (/* binding */ getMaxCommentId)
 /* harmony export */ });
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -19159,7 +19256,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function getMaxCommentId(list) {
+var getMaxCommentId = function getMaxCommentId(list) {
   var tasksList = list.flatMap(function (titles) {
     return titles.tasks;
   });
@@ -19171,7 +19268,7 @@ function getMaxCommentId(list) {
   });
   var maxTaskId = commentIdList.length ? Math.max.apply(Math, _toConsumableArray(commentIdList)) : 0;
   return maxTaskId;
-}
+};
 
 /***/ }),
 
@@ -19184,7 +19281,7 @@ function getMaxCommentId(list) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ getMaxTaskId)
+/* harmony export */   "getMaxTaskId": () => (/* binding */ getMaxTaskId)
 /* harmony export */ });
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -19198,7 +19295,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function getMaxTaskId(list) {
+var getMaxTaskId = function getMaxTaskId(list) {
   var tasksList = list.flatMap(function (titles) {
     return titles.tasks;
   });
@@ -19207,7 +19304,25 @@ function getMaxTaskId(list) {
   });
   var maxTaskId = taskIdList.length ? Math.max.apply(Math, _toConsumableArray(taskIdList)) : 0;
   return maxTaskId;
-}
+};
+
+/***/ }),
+
+/***/ "./resources/ts/components/Todo/Functions/Task/getTaskPosition.ts":
+/*!************************************************************************!*\
+  !*** ./resources/ts/components/Todo/Functions/Task/getTaskPosition.ts ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getTaskPosition": () => (/* binding */ getTaskPosition)
+/* harmony export */ });
+var getTaskPosition = function getTaskPosition(taskList) {
+  var new_task_position = taskList.length ? taskList.slice(-1)[0].task_position + 1024 : 1024;
+  return new_task_position;
+};
 
 /***/ }),
 
@@ -19220,7 +19335,7 @@ function getMaxTaskId(list) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ getMaxTitleId)
+/* harmony export */   "getMaxTitleId": () => (/* binding */ getMaxTitleId)
 /* harmony export */ });
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -19234,13 +19349,31 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function getMaxTitleId(list) {
+var getMaxTitleId = function getMaxTitleId(list) {
   var titleIdList = list.map(function (titles) {
     return titles.id;
   });
   var maxTitleId = titleIdList.length ? Math.max.apply(Math, _toConsumableArray(titleIdList)) : 0;
   return maxTitleId;
-}
+};
+
+/***/ }),
+
+/***/ "./resources/ts/components/Todo/Functions/Title/getTitlePosition.ts":
+/*!**************************************************************************!*\
+  !*** ./resources/ts/components/Todo/Functions/Title/getTitlePosition.ts ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getTitlePosition": () => (/* binding */ getTitlePosition)
+/* harmony export */ });
+var getTitlePosition = function getTitlePosition(list) {
+  var new_title_position = list.length ? list.slice(-1)[0].title_position + 1024 : 1024;
+  return new_title_position;
+};
 
 /***/ }),
 
@@ -19288,86 +19421,53 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var t1 = [];
-var t2 = [{
-  id: 1987654,
-  title: 'title1',
-  tasks: [{
-    id: 3456789,
-    task: 'task1'
-  }]
-}, {
-  id: 2252,
-  title: 'title2',
-  tasks: [{
-    id: 3456456789,
-    task: 'task1'
-  }]
-}];
 var t3 = [{
   id: 1,
   title: 'title1',
+  title_position: 1024,
   tasks: [{
     id: 1,
+    title_id: 1,
+    task_position: 1024,
+    done: false,
+    is_showing: false,
     task: 'task1',
     comments: [{
       id: 1,
+      task_id: 1,
+      comment_position: 1024,
       comment: 'comment1'
     }, {
       id: 2,
+      task_id: 1,
+      comment_position: 2048,
       comment: 'comment2'
-    }, {
-      id: 3,
-      comment: 'comment3'
     }]
   }, {
     id: 2,
+    title_id: 1,
+    task_position: 2048,
+    done: false,
+    is_showing: false,
     task: 'task2',
     comments: [{
       id: 4,
+      task_id: 2,
+      comment_position: 1024,
       comment: 'comment4'
     }]
   }, {
     id: 3,
+    title_id: 1,
+    task_position: 3072,
+    done: false,
+    is_showing: false,
     task: 'task3',
     comments: []
   }]
-}, {
-  id: 2,
-  title: 'title2',
-  tasks: [{
-    id: 4,
-    task: 'task4',
-    comments: [{
-      id: 5,
-      comment: 'comment5'
-    }]
-  }, {
-    id: 5,
-    task: 'task5',
-    comments: []
-  }]
-}, {
-  id: 3,
-  title: 'title3',
-  tasks: [{
-    id: 6,
-    task: 'task6',
-    comments: []
-  }, {
-    id: 7,
-    task: 'task7',
-    comments: [{
-      id: 6,
-      comment: 'comment6'
-    }]
-  }]
-}, {
-  id: 4,
-  title: 'title4',
-  tasks: []
 }];
 var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-  testList: t3,
+  testList: t1,
   maxTitleId: 0,
   maxTaskId: 0,
   maxCommentId: 0
@@ -19462,7 +19562,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".gridButton-flex {\n  width: 20%;\n  height: 50px;\n  margin: 0 0 0 auto;\n  display: flex;\n  align-items: center;\n}\n\n.gridButton-flex-frame {\n  color: #fff;\n  line-height: 1;\n  width: 30px;\n  height: 30px;\n  background: currentColor;\n  border-radius: 0.1em;\n  margin: 0 0 0 auto;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.gridButton-flex-frame:hover {\n  background-color: rgba(202, 202, 202);\n}\n\n.gridButton-flex-frame__changeTo1 {\n  color: #333;\n  line-height: 1;\n  width: 1.2em;\n  height: 1.2em;\n  background: currentColor;\n  border-radius: 0.1em;\n}\n\n.gridButton-flex-frame__changeTo2 {\n  width: 0.7em;\n  height: 0.7em;\n  position: relative;\n  left: -0.45em;\n  background-color: #333;\n  box-shadow: 0.9em 0 0 0 #333;\n}\n\n\n.gridButton-flex-frame__changeTo3 {\n  width: 0.5em;\n  height: 0.5em;\n  position: relative;\n  background-color: #333;\n  box-shadow: \n    -0.7em 0 0 0 #333,\n    0.7em 0 0 0 #333;\n}\n\n.gridButton-flex-frame__changeTo4 {\n  width: 0.5em;\n  height: 0.5em;\n  position: relative;\n  top: -0.35em;\n  left:-0.35em;\n  background-color: #333;\n  box-shadow: \n    0.7em 0 0 0 #333,\n    0 0.7em 0 0 #333,\n    0.7em 0.7em 0 0 #333;\n}\n\n.arrow {\n  display: inline-block;\n  color: #333;\n  line-height: 1;\n  width: 1.5em;\n  height: 0.7em;\n  background: #333;\n  border-radius: 0.1em;\n  position: relative;\n  top: 0.5em;\n  left: 0.6em;\n}\n\n.arrow::before {\n  content: \"\";\n  position: absolute;\n  top: -45%;\n  left: 90%;\n  border-top: 0.7em solid transparent;\n  border-bottom: 0.7em solid transparent;\n  border-left: 0.75em solid #333;\n}\n/* .arrow {\n  display: inline-block;\n  color: #333;\n  line-height: 1;\n  width: 3.0em;\n  height: 1.5em;\n  background: #333;\n  border-radius: 0.1em;\n  position: relative;\n  top: 0.7em;\n  left: -0.5em;\n}\n\n.arrow::before {\n  content: \"\";\n  position: absolute;\n  top: -45%;\n  left: 90%;\n  border-top: 1.4em solid transparent;\n  border-bottom: 1.4em solid transparent;\n  border-left: 1.5em solid #333;\n} */\n\n/* The switch - the box around the slider */\n.switch {\n  position: relative;\n  display: inline-block;\n  width: 50px;\n  height: 28px;\n}\n\n/* Hide default HTML checkbox */\n.switch input {\n  opacity: 0;\n  width: 0;\n  height: 0;\n}\n\n/* The slider */\n.slider {\n  position: absolute;\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #ccc;\n  transition: .4s;\n}\n\n.slider:before {\n  position: absolute;\n  content: \"\";\n  height: 22px;\n  width: 22px;\n  left: 3px;\n  bottom: 3px;\n  background-color: white;\n  transition: .4s;\n}\n\ninput:checked + .slider {\n  background-color: #333;\n}\n\ninput:focus + .slider {\n  box-shadow: 0 0 1px #333;\n}\n\ninput:checked + .slider:before {\n  transform: translateX(22px);\n}\n\n/* Rounded sliders */\n.slider.round {\n  border-radius: 34px;\n}\n\n.slider.round:before {\n  border-radius: 50%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".gridButton-flex {\n  width: 20%;\n  height: 50px;\n  margin: 0 0 0 auto;\n  display: flex;\n  align-items: center;\n}\n\n.gridButton-flex-frame {\n  color: #fff;\n  line-height: 1;\n  width: 30px;\n  height: 30px;\n  background: currentColor;\n  border-radius: 0.1em;\n  margin: 0 0 0 auto;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.gridButton-flex-frame:hover {\n  background-color: rgba(202, 202, 202);\n}\n\n.gridButton-flex-frame__changeTo1 {\n  color: #333;\n  line-height: 1;\n  width: 1.2em;\n  height: 1.2em;\n  background: currentColor;\n  border-radius: 0.1em;\n}\n\n.gridButton-flex-frame__changeTo2 {\n  width: 0.7em;\n  height: 0.7em;\n  position: relative;\n  left: -0.45em;\n  background-color: #333;\n  box-shadow: 0.9em 0 0 0 #333;\n}\n\n\n.gridButton-flex-frame__changeTo3 {\n  width: 0.5em;\n  height: 0.5em;\n  position: relative;\n  background-color: #333;\n  box-shadow: \n    -0.7em 0 0 0 #333,\n    0.7em 0 0 0 #333;\n}\n\n.gridButton-flex-frame__changeTo4 {\n  width: 0.5em;\n  height: 0.5em;\n  position: relative;\n  top: -0.35em;\n  left:-0.35em;\n  background-color: #333;\n  box-shadow: \n    0.7em 0 0 0 #333,\n    0 0.7em 0 0 #333,\n    0.7em 0.7em 0 0 #333;\n}\n\n.arrow {\n  display: inline-block;\n  color: #333;\n  line-height: 1;\n  width: 1.5em;\n  height: 0.7em;\n  background: #333;\n  border-radius: 0.1em;\n  position: relative;\n  top: 0.5em;\n  left: 0.6em;\n}\n\n.arrow::before {\n  content: \"\";\n  position: absolute;\n  top: -45%;\n  left: 90%;\n  border-top: 0.7em solid transparent;\n  border-bottom: 0.7em solid transparent;\n  border-left: 0.75em solid #333;\n}\n/* .arrow {\n  display: inline-block;\n  color: #333;\n  line-height: 1;\n  width: 3.0em;\n  height: 1.5em;\n  background: #333;\n  border-radius: 0.1em;\n  position: relative;\n  top: 0.7em;\n  left: -0.5em;\n}\n\n.arrow::before {\n  content: \"\";\n  position: absolute;\n  top: -45%;\n  left: 90%;\n  border-top: 1.4em solid transparent;\n  border-bottom: 1.4em solid transparent;\n  border-left: 1.5em solid #333;\n} */\n\n/* The switch - the box around the slider */\n.switch {\n  position: relative;\n  display: inline-block;\n  width: 50px;\n  height: 28px;\n}\n\n/* Hide default HTML checkbox */\n.switch input {\n  opacity: 0;\n  width: 0;\n  height: 0;\n}\n\n/* The slider */\n.slider {\n  position: absolute;\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #ccc;\n  transition: .4s;\n}\n\n.slider:before {\n  position: absolute;\n  content: \"\";\n  height: 22px;\n  width: 22px;\n  left: 3px;\n  bottom: 3px;\n  background-color: white;\n  transition: .4s;\n}\n\ninput:checked + .slider {\n  background-color: #333;\n}\n\ninput:focus + .slider {\n  box-shadow: 0 0 1px #333;\n}\n\ninput:checked + .slider:before {\n  transform: translateX(22px);\n}\n\n/* Rounded sliders */\n.slider.round {\n  border-radius: 34px;\n}\n\n.slider.round:before {\n  border-radius: 50%;\n}\n\n.displayNone {\n  display: none;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

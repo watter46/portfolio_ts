@@ -1,6 +1,6 @@
 import type { TitleType } from '../type'
 
-export default function getMaxCommentId(list: TitleType[]) {
+export const getMaxCommentId = (list: TitleType[]) => {
   const tasksList = list.flatMap(titles => titles.tasks)
   
   const commentList = tasksList.flatMap(tasks => tasks?.comments)

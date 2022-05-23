@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { StateType, TitleType } from '../Functions/type'
+import { getTitlePosition } from '../Functions/Title/getTitlePosition'
+
 import { inject, ref } from 'vue'
 import { key as StateKey } from '../Store/InjectionKey/StateKey'
 
@@ -7,9 +9,14 @@ const state = inject(StateKey) as StateType
 
 const titleInput = ref("")
 
+
+
 const addTitle = (input: string) => {
+  const title_position = getTitlePosition(state.testList)
+
   const addTitleObject: TitleType = {
     id: state.maxTitleId + 1,
+    title_position: title_position,
     title: input,
     tasks: []
   }
