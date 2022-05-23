@@ -47,7 +47,7 @@ const classSwitching__arrow = computed(() => gridState.is_divide ? 'arrow' : '')
                   :task-index="taskIndex" />
     </div>
 
-    <div :class="classSwitching__colSpan1" style="border: 1px solid red;">
+    <div class="" :class="classSwitching__colSpan1" style="border: 1px solid red;">
       <div :class="classSwitching__arrow"></div>
     </div>
 

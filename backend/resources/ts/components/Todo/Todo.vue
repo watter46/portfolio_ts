@@ -9,10 +9,11 @@ import getMaxTaskId from './Functions/Task/getMaxTaskId'
 import getMaxCommentId from './Functions/Comment/getMaxCommentId'
 import ChangeGrid from './ChangeGrid.vue'
 
-import { reactive, provide, watchEffect, toRefs } from 'vue'
+import { reactive, provide, watchEffect, ref, onMounted, onBeforeMount  } from 'vue'
 import { state } from './Store/state'
 import { key as StateKey } from './Store/InjectionKey/StateKey'
 import { key as GridStateKey } from './Store/InjectionKey/GridStateKey'
+import { HtmlAttributes } from 'csstype'
 
 const gridState = reactive<GridStateType>({
   gridCols: "",
