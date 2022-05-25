@@ -3,7 +3,7 @@
 namespace App\Http\Resources\Todo;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\CommentResource;
+use App\Http\Resources\Todo\CommentResource;
 
 
 class TaskResource extends JsonResource

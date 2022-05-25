@@ -33,8 +33,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'api'], function() {
+    Route::get('/', IndexTitle::class);
+    
     Route::prefix('todo/title')->group(function () {
-        Route::get('/', IndexTitle::class);
         Route::post('/post', CreateTitle::class);
         Route::patch('/{id}/patch', UpdateTitle::class);
         Route::delete('/{id}/delete', DestroyTitle::class);

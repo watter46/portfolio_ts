@@ -14,16 +14,22 @@ import { state } from './Store/state'
 import { key as StateKey } from './Store/InjectionKey/StateKey'
 import { key as GridStateKey } from './Store/InjectionKey/GridStateKey'
 
+import axios from 'axios'
+
 const gridState = reactive<GridStateType>({
   gridCols: "",
   is_divide: false
 })
 
+axios.get('/api/')
+.then(response => {
+  state.allData.push(...response.data)
+})
 
 watchEffect(() => {
-    state.maxTitleId = getMaxTitleId(state.testList)
-    state.maxTaskId = getMaxTaskId(state.testList)
-    state.maxCommentId = getMaxCommentId(state.testList)
+    state.maxTitleId = getMaxTitleId(state.allData)
+    state.maxTaskId = getMaxTaskId(state.allData)
+    state.maxCommentId = getMaxCommentId(state.allData)
     // console.log(JSON.stringify(state.testList, null, 2))
   }
 )
@@ -55,9 +61,10 @@ provide(GridStateKey, gridState)
     maxCommentId: {{ state.maxCommentId }}
   </div>
 
+
   <draggable  class="grid gap-3"
               :class="gridState.gridCols"
-              :list="state.testList"
+              :list="state.allData"
               :group="{name: 'title'}"
               animation="600"
               item-key="id">

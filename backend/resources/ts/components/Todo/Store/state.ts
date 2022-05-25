@@ -62,6 +62,7 @@ const t3:TitleType[] = [
 
 export const state = reactive<StateType>({
   testList: t1,
+  allData: [],
   maxTitleId: 0,
   maxTaskId: 0,
   maxCommentId: 0,

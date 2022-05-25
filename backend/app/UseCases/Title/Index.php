@@ -3,12 +3,12 @@
 namespace App\UseCases\Title;
 
 use App\Models\Todo\Title;
-use App\Http\Resources\IndexTitleResource;
+use App\Http\Resources\Todo\TitleResource;
 
 
 class Index
 {
-    public function __invoke(): IndexTitleResource
+    public function __invoke()
     {
         $allData = Title::orderBy('title_position', 'asc')
                         ->with('tasks.comments')
@@ -17,6 +17,6 @@ class Index
         // $allData = Title::orderBy('title_position', 'asc')
 
 
-        return new IndexTitleResource($allData);
+        return TitleResource::collection($allData);
     }
 }

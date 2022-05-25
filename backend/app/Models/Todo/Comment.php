@@ -12,6 +12,6 @@ class Comment extends Model
     protected $fillable = ['id','task_id', 'comment_position', 'comment'];
 
     public function tasks() {
-        return $this->belongsTo('App\Task');
+        return $this->belongsTo('App\Models\Todo\Task');
     }
 }

@@ -17,7 +17,7 @@ const props = defineProps<Props>();
 const state = inject(StateKey) as StateType
 
 const deleteComment = () => {
-  const taskList = state.testList[props.titleIndex].tasks as TaskType[]
+  const taskList = state.allData[props.titleIndex].tasks as TaskType[]
   const commentList = taskList[props.taskIndex].comments as CommentType[]
 
   commentList.splice(props.commentIndex, 1)

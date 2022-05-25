@@ -3,7 +3,7 @@
 namespace App\Http\Resources\Todo;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\TaskResource;
+use App\Http\Resources\Todo\TaskResource;
 
 
 class TitleResource extends JsonResource

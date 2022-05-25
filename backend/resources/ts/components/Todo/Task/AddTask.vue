@@ -31,7 +31,7 @@ const addTask = (input: string) => {
     comments: []
   }
 
-  state.testList[props.titleIndex].tasks?.push(addListObject)
+  state.allData[props.titleIndex].tasks?.push(addListObject)
 
   taskInput.value = ""
 }

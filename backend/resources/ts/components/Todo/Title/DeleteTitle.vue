@@ -15,8 +15,8 @@ const props = defineProps<Props>();
 const state = inject(StateKey) as StateType
 
 const deleteTitle = () => {
-  const deleteIndex = state.testList.findIndex(list => list.id === props.id)
-  state.testList.splice(deleteIndex, 1)
+  const deleteIndex = state.allData.findIndex(list => list.id === props.id)
+  state.allData.splice(deleteIndex, 1)
 }
 
 // onUpdated(() => console.log(props.circleWidth))

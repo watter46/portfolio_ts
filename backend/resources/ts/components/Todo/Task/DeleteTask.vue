@@ -17,7 +17,7 @@ const props = defineProps<Props>();
 const state = inject(StateKey) as StateType
 
 const deleteTask = () => {
-  const deleteTaskList = state.testList[props.titleIndex].tasks as TaskType[]
+  const deleteTaskList = state.allData[props.titleIndex].tasks as TaskType[]
 
   const deleteIndex = deleteTaskList.findIndex(tasks => tasks.id === props.id)
 

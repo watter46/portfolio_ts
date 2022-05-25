@@ -13,11 +13,11 @@ class Task extends Model
 
     public function titles()
     {
-        return $this->belongsTo('App\Title');
+        return $this->belongsTo('App\Models\Todo\Title');
     }
 
     public function comments() {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany('App\Models\Todo\Comment');
     }
 
     public function scopeTaskAsc($query)

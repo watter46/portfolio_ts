@@ -12,7 +12,7 @@ const titleInput = ref("")
 
 
 const addTitle = (input: string) => {
-  const title_position = getTitlePosition(state.testList)
+  const title_position = getTitlePosition(state.allData)
 
   const addTitleObject: TitleType = {
     id: state.maxTitleId + 1,
@@ -20,7 +20,7 @@ const addTitle = (input: string) => {
     title: input,
     tasks: []
   }
-  state.testList.push(addTitleObject)
+  state.allData.push(addTitleObject)
   titleInput.value = ""
 }
 </script>
