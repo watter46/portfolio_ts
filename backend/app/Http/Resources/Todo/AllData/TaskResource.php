@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Resources\Todo;
+namespace App\Http\Resources\Todo\AllData;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\Todo\CommentResource;
+use App\Http\Resources\Todo\AllData\CommentResource;
 
 
 class TaskResource extends JsonResource

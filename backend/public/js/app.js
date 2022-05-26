@@ -20212,7 +20212,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _Functions_Title_getTitlePosition__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Functions/Title/getTitlePosition */ "./resources/ts/components/Todo/Functions/Title/getTitlePosition.ts");
+/* harmony import */ var _addTitleLogic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addTitleLogic */ "./resources/ts/components/Todo/Title/addTitleLogic.ts");
 /* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
 
 
@@ -20226,14 +20226,7 @@ __webpack_require__.r(__webpack_exports__);
     var titleInput = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("");
 
     var addTitle = function addTitle(input) {
-      var title_position = (0,_Functions_Title_getTitlePosition__WEBPACK_IMPORTED_MODULE_1__.getTitlePosition)(state.allData);
-      var addTitleObject = {
-        id: state.maxTitleId + 1,
-        title_position: title_position,
-        title: input,
-        tasks: []
-      };
-      state.allData.push(addTitleObject);
+      (0,_addTitleLogic__WEBPACK_IMPORTED_MODULE_1__.addTitleLogic)(input, state);
       titleInput.value = "";
     };
 
@@ -20264,7 +20257,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
+/* harmony import */ var _deleteTitleLogic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./deleteTitleLogic */ "./resources/ts/components/Todo/Title/deleteTitleLogic.ts");
+/* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
+
 
 
 
@@ -20287,15 +20282,11 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var props = __props;
-    var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(_Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_1__.key);
+    var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(_Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_2__.key);
 
     var deleteTitle = function deleteTitle() {
-      var deleteIndex = state.allData.findIndex(function (list) {
-        return list.id === props.id;
-      });
-      state.allData.splice(deleteIndex, 1);
-    }; // onUpdated(() => console.log(props.circleWidth))
-
+      return (0,_deleteTitleLogic__WEBPACK_IMPORTED_MODULE_1__.deleteTitleLogic)(state, props.id);
+    };
 
     var __returned__ = {
       props: props,
@@ -20454,20 +20445,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Store_state__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Store/state */ "./resources/ts/components/Todo/Store/state.ts");
 /* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
 /* harmony import */ var _Store_InjectionKey_GridStateKey__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Store/InjectionKey/GridStateKey */ "./resources/ts/components/Todo/Store/InjectionKey/GridStateKey.ts");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_11__);
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
+/* harmony import */ var _Api_todo_api__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Api/todo-api */ "./resources/ts/components/Todo/Api/todo-api.ts");
 
 
 
@@ -20489,25 +20467,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       gridCols: "",
       is_divide: false
     });
-    axios__WEBPACK_IMPORTED_MODULE_11___default().get('/api/').then(function (response) {
-      var _state$allData;
+    (0,_Api_todo_api__WEBPACK_IMPORTED_MODULE_11__.getAllData)();
 
-      (_state$allData = _Store_state__WEBPACK_IMPORTED_MODULE_8__.state.allData).push.apply(_state$allData, _toConsumableArray(response.data));
-    });
+    var gridChange = function gridChange(emitGridCols) {
+      return gridState.gridCols = emitGridCols;
+    };
+
+    var divideChange = function divideChange(emit_is_divide) {
+      return gridState.is_divide = emit_is_divide;
+    };
+
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.watchEffect)(function () {
       _Store_state__WEBPACK_IMPORTED_MODULE_8__.state.maxTitleId = (0,_Functions_Title_getMaxTitleId__WEBPACK_IMPORTED_MODULE_4__.getMaxTitleId)(_Store_state__WEBPACK_IMPORTED_MODULE_8__.state.allData);
       _Store_state__WEBPACK_IMPORTED_MODULE_8__.state.maxTaskId = (0,_Functions_Task_getMaxTaskId__WEBPACK_IMPORTED_MODULE_5__.getMaxTaskId)(_Store_state__WEBPACK_IMPORTED_MODULE_8__.state.allData);
       _Store_state__WEBPACK_IMPORTED_MODULE_8__.state.maxCommentId = (0,_Functions_Comment_getMaxCommentId__WEBPACK_IMPORTED_MODULE_6__.getMaxCommentId)(_Store_state__WEBPACK_IMPORTED_MODULE_8__.state.allData); // console.log(JSON.stringify(state.testList, null, 2))
     });
-
-    var gridChange = function gridChange(emitGridCols) {
-      gridState.gridCols = emitGridCols;
-    };
-
-    var divideChange = function divideChange(emit_is_divide) {
-      gridState.is_divide = emit_is_divide;
-    };
-
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.provide)(_Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_9__.key, _Store_state__WEBPACK_IMPORTED_MODULE_8__.state);
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.provide)(_Store_InjectionKey_GridStateKey__WEBPACK_IMPORTED_MODULE_10__.key, gridState);
     var __returned__ = {
@@ -21288,6 +21262,44 @@ app.mount('#app');
 
 /***/ }),
 
+/***/ "./resources/ts/components/Todo/Api/todo-api.ts":
+/*!******************************************************!*\
+  !*** ./resources/ts/components/Todo/Api/todo-api.ts ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getAllData": () => (/* binding */ getAllData)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Store_state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Store/state */ "./resources/ts/components/Todo/Store/state.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
+var getAllData = function getAllData() {
+  axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/').then(function (response) {
+    var _state$allData;
+
+    (_state$allData = _Store_state__WEBPACK_IMPORTED_MODULE_1__.state.allData).push.apply(_state$allData, _toConsumableArray(response.data));
+  });
+};
+
+/***/ }),
+
 /***/ "./resources/ts/components/Todo/Functions/Comment/getCommentPosition.ts":
 /*!******************************************************************************!*\
   !*** ./resources/ts/components/Todo/Functions/Comment/getCommentPosition.ts ***!
@@ -21546,6 +21558,72 @@ var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
   maxTaskId: 0,
   maxCommentId: 0
 });
+
+/***/ }),
+
+/***/ "./resources/ts/components/Todo/Title/addTitleLogic.ts":
+/*!*************************************************************!*\
+  !*** ./resources/ts/components/Todo/Title/addTitleLogic.ts ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addTitleLogic": () => (/* binding */ addTitleLogic)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Functions_Title_getTitlePosition__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Functions/Title/getTitlePosition */ "./resources/ts/components/Todo/Functions/Title/getTitlePosition.ts");
+
+
+var addTitleLogic = function addTitleLogic(input, state) {
+  var title_position = (0,_Functions_Title_getTitlePosition__WEBPACK_IMPORTED_MODULE_1__.getTitlePosition)(state.allData);
+  var addTitleData = {
+    title_position: title_position,
+    title: input
+  };
+  /* APIと通信 */
+
+  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/todo/title/post', addTitleData).then(function (response) {
+    return state.allData.push(response.data);
+  })["catch"](function (e) {
+    return console.log(e.message);
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/ts/components/Todo/Title/deleteTitleLogic.ts":
+/*!****************************************************************!*\
+  !*** ./resources/ts/components/Todo/Title/deleteTitleLogic.ts ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "deleteTitleLogic": () => (/* binding */ deleteTitleLogic)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var deleteTitleLogic = function deleteTitleLogic(state, id) {
+  /* API通信 */
+  axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]('/api/todo/title/' + id + '/delete', {
+    data: {
+      id: id
+    }
+  }).then(function () {
+    return console.log("delete 成功");
+  })["catch"](function (e) {
+    return console.log(e.message);
+  });
+  var deleteIndex = state.allData.findIndex(function (list) {
+    return list.id === id;
+  });
+  state.allData.splice(deleteIndex, 1);
+};
 
 /***/ }),
 

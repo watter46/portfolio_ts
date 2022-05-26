@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Todo;
+namespace App\Http\Resources\Todo\AllData;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Todo\AllData\TaskResource;
 
-class CommentResource extends JsonResource
+
+class TitleResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +18,9 @@ class CommentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'task_id' => $this->task_id,
-            'comment_position' => $this->comment_position,
-            'comment' => $this->comment,
+            'title_position' => $this->title_position,
+            'title' => $this->title,
+            'tasks' => TaskResource::collection($this->whenLoaded('tasks'))
         ];
     }
 }

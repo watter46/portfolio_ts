@@ -2,18 +2,17 @@
 
 namespace App\UseCases\Title;
 
+use App\Http\Resources\Todo\Title\CreateResource;
+
 use App\Models\Todo\Title;
-use App\Http\Resources\IndexTitleResource;
 
 
 class Create
 {
-    public function __invoke(array $data): IndexTitleResource
+    public function __invoke(array $data)
     {
         $data = Title::create($data);
-
-        $response = Title::where('id', $data->id)->get();
         
-        return new IndexTitleResource($response);
+        return new CreateResource($data);
     }
 }

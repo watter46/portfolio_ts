@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { inject, onUpdated } from 'vue'
-import { StateType, TaskType } from '../Functions/type'
+import type { StateType, TaskType } from '../Functions/type'
+
+import { deleteTitleLogic } from './deleteTitleLogic'
 import { key as StateKey } from '../Store/InjectionKey/StateKey'
+
+import { inject, onUpdated } from 'vue'
 
 
 interface Props {
@@ -9,18 +12,13 @@ interface Props {
   title: string,
   titleIndex: number
 }
-
 const props = defineProps<Props>();
 
 const state = inject(StateKey) as StateType
 
-const deleteTitle = () => {
-  const deleteIndex = state.allData.findIndex(list => list.id === props.id)
-  state.allData.splice(deleteIndex, 1)
-}
-
-// onUpdated(() => console.log(props.circleWidth))
+const deleteTitle = () => deleteTitleLogic(state, props.id)
 </script>
+
 
 <template>
   <div class="card-flex__delete">

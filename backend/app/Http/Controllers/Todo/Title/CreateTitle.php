@@ -14,10 +14,12 @@ class CreateTitle extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(CreateRequest $request, CreateUseCase $createUC): IndexTitleResource
+    public function __invoke(CreateRequest $request, CreateUseCase $createUC)
     {
         $data = $request->validated();
         
-        return new IndexTitleResource($createUC($data));
+        $getTitle = $createUC($data);
+
+        return $getTitle;
     }
 }

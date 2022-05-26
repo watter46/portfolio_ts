@@ -15,6 +15,8 @@ class IndexTitle extends Controller
      */
     public function __invoke(IndexUseCase $IndexUC)
     {
-        return $IndexUC();
+        $getAllData = $IndexUC();
+    
+        return $getAllData;
     }
 }

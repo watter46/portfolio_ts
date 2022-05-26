@@ -13,18 +13,19 @@ import { reactive, provide, watchEffect, ref, onMounted, onBeforeMount  } from '
 import { state } from './Store/state'
 import { key as StateKey } from './Store/InjectionKey/StateKey'
 import { key as GridStateKey } from './Store/InjectionKey/GridStateKey'
+import { getAllData }  from './Api/todo-api'
 
-import axios from 'axios'
 
 const gridState = reactive<GridStateType>({
   gridCols: "",
   is_divide: false
 })
 
-axios.get('/api/')
-.then(response => {
-  state.allData.push(...response.data)
-})
+getAllData()
+
+const gridChange = (emitGridCols: string) => gridState.gridCols = emitGridCols
+
+const divideChange = (emit_is_divide: boolean) => gridState.is_divide = emit_is_divide
 
 watchEffect(() => {
     state.maxTitleId = getMaxTitleId(state.allData)
@@ -33,15 +34,6 @@ watchEffect(() => {
     // console.log(JSON.stringify(state.testList, null, 2))
   }
 )
-
-const gridChange = (emitGridCols: string) => {
-  gridState.gridCols = emitGridCols
-}
-
-const divideChange = (emit_is_divide: boolean) => {
-  gridState.is_divide = emit_is_divide
-}
-
 
 provide(StateKey, state)
 
