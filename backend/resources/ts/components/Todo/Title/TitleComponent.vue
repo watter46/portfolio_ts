@@ -5,32 +5,26 @@ import TaskComponent from '../Task/TaskComponent.vue'
 import AddTask from '../Task/AddTask.vue'
 import ShowTitle from './ShowTitle.vue'
 
-import { onMounted, ref, watchEffect, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { TaskType } from '../Functions/type'
 
 interface Props {
   id: number,
   title: string,
   taskList: TaskType[],
-  titleIndex: number
+  titleIndex: number,
 }
 
 defineProps<Props>();
-
-// const cardRef = ref<number>()
-// const circle_width = ref<number>()
-
-// onMounted(() => {
-//   circle_width.value = cardRef.value.clientWidth / 12
-// })
 </script>
 
 <template>
-  <div class="card card-border" ref="cardRef" style="background-color: grey;">
+  <div class="card card-border" style="background-color: grey;">
       <div class="card-flex">
         <ShowTitle :id="id"
                    :title="title"
-                   :title-index="titleIndex" />
+                   :title-index="titleIndex"
+                   ref="root" />
 
         <DeleteTitle :id="id"
                      :title="title"

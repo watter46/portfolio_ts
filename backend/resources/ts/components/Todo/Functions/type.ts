@@ -23,11 +23,7 @@ export type CommentType = {
 };
 
 export type StateType = {
-  testList: TitleType[];
   allData: TitleType[];
-  maxTitleId: number;
-  maxTaskId: number;
-  maxCommentId: number;
 }
 
 export type GridStateType = {

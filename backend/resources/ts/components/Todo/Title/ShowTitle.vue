@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import type { StateType } from '../Functions/type'
+
+import { reactive, inject } from 'vue'
+import { showTitleLogic } from './showTitleLogic'
+import { key as StateKey } from '../Store/InjectionKey/StateKey'
 
 
 interface Props {
@@ -10,25 +14,36 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const test = reactive<{value: string, edit: boolean}>({
-    value: props.title,
-    edit: false
-  })
+const state = inject(StateKey) as StateType
 
+
+const titleState = reactive<{value: string, edit: boolean}>({
+  value: props.title,
+  edit: false
+})
+
+
+const editTitle = () => {
+  
+  showTitleLogic(props.id, titleState.value, props.titleIndex, state)
+
+  console.log("変更されました")
+}
 </script>
 
 <template>
   <div class="card-flex__show">
     <div
-      v-if="!test.edit"
-      v-text="test.value"
-      @click="test.edit = true">
+      v-if="!titleState.edit"
+      v-text="titleState.value"
+      @click="titleState.edit = true">
     </div>
       <input
-        v-if="test.edit"
+        v-if="titleState.edit"
         type="text"
-        v-model="test.value"
-        @blur="test.edit = false"
+        v-model="titleState.value"
+        @change="editTitle"
+        @blur="titleState.edit = false"
         v-focus
       >
   </div>

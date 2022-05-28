@@ -4,16 +4,14 @@ import type { GridStateType } from './Functions/type'
 import draggable from 'vuedraggable'
 import AddTitle from './Title/AddTitle.vue'
 import TitleComponent from './Title/TitleComponent.vue'
-import { getMaxTitleId } from './Functions/Title/getMaxTitleId'
-import { getMaxTaskId } from './Functions/Task/getMaxTaskId'
-import { getMaxCommentId } from './Functions/Comment/getMaxCommentId'
 import ChangeGrid from './ChangeGrid.vue'
 
-import { reactive, provide, watchEffect, ref, onMounted, onBeforeMount  } from 'vue'
+import { reactive, provide } from 'vue'
 import { state } from './Store/state'
 import { key as StateKey } from './Store/InjectionKey/StateKey'
 import { key as GridStateKey } from './Store/InjectionKey/GridStateKey'
 import { getAllData }  from './Api/todo-api'
+import { updateTitlePosition } from './Title/updateTitlePosition'
 
 
 const gridState = reactive<GridStateType>({
@@ -27,13 +25,9 @@ const gridChange = (emitGridCols: string) => gridState.gridCols = emitGridCols
 
 const divideChange = (emit_is_divide: boolean) => gridState.is_divide = emit_is_divide
 
-watchEffect(() => {
-    state.maxTitleId = getMaxTitleId(state.allData)
-    state.maxTaskId = getMaxTaskId(state.allData)
-    state.maxCommentId = getMaxCommentId(state.allData)
-    // console.log(JSON.stringify(state.testList, null, 2))
-  }
-)
+
+const updatePosition = (event: any) => updateTitlePosition(event)
+
 
 provide(StateKey, state)
 
@@ -47,19 +41,13 @@ provide(GridStateKey, gridState)
 
   <AddTitle style="background-color: grey; height: 50px;" />
 
-  <div class="d-flex justify-content-center">
-    maxTitleId: {{ state.maxTitleId }}<br>
-    maxTaskId: {{ state.maxTaskId }}<br>
-    maxCommentId: {{ state.maxCommentId }}
-  </div>
-
-
   <draggable  class="grid gap-3"
               :class="gridState.gridCols"
               :list="state.allData"
               :group="{name: 'title'}"
               animation="600"
-              item-key="id">
+              item-key="id"
+              @end="updatePosition">
     <template #item="{ element, index }">
       <TitleComponent :id="element.id"
                       :title="element.title"

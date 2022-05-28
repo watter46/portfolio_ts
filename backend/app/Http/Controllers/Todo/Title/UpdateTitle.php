@@ -14,10 +14,12 @@ class UpdateTitle extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(UpdateRequest $request, UpdateUseCase $updateUC): void
+    public function __invoke(UpdateRequest $request, UpdateUseCase $updateUC)
     {
         $data = $request->validated();
+
+        $getTitle = $updateUC($data);
         
-        $updateUC($data);
+        return $getTitle;
     }
 }
