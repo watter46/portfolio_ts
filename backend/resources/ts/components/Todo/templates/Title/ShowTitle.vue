@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { StateType } from '../Functions/type'
+import type { StateType } from '../../Store/type'
 
 import { reactive, inject } from 'vue'
-import { showTitleLogic } from './showTitleLogic'
-import { key as StateKey } from '../Store/InjectionKey/StateKey'
+import { editTitleToApi } from '../../modules/API/Title/editTitleToApi'
+import { key as StateKey } from '../../Store/InjectionKey/StateKey'
 
 
 interface Props {
@@ -25,7 +25,7 @@ const titleState = reactive<{value: string, edit: boolean}>({
 
 const editTitle = () => {
   
-  showTitleLogic(props.id, titleState.value, props.titleIndex, state)
+  editTitleToApi(props.id, titleState.value, props.titleIndex)
 
   console.log("変更されました")
 }

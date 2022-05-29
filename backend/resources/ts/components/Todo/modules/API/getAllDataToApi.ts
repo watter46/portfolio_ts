@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { state } from '../Store/state'
+import { state } from '../../Store/state'
 
 
-export const getAllData = () => {
+export const getAllDataToApi = () => {
   axios.get('/api/')
   .then(response => {
     state.allData.push(...response.data)

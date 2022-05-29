@@ -1,25 +1,25 @@
-import type { StateType, TitleType } from '../Functions/type'
+import type { StateType, TitleType } from '../../../Store/type'
 
 import axios, { AxiosResponse, AxiosError } from 'axios'
+import { state } from '../../../Store/state'
 
-type showTitleLogicType = (
+type editTitleType = (
   id: number,
   title: string,
   titleIndex: number,
-  state: StateType,
 ) => void
 
 
 
-export const showTitleLogic: showTitleLogicType = (id, title, titleIndex, state) => {
+export const editTitleToApi: editTitleType = (id, title, titleIndex) => {
 
-  const editInputTitle = {
+  const editTitleData = {
     id: id,
     title: title,
   }
 
   /* APIと通信 */
-  axios.patch('/api/todo/title/' + id + '/patch', editInputTitle)
+  axios.patch('/api/todo/title/' + id + '/patch', editTitleData)
   .then((response: AxiosResponse<TitleType>) => Object.assign(state.allData[titleIndex], response.data))
   .catch((e: AxiosError<{ error: string }>) => console.log(e.message))
 }

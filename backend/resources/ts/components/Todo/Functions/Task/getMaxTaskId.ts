@@ -1,4 +1,4 @@
-import type { TitleType } from '../type'
+import type { TitleType } from '../../Store/type'
 
 export const getMaxTaskId = (list: TitleType[]) => {
   const tasksList = list.flatMap(titles => titles.tasks)

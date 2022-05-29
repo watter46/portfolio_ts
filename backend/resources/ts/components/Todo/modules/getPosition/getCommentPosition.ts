@@ -1,4 +1,4 @@
-import type { CommentType } from '../type'
+import type { CommentType } from '../../Store/type'
 
 export const getCommentPosition = (commentList: CommentType[]) => {
 

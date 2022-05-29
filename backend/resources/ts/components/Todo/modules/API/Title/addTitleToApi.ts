@@ -1,14 +1,15 @@
-import type { StateType, TitleType } from '../Functions/type'
+import type { TitleType } from '../../../Store/type'
 
 import axios, { AxiosResponse, AxiosError } from 'axios'
-import { getTitlePosition } from '../Functions/Title/getTitlePosition'
+import { getTitlePosition } from '../../getPosition/getTitlePosition'
+import { state } from '../../../Store/state'
 
 type AddTitleType = {
   title_position: number;
   title: string;
 }
 
-export const addTitleLogic = (input: string, state: StateType) => {
+export const addTitleToApi = (input: string) => {
 
   const title_position = getTitlePosition(state.allData)
 

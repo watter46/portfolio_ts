@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { StateType, TaskType } from '../Functions/type'
+import type { StateType, TaskType } from '../../Store/type'
 
 import { inject } from 'vue'
-import { key as StateKey } from '../Store/InjectionKey/StateKey'
+import { key as StateKey } from '../../Store/InjectionKey/StateKey'
 
 
 interface Props {

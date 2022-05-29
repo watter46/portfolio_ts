@@ -1,9 +1,9 @@
-import type { StateType } from '../Functions/type'
+import type { StateType } from '../../../Store/type'
 
 import axios,{ AxiosError } from 'axios'
 
 
-export const deleteTitleLogic = (state: StateType, id: number) => {
+export const deleteTitleToApi = (state: StateType, id: number) => {
 
   /* API通信 */
   axios.delete('/api/todo/title/' + id + '/delete', {

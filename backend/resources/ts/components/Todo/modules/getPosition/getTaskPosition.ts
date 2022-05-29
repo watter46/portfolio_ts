@@ -1,4 +1,4 @@
-import type { TaskType } from '../type'
+import type { TaskType } from '../../Store/type'
 
 export const getTaskPosition = (taskList: TaskType[]) => {
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { StateType, TitleType, TaskType } from '../Functions/type'
+import type { StateType, TitleType, TaskType } from '../../Store/type'
 import { inject, ref } from 'vue'
-import { key as StateKey } from '../Store/InjectionKey/StateKey'
-import { getTaskPosition } from '../Functions/Task/getTaskPosition'
+import { key as StateKey } from '../../Store/InjectionKey/StateKey'
+import { getTaskPosition } from '../../modules/getPosition/getTaskPosition'
 
 
 interface Props {
@@ -19,21 +19,21 @@ const state = inject(StateKey) as StateType
 
 
 const addTask = (input: string) => {
-  const task_position = getTaskPosition(props.taskList)
+  // const task_position = getTaskPosition(props.taskList)
 
-  const addListObject: TaskType = {
-    id: state.maxTaskId + 1,
-    title_id: props.titleId,
-    task_position: task_position,
-    done: false,
-    is_showing: false,
-    task: input,
-    comments: []
-  }
+  // const addListObject: TaskType = {
+  //   id: state.maxTaskId + 1,
+  //   title_id: props.titleId,
+  //   task_position: task_position,
+  //   done: false,
+  //   is_showing: false,
+  //   task: input,
+  //   comments: []
+  // }
 
-  state.allData[props.titleIndex].tasks?.push(addListObject)
+  // state.allData[props.titleIndex].tasks?.push(addListObject)
 
-  taskInput.value = ""
+  // taskInput.value = ""
 }
 </script>
 

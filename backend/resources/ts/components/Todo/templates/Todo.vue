@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { GridStateType } from './Functions/type'
+import type { GridStateType } from '../Store/type'
 
 import draggable from 'vuedraggable'
 import AddTitle from './Title/AddTitle.vue'
@@ -7,11 +7,11 @@ import TitleComponent from './Title/TitleComponent.vue'
 import ChangeGrid from './ChangeGrid.vue'
 
 import { reactive, provide } from 'vue'
-import { state } from './Store/state'
-import { key as StateKey } from './Store/InjectionKey/StateKey'
-import { key as GridStateKey } from './Store/InjectionKey/GridStateKey'
-import { getAllData }  from './Api/todo-api'
-import { updateTitlePosition } from './Title/updateTitlePosition'
+import { state } from '../Store/state'
+import { key as StateKey } from '../Store/InjectionKey/StateKey'
+import { key as GridStateKey } from '../Store/InjectionKey/GridStateKey'
+import { getAllDataToApi }  from '../modules/API/getAllDataToApi'
+import { updateTitlePositionToApi } from '../modules/API/Title/updateTitlePositionToApi'
 
 
 const gridState = reactive<GridStateType>({
@@ -19,17 +19,19 @@ const gridState = reactive<GridStateType>({
   is_divide: false
 })
 
-getAllData()
 
 const gridChange = (emitGridCols: string) => gridState.gridCols = emitGridCols
 
 const divideChange = (emit_is_divide: boolean) => gridState.is_divide = emit_is_divide
 
+getAllDataToApi()
 
-const updatePosition = (event: any) => updateTitlePosition(event)
+const updatePosition = (event: any) => updateTitlePositionToApi(event)
 
 
 provide(StateKey, state)
+
+// provide(StateChangeKey, stateChange)
 
 provide(GridStateKey, gridState)
 </script>

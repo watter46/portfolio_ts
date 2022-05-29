@@ -1,4 +1,4 @@
 import { InjectionKey } from "vue"
-import { StateType } from "../../Functions/type"
+import { StateType } from "../type"
 
 export const key: InjectionKey<StateType> = Symbol('StateKey')

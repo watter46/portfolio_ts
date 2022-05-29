@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CommentType, GridStateType } from '../Functions/type'
+import type { CommentType, GridStateType } from '../../Store/type'
 
 import AddComment from '../Comment/AddComment.vue'
 import DeleteTask from './DeleteTask.vue'
@@ -7,7 +7,7 @@ import CommentComponent from '../Comment/CommentComponent.vue'
 import ShowTask from './ShowTask.vue'
 import draggable from 'vuedraggable'
 import { inject, computed } from 'vue'
-import { key as GridStateKey } from '../Store/InjectionKey/GridStateKey'
+import { key as GridStateKey } from '../../Store/InjectionKey/GridStateKey'
 
 
 interface Props {

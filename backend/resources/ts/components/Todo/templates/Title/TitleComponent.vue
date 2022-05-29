@@ -6,7 +6,7 @@ import AddTask from '../Task/AddTask.vue'
 import ShowTitle from './ShowTitle.vue'
 
 import { ref, onMounted } from 'vue'
-import { TaskType } from '../Functions/type'
+import { TaskType } from '../../Store/type'
 
 interface Props {
   id: number,

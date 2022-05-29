@@ -1,6 +1,6 @@
 import { reactive } from "vue"
-import { StateType } from '../Functions/type'
+import { StateType } from './type'
 
 export const state = reactive<StateType>({
-  allData: [],
+  allData: []
 })

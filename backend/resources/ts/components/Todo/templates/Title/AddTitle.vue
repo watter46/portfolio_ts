@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { StateType } from '../Functions/type'
+import type { StateType } from '../../Store/type'
 
-import { addTitleLogic } from './addTitleLogic'
-import { key as StateKey } from '../Store/InjectionKey/StateKey'
+import { addTitleToApi } from '../../modules/API/Title/addTitleToApi'
+import { key as StateKey } from '../../Store/InjectionKey/StateKey'
 
 import { inject, ref } from 'vue'
 
@@ -11,7 +11,7 @@ const state = inject(StateKey) as StateType
 const titleInput = ref("")
 
 const addTitle = (input: string) => {
-  addTitleLogic(input, state)
+  addTitle(input)
   titleInput.value = ""
 }
 </script>

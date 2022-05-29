@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { StateType, TaskType } from '../Functions/type'
+import type { StateType } from '../../Store/type'
 
-import { deleteTitleLogic } from './deleteTitleLogic'
-import { key as StateKey } from '../Store/InjectionKey/StateKey'
+import { deleteTitleToApi } from '../../modules/API/Title/deleteTitleToApi'
+import { key as StateKey } from '../../Store/InjectionKey/StateKey'
 
-import { inject, onUpdated } from 'vue'
+import { inject } from 'vue'
 
 
 interface Props {
@@ -16,7 +16,7 @@ const props = defineProps<Props>();
 
 const state = inject(StateKey) as StateType
 
-const deleteTitle = () => deleteTitleLogic(state, props.id)
+const deleteTitle = () => deleteTitleToApi(state, props.id)
 </script>
 
 

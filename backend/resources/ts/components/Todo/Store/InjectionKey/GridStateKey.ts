@@ -1,5 +1,4 @@
-import { InjectionKey, Ref } from "vue"
-import { GridStateType } from "../../Functions/type"
+import { InjectionKey } from "vue"
+import { GridStateType } from "../type"
 
 export const key: InjectionKey<GridStateType> = Symbol('GridStateKey')
-// export const key: InjectionKey<GridStateType> = Symbol('GridStateKey')

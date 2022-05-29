@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { CommentType, StateType, TaskType } from '../Functions/type'
-import { key as StateKey } from '../Store/InjectionKey/StateKey'
+import type { CommentType, StateType, TaskType } from '../../Store/type'
+import { key as StateKey } from '../../Store/InjectionKey/StateKey'
 import { inject } from 'vue'
 
 
