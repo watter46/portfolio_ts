@@ -1,30 +1,11 @@
-import isNestKeyExists from '../IsKeyExists/isNestKeyExists'
-import { toRaw } from 'vue'
-import type { TitleType } from '../type'
+import type { TitleType } from '../../Store/type'
 
-export default function getMaxTitleId(list, listKey, key) {
-  const returnMaxTaskId = (list, listKey, key) => {
-    if (isNestKeyExists(list, listKey, key)) {
-      const toRawArray = toRaw(list)
+export const getMaxTaskId = (list: TitleType[]) => {
+  const tasksList = list.flatMap(titles => titles.tasks)
 
-      const listKeyInList = toRawArray.flatMap(list => list[listKey])
-                                      .filter(exclude_undefined => exclude_undefined)
+  const taskIdList = tasksList.flatMap(tasks => typeof tasks !== 'undefined'? tasks.id : 0)
 
-      const idList = listKeyInList.flatMap(listKeyInList => listKeyInList[key])
-                                  .filter(exclude_undefined => exclude_undefined)
-
-      return Math.max(...idList)
-    }
-    else
-    {
-      return 0
-    }
-  }
+  const maxTaskId = taskIdList.length ? Math.max(...taskIdList) : 0
   
-  /**
-  * @type {number} maxTaskId タスクidの最大値
-  */
-  const maxTaskId = returnMaxTaskId(list, listKey, key)
-
-  return maxTaskId 
+  return maxTaskId
 }

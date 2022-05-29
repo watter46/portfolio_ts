@@ -424,47 +424,31 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
-.container {
-  width: 100%;
+.col-span-5 {
+  grid-column: span 5 / span 5;
 }
-@media (min-width: 640px) {
-
-  .container {
-    max-width: 640px;
-  }
+.col-span-1 {
+  grid-column: span 1 / span 1;
 }
-@media (min-width: 768px) {
-
-  .container {
-    max-width: 768px;
-  }
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
 }
-@media (min-width: 1024px) {
-
-  .container {
-    max-width: 1024px;
-  }
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
-@media (min-width: 1280px) {
-
-  .container {
-    max-width: 1280px;
-  }
-}
-@media (min-width: 1536px) {
-
-  .container {
-    max-width: 1536px;
-  }
+.mb-1 {
+  margin-bottom: 0.25rem;
 }
 .grid {
   display: grid;
 }
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -472,10 +456,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
-.gap-1 {
-  gap: 0.25rem;
+.grid-cols-11 {
+  grid-template-columns: repeat(11, minmax(0, 1fr));
 }
-.filter {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+.gap-3 {
+  gap: 0.75rem;
+}
+.border {
+  border-width: 1px;
 }
 

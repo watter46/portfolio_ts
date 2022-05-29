@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Todo from "./components//Todo/Todo.vue";
+import Todo from "./components/Todo/templates/Todo.vue";
  
 const routes = [
     { path: '/todo', name: 'todo', component: Todo },
-    // { path: '/Page2', name: 'page2', component: Page2 },
 ]
  
 const router = createRouter({

@@ -69,6 +69,28 @@
   display: inline-block;
   color: #333;
   line-height: 1;
+  width: 1.5em;
+  height: 0.7em;
+  background: #333;
+  border-radius: 0.1em;
+  position: relative;
+  top: 0.5em;
+  left: 0.6em;
+}
+
+.arrow::before {
+  content: "";
+  position: absolute;
+  top: -45%;
+  left: 90%;
+  border-top: 0.7em solid transparent;
+  border-bottom: 0.7em solid transparent;
+  border-left: 0.75em solid #333;
+}
+/* .arrow {
+  display: inline-block;
+  color: #333;
+  line-height: 1;
   width: 3.0em;
   height: 1.5em;
   background: #333;
@@ -86,7 +108,7 @@
   border-top: 1.4em solid transparent;
   border-bottom: 1.4em solid transparent;
   border-left: 1.5em solid #333;
-}
+} */
 
 /* The switch - the box around the slider */
 .switch {
@@ -149,4 +171,8 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.displayNone {
+  display: none;
 }
