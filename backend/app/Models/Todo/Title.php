@@ -9,7 +9,7 @@ class Title extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','title_position','title'];
+    protected $fillable = ['title_position','title'];
 
     public function tasks()
     {

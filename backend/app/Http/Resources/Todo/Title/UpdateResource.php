@@ -14,9 +14,11 @@ class UpdateResource extends JsonResource
      */
     public function toArray($request)
     {   
+        clock($this);
         return [
             'id' => $this->id,
-            'title' => $this->title
+            'title' => $this->title,
+            'title_position' => $this->title_position
         ];
     }
 }

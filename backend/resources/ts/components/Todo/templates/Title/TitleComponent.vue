@@ -5,7 +5,6 @@ import TaskComponent from '../Task/TaskComponent.vue'
 import AddTask from '../Task/AddTask.vue'
 import ShowTitle from './ShowTitle.vue'
 
-import { ref, onMounted } from 'vue'
 import { TaskType } from '../../Store/type'
 
 interface Props {
@@ -13,6 +12,7 @@ interface Props {
   title: string,
   taskList: TaskType[],
   titleIndex: number,
+  title_position: number
 }
 
 defineProps<Props>();
@@ -24,6 +24,7 @@ defineProps<Props>();
         <ShowTitle :id="id"
                    :title="title"
                    :title-index="titleIndex"
+                   :title_position="title_position"
                    ref="root" />
 
         <DeleteTitle :id="id"

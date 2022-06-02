@@ -20204,26 +20204,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
-
+/* harmony import */ var _modules_API_Title_addTitleToApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../modules/API/Title/addTitleToApi */ "./resources/ts/components/Todo/modules/API/Title/addTitleToApi.ts");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(_Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_1__.key);
-    var titleInput = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("");
-
-    var addTitle = function addTitle(input) {
-      addTitle(input);
-      titleInput.value = "";
-    };
-
     var __returned__ = {
-      state: state,
-      titleInput: titleInput,
-      addTitle: addTitle
+      titleInput: _modules_API_Title_addTitleToApi__WEBPACK_IMPORTED_MODULE_1__.titleInput,
+      addTitleToApi: _modules_API_Title_addTitleToApi__WEBPACK_IMPORTED_MODULE_1__.addTitleToApi
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -20324,6 +20314,10 @@ __webpack_require__.r(__webpack_exports__);
     titleIndex: {
       type: Number,
       required: true
+    },
+    title_position: {
+      type: Number,
+      required: true
     }
   },
   setup: function setup(__props, _ref) {
@@ -20337,7 +20331,7 @@ __webpack_require__.r(__webpack_exports__);
     });
 
     var editTitle = function editTitle() {
-      (0,_modules_API_Title_editTitleToApi__WEBPACK_IMPORTED_MODULE_1__.editTitleToApi)(props.id, titleState.value, props.titleIndex);
+      (0,_modules_API_Title_editTitleToApi__WEBPACK_IMPORTED_MODULE_1__.editTitleToApi)(props.id, titleState.value, props.titleIndex, props.title_position);
       console.log("変更されました");
     };
 
@@ -20398,6 +20392,10 @@ __webpack_require__.r(__webpack_exports__);
     titleIndex: {
       type: Number,
       required: true
+    },
+    title_position: {
+      type: Number,
+      required: true
     }
   },
   setup: function setup(__props, _ref) {
@@ -20438,10 +20436,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Title_TitleComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Title/TitleComponent.vue */ "./resources/ts/components/Todo/templates/Title/TitleComponent.vue");
 /* harmony import */ var _ChangeGrid_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ChangeGrid.vue */ "./resources/ts/components/Todo/templates/ChangeGrid.vue");
 /* harmony import */ var _Store_state__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Store/state */ "./resources/ts/components/Todo/Store/state.ts");
-/* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
-/* harmony import */ var _Store_InjectionKey_GridStateKey__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Store/InjectionKey/GridStateKey */ "./resources/ts/components/Todo/Store/InjectionKey/GridStateKey.ts");
-/* harmony import */ var _modules_API_getAllDataToApi__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../modules/API/getAllDataToApi */ "./resources/ts/components/Todo/modules/API/getAllDataToApi.ts");
-/* harmony import */ var _modules_API_Title_updateTitlePositionToApi__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../modules/API/Title/updateTitlePositionToApi */ "./resources/ts/components/Todo/modules/API/Title/updateTitlePositionToApi.ts");
+/* harmony import */ var _Store_gridState__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Store/gridState */ "./resources/ts/components/Todo/Store/gridState.ts");
+/* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
+/* harmony import */ var _Store_InjectionKey_GridStateKey__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Store/InjectionKey/GridStateKey */ "./resources/ts/components/Todo/Store/InjectionKey/GridStateKey.ts");
+/* harmony import */ var _modules_gridChangeLogic__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../modules/gridChangeLogic */ "./resources/ts/components/Todo/modules/gridChangeLogic.ts");
+/* harmony import */ var _modules_API_getAllDataToApi__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../modules/API/getAllDataToApi */ "./resources/ts/components/Todo/modules/API/getAllDataToApi.ts");
+/* harmony import */ var _modules_API_Title_updateTitlePositionToApi__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../modules/API/Title/updateTitlePositionToApi */ "./resources/ts/components/Todo/modules/API/Title/updateTitlePositionToApi.ts");
+
+
 
 
 
@@ -20457,38 +20459,24 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var gridState = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      gridCols: "",
-      is_divide: false
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watchEffect)(function () {
+      return console.log(JSON.stringify(_Store_state__WEBPACK_IMPORTED_MODULE_5__.state.allData, null, 2));
     });
+    /* API 全てのデータ取得 */
 
-    var gridChange = function gridChange(emitGridCols) {
-      return gridState.gridCols = emitGridCols;
-    };
-
-    var divideChange = function divideChange(emit_is_divide) {
-      return gridState.is_divide = emit_is_divide;
-    };
-
-    (0,_modules_API_getAllDataToApi__WEBPACK_IMPORTED_MODULE_8__.getAllDataToApi)();
-
-    var updatePosition = function updatePosition(event) {
-      return (0,_modules_API_Title_updateTitlePositionToApi__WEBPACK_IMPORTED_MODULE_9__.updateTitlePositionToApi)(event);
-    };
-
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.provide)(_Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_6__.key, _Store_state__WEBPACK_IMPORTED_MODULE_5__.state); // provide(StateChangeKey, stateChange)
-
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.provide)(_Store_InjectionKey_GridStateKey__WEBPACK_IMPORTED_MODULE_7__.key, gridState);
+    (0,_modules_API_getAllDataToApi__WEBPACK_IMPORTED_MODULE_10__.getAllDataToApi)();
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.provide)(_Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_7__.key, _Store_state__WEBPACK_IMPORTED_MODULE_5__.state);
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.provide)(_Store_InjectionKey_GridStateKey__WEBPACK_IMPORTED_MODULE_8__.key, _Store_gridState__WEBPACK_IMPORTED_MODULE_6__.gridState);
     var __returned__ = {
-      gridState: gridState,
-      gridChange: gridChange,
-      divideChange: divideChange,
-      updatePosition: updatePosition,
       draggable: (vuedraggable__WEBPACK_IMPORTED_MODULE_1___default()),
       AddTitle: _Title_AddTitle_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
       TitleComponent: _Title_TitleComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
       ChangeGrid: _ChangeGrid_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-      state: _Store_state__WEBPACK_IMPORTED_MODULE_5__.state
+      state: _Store_state__WEBPACK_IMPORTED_MODULE_5__.state,
+      gridState: _Store_gridState__WEBPACK_IMPORTED_MODULE_6__.gridState,
+      gridChange: _modules_gridChangeLogic__WEBPACK_IMPORTED_MODULE_9__.gridChange,
+      divideChange: _modules_gridChangeLogic__WEBPACK_IMPORTED_MODULE_9__.divideChange,
+      updateTitlePositionToApi: _modules_API_Title_updateTitlePositionToApi__WEBPACK_IMPORTED_MODULE_11__.updateTitlePositionToApi
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -20993,7 +20981,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "button",
     "class": "buttonCircle",
     onClick: _cache[1] || (_cache[1] = function ($event) {
-      return $setup.addTitle($setup.titleInput);
+      return $setup.addTitleToApi($setup.titleInput);
     })
   }, _hoisted_4)])]);
 }
@@ -21108,10 +21096,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: $props.id,
     title: $props.title,
     "title-index": $props.titleIndex,
+    title_position: $props.title_position,
     ref: "root"
   }, null, 8
   /* PROPS */
-  , ["id", "title", "title-index"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DeleteTitle"], {
+  , ["id", "title", "title-index", "title_position"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DeleteTitle"], {
     id: $props.id,
     title: $props.title,
     "title-index": $props.titleIndex
@@ -21169,10 +21158,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" グリッドを変更する "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChangeGrid"], {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" changeGridコンポーネント: Grid幅変更 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChangeGrid"], {
     onGridChange: $setup.gridChange,
     onDivideChange: $setup.divideChange
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AddTitle"], {
+  }, null, 8
+  /* PROPS */
+  , ["onGridChange", "onDivideChange"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" AddTitleコンポーネント: タイトル追加 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AddTitle"], {
     style: {
       "background-color": "grey",
       "height": "50px"
@@ -21185,7 +21176,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     },
     animation: "600",
     "item-key": "id",
-    onEnd: $setup.updatePosition
+    onEnd: $setup.updateTitlePositionToApi
   }, {
     item: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
       var element = _ref.element,
@@ -21194,17 +21185,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: element.id,
         title: element.title,
         "task-list": element.tasks,
-        "title-index": index
+        "title-index": index,
+        title_position: element.title_position
       }, null, 8
       /* PROPS */
-      , ["id", "title", "task-list", "title-index"])];
+      , ["id", "title", "task-list", "title-index", "title_position"])];
     }),
     _: 1
     /* STABLE */
 
   }, 8
   /* PROPS */
-  , ["class", "list"])], 64
+  , ["class", "list", "onEnd"])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -21270,6 +21262,26 @@ var key = Symbol('StateKey');
 
 /***/ }),
 
+/***/ "./resources/ts/components/Todo/Store/gridState.ts":
+/*!*********************************************************!*\
+  !*** ./resources/ts/components/Todo/Store/gridState.ts ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "gridState": () => (/* binding */ gridState)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var gridState = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+  gridCols: "",
+  is_divide: false
+});
+
+/***/ }),
+
 /***/ "./resources/ts/components/Todo/Store/state.ts":
 /*!*****************************************************!*\
   !*** ./resources/ts/components/Todo/Store/state.ts ***!
@@ -21286,6 +21298,46 @@ __webpack_require__.r(__webpack_exports__);
 var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
   allData: []
 });
+
+/***/ }),
+
+/***/ "./resources/ts/components/Todo/modules/API/Title/addTitleToApi.ts":
+/*!*************************************************************************!*\
+  !*** ./resources/ts/components/Todo/modules/API/Title/addTitleToApi.ts ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addTitleToApi": () => (/* binding */ addTitleToApi),
+/* harmony export */   "titleInput": () => (/* binding */ titleInput)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _getPosition_getTitlePosition__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../getPosition/getTitlePosition */ "./resources/ts/components/Todo/modules/getPosition/getTitlePosition.ts");
+/* harmony import */ var _Store_state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Store/state */ "./resources/ts/components/Todo/Store/state.ts");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+
+
+var titleInput = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)("");
+var addTitleToApi = function addTitleToApi(input) {
+  var title_position = (0,_getPosition_getTitlePosition__WEBPACK_IMPORTED_MODULE_1__.getTitlePosition)(_Store_state__WEBPACK_IMPORTED_MODULE_2__.state.allData);
+  var addTitleData = {
+    title_position: title_position,
+    title: input
+  };
+  /* APIと通信 */
+
+  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/todo/title/post', addTitleData).then(function (response) {
+    return _Store_state__WEBPACK_IMPORTED_MODULE_2__.state.allData.push(response.data);
+  })["catch"](function (e) {
+    return console.log(e.message);
+  });
+  titleInput.value = "";
+};
 
 /***/ }),
 
@@ -21338,10 +21390,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Store_state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Store/state */ "./resources/ts/components/Todo/Store/state.ts");
 
 
-var editTitleToApi = function editTitleToApi(id, title, titleIndex) {
+var editTitleToApi = function editTitleToApi(id, title, titleIndex, title_position) {
   var editTitleData = {
     id: id,
-    title: title
+    title: title,
+    title_position: title_position
   };
   /* APIと通信 */
 
@@ -21365,14 +21418,74 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "updateTitlePositionToApi": () => (/* binding */ updateTitlePositionToApi)
 /* harmony export */ });
-/* harmony import */ var _calculate_position__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../calculate-position */ "./resources/ts/components/Todo/modules/calculate-position.ts");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Store_state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Store/state */ "./resources/ts/components/Todo/Store/state.ts");
+/* harmony import */ var _calculate_position__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../calculate-position */ "./resources/ts/components/Todo/modules/calculate-position.ts");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
 var updateTitlePositionToApi = function updateTitlePositionToApi(event) {
-  var newPosition = (0,_calculate_position__WEBPACK_IMPORTED_MODULE_0__.calculatePosition)(event);
-  /* API通信 */
-  // axios.patch('/api/todo/title/' + id + '/patch', addTitleData)
-  // .then((response: AxiosResponse<TitleType>) => state.allData.push(response.data))
-  // .catch((e: AxiosError<{ error: string }>) => console.log(e.message))
+  var index = event.item.__draggable_context.index;
+  var id = event.item.__draggable_context.element.id;
+  var title = event.item.__draggable_context.element.title;
+
+  var _calculatePosition = (0,_calculate_position__WEBPACK_IMPORTED_MODULE_2__.calculatePosition)(event),
+      _calculatePosition2 = _slicedToArray(_calculatePosition, 3),
+      previousPosition = _calculatePosition2[0],
+      nextPosition = _calculatePosition2[1],
+      newPosition = _calculatePosition2[2];
+
+  if (newPosition !== previousPosition && newPosition !== nextPosition && newPosition > 0 && previousPosition > 0 && nextPosition > 0) {
+    /* positionが重なっていないときの処理 */
+    var updateTitleData = {
+      id: id,
+      title: title,
+      title_position: newPosition
+    };
+    /* API通信 */
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().patch('/api/todo/title/' + id + '/patch', updateTitleData).then(function (response) {
+      return Object.assign(_Store_state__WEBPACK_IMPORTED_MODULE_1__.state.allData[index], response.data);
+    })["catch"](function (e) {
+      return console.log(e.message);
+    });
+  } else {
+    /* positionが重なっているときの処理 */
+
+    /* positionをふり直す */
+    var ids = _Store_state__WEBPACK_IMPORTED_MODULE_1__.state.allData.map(function (titles) {
+      return titles.id;
+    }).join('-');
+    var updatePositionList = _Store_state__WEBPACK_IMPORTED_MODULE_1__.state.allData.map(function (titles, index) {
+      return {
+        'id': titles.id,
+        'title': titles.title,
+        'title_position': (index + 1) * 1024
+      };
+    });
+    axios__WEBPACK_IMPORTED_MODULE_0___default().patch('/api/todo/title/' + ids + '/patch', {
+      updatePositionList: updatePositionList
+    }).then(function (response) {
+      _Store_state__WEBPACK_IMPORTED_MODULE_1__.state.allData.forEach(function (titles, index) {
+        Object.assign(titles, response.data[index]);
+      });
+    })["catch"](function (e) {
+      return console.log(e.message);
+    });
+  }
 };
 
 /***/ }),
@@ -21426,38 +21539,91 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "calculatePosition": () => (/* binding */ calculatePosition)
 /* harmony export */ });
+// type calculatePositionType = (event: any) => [number, number, number]
 var calculatePosition = function calculatePosition(event) {
   var previousElement = event.item.previousElementSibling;
   var nextElement = event.item.nextElementSibling;
 
-  var getNewPosition = function getNewPosition(previousPosition, nextPosition) {
+  var calculateNewPosition = function calculateNewPosition(previousPosition, nextPosition) {
     return Math.floor((previousPosition + nextPosition) / 2);
   };
 
-  var previousPosition;
-  var nextPosition;
+  var getPositionList = function getPositionList() {
+    if (previousElement && nextElement) {
+      var previousElement_context = previousElement.__draggable_context.element;
+      var nextElement_context = nextElement.__draggable_context.element;
+      var previousPosition = previousElement_context.title_position;
+      var nextPosition = nextElement_context.title_position;
+      var newPosition = calculateNewPosition(previousPosition, nextPosition);
+      return [previousPosition, nextPosition, newPosition];
+    }
 
-  if (previousElement && nextElement) {
-    var previousElement_context = previousElement.__draggable_context.element;
-    var nextElement_context = nextElement.__draggable_context.element;
-    previousPosition = previousElement_context.title_position;
-    nextPosition = nextElement_context.title_position;
-    return getNewPosition(previousPosition, nextPosition);
-  }
+    if (!previousElement) {
+      var _nextElement_context = nextElement.__draggable_context.element;
+      var _nextPosition = _nextElement_context.title_position;
 
-  if (!previousElement) {
-    var _nextElement_context = nextElement.__draggable_context.element;
-    nextPosition = _nextElement_context.title_position;
-    previousPosition = nextPosition - 512;
-    return getNewPosition(previousPosition, nextPosition);
-  }
+      var _previousPosition = _nextPosition - 512;
 
-  if (!nextElement) {
-    var _previousElement_context = previousElement.__draggable_context.element;
-    previousPosition = _previousElement_context.title_position;
-    nextPosition = previousPosition + 512;
-    return getNewPosition(previousPosition, nextPosition);
-  }
+      var _newPosition = calculateNewPosition(_previousPosition, _nextPosition);
+
+      return [_previousPosition, _nextPosition, _newPosition];
+    }
+
+    if (!nextElement) {
+      var _previousElement_context = previousElement.__draggable_context.element;
+      var _previousPosition2 = _previousElement_context.title_position;
+
+      var _nextPosition2 = _previousPosition2 + 512;
+
+      var _newPosition2 = calculateNewPosition(_previousPosition2, _nextPosition2);
+
+      return [_previousPosition2, _nextPosition2, _newPosition2];
+    }
+  };
+
+  var positions = getPositionList();
+  return positions;
+};
+
+/***/ }),
+
+/***/ "./resources/ts/components/Todo/modules/getPosition/getTitlePosition.ts":
+/*!******************************************************************************!*\
+  !*** ./resources/ts/components/Todo/modules/getPosition/getTitlePosition.ts ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getTitlePosition": () => (/* binding */ getTitlePosition)
+/* harmony export */ });
+var getTitlePosition = function getTitlePosition(list) {
+  var new_title_position = list.length ? list.slice(-1)[0].title_position + 1024 : 1024;
+  return new_title_position;
+};
+
+/***/ }),
+
+/***/ "./resources/ts/components/Todo/modules/gridChangeLogic.ts":
+/*!*****************************************************************!*\
+  !*** ./resources/ts/components/Todo/modules/gridChangeLogic.ts ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "divideChange": () => (/* binding */ divideChange),
+/* harmony export */   "gridChange": () => (/* binding */ gridChange)
+/* harmony export */ });
+/* harmony import */ var _Store_gridState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Store/gridState */ "./resources/ts/components/Todo/Store/gridState.ts");
+
+var gridChange = function gridChange(emitGridCols) {
+  return _Store_gridState__WEBPACK_IMPORTED_MODULE_0__.gridState.gridCols = emitGridCols;
+};
+var divideChange = function divideChange(emit_is_divide) {
+  return _Store_gridState__WEBPACK_IMPORTED_MODULE_0__.gridState.is_divide = emit_is_divide;
 };
 
 /***/ }),

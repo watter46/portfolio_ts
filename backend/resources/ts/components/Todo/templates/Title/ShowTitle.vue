@@ -9,7 +9,8 @@ import { key as StateKey } from '../../Store/InjectionKey/StateKey'
 interface Props {
   id: number,
   title: string,
-  titleIndex: number
+  titleIndex: number,
+  title_position: number
 }
 
 const props = defineProps<Props>();
@@ -25,7 +26,7 @@ const titleState = reactive<{value: string, edit: boolean}>({
 
 const editTitle = () => {
   
-  editTitleToApi(props.id, titleState.value, props.titleIndex)
+  editTitleToApi(props.id, titleState.value, props.titleIndex, props.title_position)
 
   console.log("変更されました")
 }

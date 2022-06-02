@@ -13,7 +13,8 @@ import { gridChange, divideChange } from '../modules/gridChangeLogic'
 import { getAllDataToApi }  from '../modules/API/getAllDataToApi'
 import { updateTitlePositionToApi } from '../modules/API/Title/updateTitlePositionToApi'
 
-// watchEffect(() => console.log(JSON.stringify(state.allData, null, 2)))
+
+watchEffect(() => console.log(JSON.stringify(state.allData, null, 2)))
 
 /* API 全てのデータ取得 */
 getAllDataToApi()
@@ -42,7 +43,8 @@ provide(GridStateKey, gridState)
       <TitleComponent :id="element.id"
                       :title="element.title"
                       :task-list="element.tasks"
-                      :title-index="index" />
+                      :title-index="index"
+                      :title_position="element.title_position" />
     </template>
   </draggable>
 </template>

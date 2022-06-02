@@ -30,3 +30,5 @@ export type GridStateType = {
   gridCols: string;
   is_divide: boolean;
 }
+
+export type ResponseTitleArrayType = TitleType[]
