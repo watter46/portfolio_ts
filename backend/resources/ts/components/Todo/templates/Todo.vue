@@ -40,11 +40,11 @@ provide(GridStateKey, gridState)
               item-key="id"
               @end="updateTitlePositionToApi">
     <template #item="{ element, index }">
-      <TitleComponent :id="element.id"
+      <TitleComponent :title-index="index"
+                      :id="element.id"
                       :title="element.title"
-                      :task-list="element.tasks"
-                      :title-index="index"
-                      :title_position="element.title_position" />
+                      :title_position="element.title_position"
+                      :task-list="element.tasks" />
     </template>
   </draggable>
 </template>

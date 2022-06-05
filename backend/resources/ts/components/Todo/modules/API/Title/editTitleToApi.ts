@@ -4,15 +4,15 @@ import axios, { AxiosResponse, AxiosError } from 'axios'
 import { state } from '../../../Store/state'
 
 type editTitleType = (
-  id: number,
   title: string,
+  id: number,
   titleIndex: number,
   title_position: number
 ) => void
 
 
 
-export const editTitleToApi: editTitleType = (id, title, titleIndex, title_position) => {
+export const editTitleToApi: editTitleType = (title, id, titleIndex, title_position) => {
 
   const editTitleData = {
     id: id,

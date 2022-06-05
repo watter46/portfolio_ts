@@ -13,7 +13,20 @@ class CreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
+    }
+
+    /**
+    * バリーデーションのためにデータを準備
+    *
+    * @return void
+    */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'done' => false,
+            'is_showing' => false
+        ]);
     }
 
     /**
@@ -24,7 +37,11 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title_id' => 'required|integer',
+            'task' => 'required|string',
+            'done' => 'required|boolean',
+            'is_showing' => 'required|boolean',
+            'task_position' => 'required|integer'
         ];
     }
 }

@@ -11,8 +11,8 @@ class DestroyTitle extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  App\Http\Requests\Todo\Title\DestroyRequest  $request
+     * @param  App\UseCases\Title\Destroy as DestroyUseCase $destroyUC
      */
     public function __invoke(DestroyRequest $request, DestroyUseCase $destroyUC): void
     {

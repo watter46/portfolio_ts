@@ -2,14 +2,14 @@ import type { ResponseTitleArrayType, TitleType } from '../../../Store/type'
 
 import axios, { AxiosResponse, AxiosError } from 'axios'
 import { state } from '../../../Store/state'
-import  { calculatePosition } from '../../calculate-position'
+import { calculatePosition } from '../../calculate-position'
 
 
 export const updateTitlePositionToApi = (event: any) => {
   const index = event.item.__draggable_context.index
   const id = event.item.__draggable_context.element.id
   const title = event.item.__draggable_context.element.title
-  const [ previousPosition, nextPosition, newPosition ] = calculatePosition(event)
+  const [ previousPosition, nextPosition, newPosition ] = calculatePosition('title', event)
 
 
   if (newPosition !== previousPosition &&
@@ -40,6 +40,7 @@ export const updateTitlePositionToApi = (event: any) => {
       return ({ 'id': titles.id, 'title': titles.title, 'title_position': (index + 1) * 1024 })
     })
 
+    /* API通信 */
     axios.patch('/api/todo/title/' + ids + '/patch', {
       updatePositionList: updatePositionList
     })

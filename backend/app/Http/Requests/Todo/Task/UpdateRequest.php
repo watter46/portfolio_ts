@@ -13,7 +13,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,24 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        if (!$this->has('updatePositionList')) {
+            $rules = [];
+            if ($this->has('id')) $rules['id'] = 'required|integer';
+            if ($this->has('title_id')) $rules['title_id'] = 'required|integer';
+            if ($this->has('task')) $rules['task'] = 'required|string';
+            if ($this->has('done')) $rules['done'] = 'required|boolean';
+            if ($this->has('is_showing')) $rules['is_showing'] = 'required|boolean';
+            if ($this->has('task_position')) $rules['task_position'] = 'required|integer';
+
+            return $rules;
+        }
+
+        if ($this->has('updatePositionList')) {
+            return [
+                'updatePositionList.*.id' => 'required|integer',
+                'updatePositionList.*.task' => 'required|string',
+                'updatePositionList.*.task_position' => 'required|integer'
+            ];
+        }
     }
 }

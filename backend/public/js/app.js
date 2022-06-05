@@ -19938,51 +19938,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
-
+/* harmony import */ var _modules_API_Task_addTaskToApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../modules/API/Task/addTaskToApi */ "./resources/ts/components/Todo/modules/API/Task/addTaskToApi.ts");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   props: {
-    taskList: {
-      type: Array,
-      required: true
-    },
-    titleId: {
-      type: Number,
-      required: true
-    },
     titleIndex: {
       type: Number,
+      required: true
+    },
+    title_id: {
+      type: Number,
+      required: true
+    },
+    taskList: {
+      type: Array,
       required: true
     }
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var props = __props;
-    var taskInput = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("");
-    var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(_Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_1__.key);
-
-    var addTask = function addTask(input) {// const task_position = getTaskPosition(props.taskList)
-      // const addListObject: TaskType = {
-      //   id: state.maxTaskId + 1,
-      //   title_id: props.titleId,
-      //   task_position: task_position,
-      //   done: false,
-      //   is_showing: false,
-      //   task: input,
-      //   comments: []
-      // }
-      // state.allData[props.titleIndex].tasks?.push(addListObject)
-      // taskInput.value = ""
-    };
-
     var __returned__ = {
-      props: props,
-      taskInput: taskInput,
-      state: state,
-      addTask: addTask
+      taskInput: _modules_API_Task_addTaskToApi__WEBPACK_IMPORTED_MODULE_1__.taskInput,
+      addTaskToApi: _modules_API_Task_addTaskToApi__WEBPACK_IMPORTED_MODULE_1__.addTaskToApi
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -20006,8 +19985,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
-
+/* harmony import */ var _modules_API_Task_deleteTaskToApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../modules/API/Task/deleteTaskToApi */ "./resources/ts/components/Todo/modules/API/Task/deleteTaskToApi.ts");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
@@ -20032,21 +20010,8 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var props = __props;
-    var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(_Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_1__.key);
-
-    var deleteTask = function deleteTask() {
-      var deleteTaskList = state.allData[props.titleIndex].tasks;
-      var deleteIndex = deleteTaskList.findIndex(function (tasks) {
-        return tasks.id === props.id;
-      });
-      deleteTaskList.splice(deleteIndex, 1);
-    };
-
     var __returned__ = {
-      props: props,
-      state: state,
-      deleteTask: deleteTask
+      deleteTaskToApi: _modules_API_Task_deleteTaskToApi__WEBPACK_IMPORTED_MODULE_1__.deleteTaskToApi
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -20070,10 +20035,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _modules_API_Task_editTaskToApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../modules/API/Task/editTaskToApi */ "./resources/ts/components/Todo/modules/API/Task/editTaskToApi.ts");
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   props: {
+    titleIndex: {
+      type: Number,
+      required: true
+    },
+    taskIndex: {
+      type: Number,
+      required: true
+    },
     id: {
+      type: Number,
+      required: true
+    },
+    title_id: {
       type: Number,
       required: true
     },
@@ -20081,19 +20061,34 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       required: true
     },
-    taskIndex: {
+    task_position: {
       type: Number,
       required: true
     },
-    titleIndex: {
-      type: Number,
+    done: {
+      type: Boolean,
+      required: true
+    },
+    is_showing: {
+      type: Boolean,
       required: true
     }
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var __returned__ = {};
+    var props = __props;
+    var taskState = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+      input: props.task,
+      is_done: props.done,
+      is_showing: props.is_showing,
+      is_edit: false
+    });
+    var __returned__ = {
+      props: props,
+      taskState: taskState,
+      editTaskToApi: _modules_API_Task_editTaskToApi__WEBPACK_IMPORTED_MODULE_1__.editTaskToApi
+    };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
       value: true
@@ -20122,8 +20117,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ShowTask_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ShowTask.vue */ "./resources/ts/components/Todo/templates/Task/ShowTask.vue");
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.umd.js");
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _Store_InjectionKey_GridStateKey__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Store/InjectionKey/GridStateKey */ "./resources/ts/components/Todo/Store/InjectionKey/GridStateKey.ts");
-
+/* harmony import */ var _modules_classSwitching__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../modules/classSwitching */ "./resources/ts/components/Todo/modules/classSwitching.ts");
 
 
 
@@ -20133,7 +20127,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   props: {
+    titleIndex: {
+      type: Number,
+      required: true
+    },
+    taskIndex: {
+      type: Number,
+      required: true
+    },
     id: {
+      type: Number,
+      required: true
+    },
+    title_id: {
       type: Number,
       required: true
     },
@@ -20141,46 +20147,36 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       required: true
     },
+    task_position: {
+      type: Number,
+      required: true
+    },
+    done: {
+      type: Boolean,
+      required: true
+    },
+    is_showing: {
+      type: Boolean,
+      required: true
+    },
     commentList: {
       type: Array,
-      required: true
-    },
-    taskIndex: {
-      type: Number,
-      required: true
-    },
-    titleIndex: {
-      type: Number,
       required: true
     }
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var gridState = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(_Store_InjectionKey_GridStateKey__WEBPACK_IMPORTED_MODULE_6__.key);
-    var classSwitching__gridCols11 = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return gridState.is_divide ? 'grid grid-cols-11' : '';
-    });
-    var classSwitching__colSpan5 = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return gridState.is_divide ? 'col-span-5' : '';
-    });
-    var classSwitching__colSpan1 = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return gridState.is_divide ? 'col-span-1' : '';
-    });
-    var classSwitching__arrow = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return gridState.is_divide ? 'arrow' : '';
-    });
     var __returned__ = {
-      gridState: gridState,
-      classSwitching__gridCols11: classSwitching__gridCols11,
-      classSwitching__colSpan5: classSwitching__colSpan5,
-      classSwitching__colSpan1: classSwitching__colSpan1,
-      classSwitching__arrow: classSwitching__arrow,
       AddComment: _Comment_AddComment_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
       DeleteTask: _DeleteTask_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
       CommentComponent: _Comment_CommentComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
       ShowTask: _ShowTask_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-      draggable: (vuedraggable__WEBPACK_IMPORTED_MODULE_5___default())
+      draggable: (vuedraggable__WEBPACK_IMPORTED_MODULE_5___default()),
+      classSwitching__gridCols11: _modules_classSwitching__WEBPACK_IMPORTED_MODULE_6__.classSwitching__gridCols11,
+      classSwitching__colSpan5: _modules_classSwitching__WEBPACK_IMPORTED_MODULE_6__.classSwitching__colSpan5,
+      classSwitching__colSpan1: _modules_classSwitching__WEBPACK_IMPORTED_MODULE_6__.classSwitching__colSpan1,
+      classSwitching__arrow: _modules_classSwitching__WEBPACK_IMPORTED_MODULE_6__.classSwitching__arrow
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -20238,9 +20234,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _modules_API_Title_deleteTitleToApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../modules/API/Title/deleteTitleToApi */ "./resources/ts/components/Todo/modules/API/Title/deleteTitleToApi.ts");
-/* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
-
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
@@ -20262,16 +20255,9 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var props = __props;
-    var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(_Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_2__.key);
-
-    var deleteTitle = function deleteTitle() {
-      return (0,_modules_API_Title_deleteTitleToApi__WEBPACK_IMPORTED_MODULE_1__.deleteTitleToApi)(state, props.id);
-    };
-
     var __returned__ = {
       props: props,
-      state: state,
-      deleteTitle: deleteTitle
+      deleteTitleToApi: _modules_API_Title_deleteTitleToApi__WEBPACK_IMPORTED_MODULE_1__.deleteTitleToApi
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -20296,8 +20282,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _modules_API_Title_editTitleToApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../modules/API/Title/editTitleToApi */ "./resources/ts/components/Todo/modules/API/Title/editTitleToApi.ts");
-/* harmony import */ var _Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Store/InjectionKey/StateKey */ "./resources/ts/components/Todo/Store/InjectionKey/StateKey.ts");
-
 
 
 
@@ -20324,22 +20308,14 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var props = __props;
-    var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(_Store_InjectionKey_StateKey__WEBPACK_IMPORTED_MODULE_2__.key);
     var titleState = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      value: props.title,
-      edit: false
+      input: props.title,
+      is_edit: false
     });
-
-    var editTitle = function editTitle() {
-      (0,_modules_API_Title_editTitleToApi__WEBPACK_IMPORTED_MODULE_1__.editTitleToApi)(props.id, titleState.value, props.titleIndex, props.title_position);
-      console.log("変更されました");
-    };
-
     var __returned__ = {
       props: props,
-      state: state,
       titleState: titleState,
-      editTitle: editTitle
+      editTitleToApi: _modules_API_Title_editTitleToApi__WEBPACK_IMPORTED_MODULE_1__.editTitleToApi
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -20369,6 +20345,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Task_TaskComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Task/TaskComponent.vue */ "./resources/ts/components/Todo/templates/Task/TaskComponent.vue");
 /* harmony import */ var _Task_AddTask_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Task/AddTask.vue */ "./resources/ts/components/Todo/templates/Task/AddTask.vue");
 /* harmony import */ var _ShowTitle_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ShowTitle.vue */ "./resources/ts/components/Todo/templates/Title/ShowTitle.vue");
+/* harmony import */ var _modules_API_Task_updateTaskPositionToApi__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../modules/API/Task/updateTaskPositionToApi */ "./resources/ts/components/Todo/modules/API/Task/updateTaskPositionToApi.ts");
+
 
 
 
@@ -20377,6 +20355,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   props: {
+    titleIndex: {
+      type: Number,
+      required: true
+    },
     id: {
       type: Number,
       required: true
@@ -20385,16 +20367,12 @@ __webpack_require__.r(__webpack_exports__);
       type: String,
       required: true
     },
-    taskList: {
-      type: Array,
-      required: true
-    },
-    titleIndex: {
-      type: Number,
-      required: true
-    },
     title_position: {
       type: Number,
+      required: true
+    },
+    taskList: {
+      type: Array,
       required: true
     }
   },
@@ -20406,7 +20384,8 @@ __webpack_require__.r(__webpack_exports__);
       DeleteTitle: _DeleteTitle_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
       TaskComponent: _Task_TaskComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
       AddTask: _Task_AddTask_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-      ShowTitle: _ShowTitle_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+      ShowTitle: _ShowTitle_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+      updateTaskPositionToApi: _modules_API_Task_updateTaskPositionToApi__WEBPACK_IMPORTED_MODULE_6__.updateTaskPositionToApi
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -20775,7 +20754,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "button",
     "class": "buttonCircle",
     onClick: _cache[1] || (_cache[1] = function ($event) {
-      return $setup.addTask($setup.taskInput);
+      return $setup.addTaskToApi($setup.taskInput, $props.titleIndex, $props.title_id, $props.taskList);
     })
   }, _hoisted_4)])]);
 }
@@ -20811,7 +20790,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "button",
     "class": "buttonCircle",
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $setup.deleteTask();
+      return $setup.deleteTaskToApi($props.titleIndex, $props.taskIndex, $props.id);
     })
   }, _hoisted_3)]);
 }
@@ -20835,12 +20814,44 @@ var _hoisted_1 = {
   "class": "card-flex__show"
 };
 var _hoisted_2 = {
-  "class": "h3"
+  "class": "card-flex__show__checkbox"
 };
+var _hoisted_3 = ["textContent"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.task), 1
-  /* TEXT */
-  )]);
+  var _directive_focus = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("focus");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "checkbox",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $setup.taskState.is_done = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.taskState.is_done]])]), !$setup.taskState.is_edit ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    key: 0,
+    "class": "card-flex__show__input",
+    textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.taskState.input),
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $setup.taskState.is_edit = true;
+    })
+  }, null, 8
+  /* PROPS */
+  , _hoisted_3)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.taskState.is_edit ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+    key: 1,
+    "class": "card-flex__show__input",
+    type: "text",
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $setup.taskState.input = $event;
+    }),
+    onChange: _cache[3] || (_cache[3] = function ($event) {
+      return $setup.editTaskToApi($setup.taskState.input, $setup.props);
+    }),
+    onBlur: _cache[4] || (_cache[4] = function ($event) {
+      return $setup.taskState.is_edit = false;
+    })
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.taskState.input], [_directive_focus]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -20859,7 +20870,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "card-flex bg-primary"
+  "class": "card-flex"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
@@ -20870,13 +20881,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($setup.classSwitching__colSpan5)
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ShowTask"], {
-    id: $props.id,
-    task: $props.task,
+    "title-index": $props.titleIndex,
     "task-index": $props.taskIndex,
-    "title-index": $props.titleIndex
+    id: $props.id,
+    title_id: $props.title_id,
+    task: $props.task,
+    task_position: $props.task_position,
+    done: $props.done,
+    is_showing: $props.is_showing
   }, null, 8
   /* PROPS */
-  , ["id", "task", "task-index", "title-index"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DeleteTask"], {
+  , ["title-index", "task-index", "id", "title_id", "task", "task_position", "done", "is_showing"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DeleteTask"], {
     id: $props.id,
     task: $props.task,
     "title-index": $props.titleIndex,
@@ -20893,7 +20908,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["comment-list", "task-id", "title-index", "task-index"])], 2
   /* CLASS */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["", $setup.classSwitching__colSpan1]),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($setup.classSwitching__colSpan1),
     style: {
       "border": "1px solid red"
     }
@@ -21017,7 +21032,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "button",
     "class": "buttonCircle",
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $setup.deleteTitle();
+      return $setup.deleteTitleToApi($setup.props.id);
     })
   }, _hoisted_3)]);
 }
@@ -21044,27 +21059,29 @@ var _hoisted_2 = ["textContent"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _directive_focus = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("focus");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [!$setup.titleState.edit ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [!$setup.titleState.is_edit ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 0,
-    textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.titleState.value),
+    textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.titleState.input),
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $setup.titleState.edit = true;
+      return $setup.titleState.is_edit = true;
     })
   }, null, 8
   /* PROPS */
-  , _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.titleState.edit ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+  , _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.titleState.is_edit ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 1,
     type: "text",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $setup.titleState.value = $event;
+      return $setup.titleState.input = $event;
     }),
-    onChange: $setup.editTitle,
-    onBlur: _cache[2] || (_cache[2] = function ($event) {
-      return $setup.titleState.edit = false;
+    onChange: _cache[2] || (_cache[2] = function ($event) {
+      return $setup.editTitleToApi($setup.titleState.input, $setup.props.id, $setup.props.titleIndex, $setup.props.title_position);
+    }),
+    onBlur: _cache[3] || (_cache[3] = function ($event) {
+      return $setup.titleState.is_edit = false;
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.titleState.value], [_directive_focus]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.titleState.input], [_directive_focus]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -21093,53 +21110,57 @@ var _hoisted_2 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ShowTitle"], {
-    id: $props.id,
-    title: $props.title,
     "title-index": $props.titleIndex,
-    title_position: $props.title_position,
-    ref: "root"
-  }, null, 8
-  /* PROPS */
-  , ["id", "title", "title-index", "title_position"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DeleteTitle"], {
     id: $props.id,
     title: $props.title,
-    "title-index": $props.titleIndex
+    title_position: $props.title_position
   }, null, 8
   /* PROPS */
-  , ["id", "title", "title-index"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AddTask"], {
+  , ["title-index", "id", "title", "title_position"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["DeleteTitle"], {
+    "title-index": $props.titleIndex,
+    id: $props.id,
+    title: $props.title
+  }, null, 8
+  /* PROPS */
+  , ["title-index", "id", "title"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["AddTask"], {
     "class": "my-3",
-    "task-list": $props.taskList,
-    "title-id": $props.id,
-    "title-index": $props.titleIndex
+    "title-index": $props.titleIndex,
+    title_id: $props.id,
+    "task-list": $props.taskList
   }, null, 8
   /* PROPS */
-  , ["task-list", "title-id", "title-index"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["draggable"], {
+  , ["title-index", "title_id", "task-list"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["draggable"], {
     list: $props.taskList,
     group: {
       name: 'task'
     },
     animation: "600",
-    "item-key": "id"
+    "item-key": "id",
+    onEnd: $setup.updateTaskPositionToApi
   }, {
     item: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
       var element = _ref.element,
           index = _ref.index;
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TaskComponent"], {
-        id: element.id,
-        task: element.task,
-        "comment-list": element.comments,
         "title-index": $props.titleIndex,
-        "task-index": index
+        "task-index": index,
+        id: element.id,
+        title_id: element.title_id,
+        task: element.task,
+        task_position: element.task_position,
+        done: element.done,
+        is_showing: element.is_showing,
+        "comment-list": element.comments
       }, null, 8
       /* PROPS */
-      , ["id", "task", "comment-list", "title-index", "task-index"])];
+      , ["title-index", "task-index", "id", "title_id", "task", "task_position", "done", "is_showing", "comment-list"])];
     }),
     _: 1
     /* STABLE */
 
   }, 8
   /* PROPS */
-  , ["list"])]);
+  , ["list", "onEnd"])]);
 }
 
 /***/ }),
@@ -21182,14 +21203,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       var element = _ref.element,
           index = _ref.index;
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["TitleComponent"], {
+        "title-index": index,
         id: element.id,
         title: element.title,
-        "task-list": element.tasks,
-        "title-index": index,
-        title_position: element.title_position
+        title_position: element.title_position,
+        "task-list": element.tasks
       }, null, 8
       /* PROPS */
-      , ["id", "title", "task-list", "title-index", "title_position"])];
+      , ["title-index", "id", "title", "title_position", "task-list"])];
     }),
     _: 1
     /* STABLE */
@@ -21301,6 +21322,196 @@ var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
 
 /***/ }),
 
+/***/ "./resources/ts/components/Todo/modules/API/Task/addTaskToApi.ts":
+/*!***********************************************************************!*\
+  !*** ./resources/ts/components/Todo/modules/API/Task/addTaskToApi.ts ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addTaskToApi": () => (/* binding */ addTaskToApi),
+/* harmony export */   "taskInput": () => (/* binding */ taskInput)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _getPosition_getTaskPosition__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../getPosition/getTaskPosition */ "./resources/ts/components/Todo/modules/getPosition/getTaskPosition.ts");
+/* harmony import */ var _Store_state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Store/state */ "./resources/ts/components/Todo/Store/state.ts");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+
+
+var taskInput = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)("");
+var addTaskToApi = function addTaskToApi(input, titleIndex, title_id, taskList) {
+  var task_position = (0,_getPosition_getTaskPosition__WEBPACK_IMPORTED_MODULE_1__.getTaskPosition)(taskList);
+  var addTaskData = {
+    title_id: title_id,
+    task: input,
+    task_position: task_position
+  };
+  /* APIと通信 */
+
+  axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/todo/task/post', addTaskData).then(function (response) {
+    var _state$allData$titleI;
+
+    return (_state$allData$titleI = _Store_state__WEBPACK_IMPORTED_MODULE_2__.state.allData[titleIndex].tasks) === null || _state$allData$titleI === void 0 ? void 0 : _state$allData$titleI.push(response.data);
+  })["catch"](function (e) {
+    return console.log(e.message);
+  });
+  taskInput.value = "";
+};
+
+/***/ }),
+
+/***/ "./resources/ts/components/Todo/modules/API/Task/deleteTaskToApi.ts":
+/*!**************************************************************************!*\
+  !*** ./resources/ts/components/Todo/modules/API/Task/deleteTaskToApi.ts ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "deleteTaskToApi": () => (/* binding */ deleteTaskToApi)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Store_state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Store/state */ "./resources/ts/components/Todo/Store/state.ts");
+
+
+var deleteTaskToApi = function deleteTaskToApi(titleIndex, taskIndex, id) {
+  var _state$allData$titleI;
+
+  /* API通信 */
+  axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]('/api/todo/task/' + id + '/delete', {
+    data: {
+      id: id
+    }
+  }).then(function () {
+    return console.log("delete 成功");
+  })["catch"](function (e) {
+    return console.log(e.message);
+  });
+  (_state$allData$titleI = _Store_state__WEBPACK_IMPORTED_MODULE_1__.state.allData[titleIndex].tasks) === null || _state$allData$titleI === void 0 ? void 0 : _state$allData$titleI.splice(taskIndex, 1);
+};
+
+/***/ }),
+
+/***/ "./resources/ts/components/Todo/modules/API/Task/editTaskToApi.ts":
+/*!************************************************************************!*\
+  !*** ./resources/ts/components/Todo/modules/API/Task/editTaskToApi.ts ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "editTaskToApi": () => (/* binding */ editTaskToApi)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Store_state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Store/state */ "./resources/ts/components/Todo/Store/state.ts");
+
+
+var editTaskToApi = function editTaskToApi(task, props) {
+  var editTaskData = {
+    id: props.id,
+    title_id: props.title_id,
+    task: task,
+    done: props.done,
+    is_showing: props.is_showing,
+    task_position: props.task_position
+  };
+  /* APIと通信 */
+
+  axios__WEBPACK_IMPORTED_MODULE_0___default().patch('/api/todo/task/' + props.id + '/patch', editTaskData).then(function (response) {
+    var _state$allData$props$;
+
+    Object.assign((_state$allData$props$ = _Store_state__WEBPACK_IMPORTED_MODULE_1__.state.allData[props.titleIndex].tasks) === null || _state$allData$props$ === void 0 ? void 0 : _state$allData$props$[props.taskIndex], response.data);
+  })["catch"](function (e) {
+    return console.log(e.message);
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/ts/components/Todo/modules/API/Task/updateTaskPositionToApi.ts":
+/*!**********************************************************************************!*\
+  !*** ./resources/ts/components/Todo/modules/API/Task/updateTaskPositionToApi.ts ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "updateTaskPositionToApi": () => (/* binding */ updateTaskPositionToApi)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _calculate_position__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../calculate-position */ "./resources/ts/components/Todo/modules/calculate-position.ts");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+var updateTaskPositionToApi = function updateTaskPositionToApi(event) {
+  var index = event.item.__draggable_context.index;
+  var id = event.item.__draggable_context.element.id;
+  var task = event.item.__draggable_context.element.task;
+
+  var _calculatePosition = (0,_calculate_position__WEBPACK_IMPORTED_MODULE_1__.calculatePosition)('task', event),
+      _calculatePosition2 = _slicedToArray(_calculatePosition, 3),
+      previousPosition = _calculatePosition2[0],
+      nextPosition = _calculatePosition2[1],
+      newPosition = _calculatePosition2[2];
+
+  if (newPosition !== previousPosition && newPosition !== nextPosition && newPosition > 0 && previousPosition > 0 && nextPosition > 0) {
+    /* positionが重なっていないときの処理 */
+    var updateTaskData = {
+      id: id,
+      task: task,
+      task_position: newPosition
+    };
+    /* API通信 */
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().patch('/api/todo/task/' + id + '/patch', updateTaskData) // .then((response: AxiosResponse<TaskType>) => Object.assign(state.allData[index], response.data))
+    .then(function (response) {
+      return console.log(response.data);
+    })["catch"](function (e) {
+      return console.log(e.message);
+    });
+  } else {// /* positionが重なっているときの処理 */
+    // /* positionをふり直す */
+    // const ids = (state.allData.map(tasks => tasks.id)).join('-')
+    // const updatePositionList = state.allData.map((tasks, index) => {
+    //   return ({ 'id': tasks.id, 'title': tasks.task, 'task_position': (index + 1) * 1024 })
+    // })
+    // /* API通信 */
+    // axios.patch('/api/todo/title/' + ids + '/patch', {
+    //   updatePositionList: updatePositionList
+    // })
+    // .then((response: AxiosResponse<ResponseTaskArrayType>) => {
+    //   state.allData.forEach((tasks, index) => {
+    //     Object.assign(tasks, response.data[index])
+    //   })
+    // })
+    // .catch((e: AxiosError<{ error: string }>) => console.log(e.message))
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/ts/components/Todo/modules/API/Title/addTitleToApi.ts":
 /*!*************************************************************************!*\
   !*** ./resources/ts/components/Todo/modules/API/Title/addTitleToApi.ts ***!
@@ -21354,8 +21565,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Store_state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Store/state */ "./resources/ts/components/Todo/Store/state.ts");
 
-var deleteTitleToApi = function deleteTitleToApi(state, id) {
+
+var deleteTitleToApi = function deleteTitleToApi(id) {
   /* API通信 */
   axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]('/api/todo/title/' + id + '/delete', {
     data: {
@@ -21366,10 +21579,10 @@ var deleteTitleToApi = function deleteTitleToApi(state, id) {
   })["catch"](function (e) {
     return console.log(e.message);
   });
-  var deleteIndex = state.allData.findIndex(function (list) {
+  var deleteIndex = _Store_state__WEBPACK_IMPORTED_MODULE_1__.state.allData.findIndex(function (list) {
     return list.id === id;
   });
-  state.allData.splice(deleteIndex, 1);
+  _Store_state__WEBPACK_IMPORTED_MODULE_1__.state.allData.splice(deleteIndex, 1);
 };
 
 /***/ }),
@@ -21390,7 +21603,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Store_state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Store/state */ "./resources/ts/components/Todo/Store/state.ts");
 
 
-var editTitleToApi = function editTitleToApi(id, title, titleIndex, title_position) {
+var editTitleToApi = function editTitleToApi(title, id, titleIndex, title_position) {
   var editTitleData = {
     id: id,
     title: title,
@@ -21442,7 +21655,7 @@ var updateTitlePositionToApi = function updateTitlePositionToApi(event) {
   var id = event.item.__draggable_context.element.id;
   var title = event.item.__draggable_context.element.title;
 
-  var _calculatePosition = (0,_calculate_position__WEBPACK_IMPORTED_MODULE_2__.calculatePosition)(event),
+  var _calculatePosition = (0,_calculate_position__WEBPACK_IMPORTED_MODULE_2__.calculatePosition)('title', event),
       _calculatePosition2 = _slicedToArray(_calculatePosition, 3),
       previousPosition = _calculatePosition2[0],
       nextPosition = _calculatePosition2[1],
@@ -21476,6 +21689,8 @@ var updateTitlePositionToApi = function updateTitlePositionToApi(event) {
         'title_position': (index + 1) * 1024
       };
     });
+    /* API通信 */
+
     axios__WEBPACK_IMPORTED_MODULE_0___default().patch('/api/todo/title/' + ids + '/patch', {
       updatePositionList: updatePositionList
     }).then(function (response) {
@@ -21539,8 +21754,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "calculatePosition": () => (/* binding */ calculatePosition)
 /* harmony export */ });
-// type calculatePositionType = (event: any) => [number, number, number]
-var calculatePosition = function calculatePosition(event) {
+var calculatePosition = function calculatePosition(columnName, event) {
   var previousElement = event.item.previousElementSibling;
   var nextElement = event.item.nextElementSibling;
 
@@ -21549,18 +21763,20 @@ var calculatePosition = function calculatePosition(event) {
   };
 
   var getPositionList = function getPositionList() {
+    var positionName = columnName + '_position';
+
     if (previousElement && nextElement) {
       var previousElement_context = previousElement.__draggable_context.element;
       var nextElement_context = nextElement.__draggable_context.element;
-      var previousPosition = previousElement_context.title_position;
-      var nextPosition = nextElement_context.title_position;
+      var previousPosition = previousElement_context[positionName];
+      var nextPosition = nextElement_context[positionName];
       var newPosition = calculateNewPosition(previousPosition, nextPosition);
       return [previousPosition, nextPosition, newPosition];
     }
 
     if (!previousElement) {
       var _nextElement_context = nextElement.__draggable_context.element;
-      var _nextPosition = _nextElement_context.title_position;
+      var _nextPosition = _nextElement_context[positionName];
 
       var _previousPosition = _nextPosition - 512;
 
@@ -21571,7 +21787,7 @@ var calculatePosition = function calculatePosition(event) {
 
     if (!nextElement) {
       var _previousElement_context = previousElement.__draggable_context.element;
-      var _previousPosition2 = _previousElement_context.title_position;
+      var _previousPosition2 = _previousElement_context[positionName];
 
       var _nextPosition2 = _previousPosition2 + 512;
 
@@ -21583,6 +21799,57 @@ var calculatePosition = function calculatePosition(event) {
 
   var positions = getPositionList();
   return positions;
+};
+
+/***/ }),
+
+/***/ "./resources/ts/components/Todo/modules/classSwitching.ts":
+/*!****************************************************************!*\
+  !*** ./resources/ts/components/Todo/modules/classSwitching.ts ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "classSwitching__arrow": () => (/* binding */ classSwitching__arrow),
+/* harmony export */   "classSwitching__colSpan1": () => (/* binding */ classSwitching__colSpan1),
+/* harmony export */   "classSwitching__colSpan5": () => (/* binding */ classSwitching__colSpan5),
+/* harmony export */   "classSwitching__gridCols11": () => (/* binding */ classSwitching__gridCols11)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Store_gridState__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Store/gridState */ "./resources/ts/components/Todo/Store/gridState.ts");
+
+
+var classSwitching__gridCols11 = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+  return _Store_gridState__WEBPACK_IMPORTED_MODULE_1__.gridState.is_divide ? 'grid grid-cols-11' : '';
+});
+var classSwitching__colSpan5 = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+  return _Store_gridState__WEBPACK_IMPORTED_MODULE_1__.gridState.is_divide ? 'col-span-5' : '';
+});
+var classSwitching__colSpan1 = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+  return _Store_gridState__WEBPACK_IMPORTED_MODULE_1__.gridState.is_divide ? 'col-span-1' : '';
+});
+var classSwitching__arrow = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+  return _Store_gridState__WEBPACK_IMPORTED_MODULE_1__.gridState.is_divide ? 'arrow' : '';
+});
+
+/***/ }),
+
+/***/ "./resources/ts/components/Todo/modules/getPosition/getTaskPosition.ts":
+/*!*****************************************************************************!*\
+  !*** ./resources/ts/components/Todo/modules/getPosition/getTaskPosition.ts ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getTaskPosition": () => (/* binding */ getTaskPosition)
+/* harmony export */ });
+var getTaskPosition = function getTaskPosition(taskList) {
+  var new_task_position = taskList.length ? taskList.slice(-1)[0].task_position + 1024 : 1024;
+  return new_task_position;
 };
 
 /***/ }),
@@ -21738,7 +22005,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "* {\n    box-sizing: border-box;\n}\n\n/*\n    addInputComponent CSS\n*/\n.addInput-flex {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 100%;\n}\n\n.addInput-flex__add {\n    width: 30px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.addInput-flex__input {\n    width: 80%;\n    height: 30px;\n    border-radius: 15px;\n    border: none;\n    margin-right: 1%;\n}\n\n/* \n    cardComponent CSS\n*/\n\n.card-border {\n    border: 3px solid aliceblue;\n}\n\n.card-flex {\n    display: flex;\n    align-items: center;\n    width: 100%;\n}\n\n.card-flex__show {\n    width: 90%;\n    height: 100%;\n    text-align: center;\n}\n\n.card-flex__delete {\n    width: 10%;\n    height: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n/*\n    buttonCircle CSS\n*/\n.buttonCircle {\n    width: 30px;\n    height: 30px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    background-color: inherit;\n    border-radius: 50%;\n    cursor: pointer;\n}\n\n.buttonCircle:hover {\n    background-color: rgba(202, 202, 202);\n}\n\n/*\n    plusButton CSS\n*/\n.buttonCircle-plus {\n  display: inline-block;\n  color: #333;\n  line-height: 1;\n  width: 0.2em;\n  height: 1.2em;\n  background: currentColor;\n  border-radius: 0.1em;\n  position: relative;\n}\n\n.buttonCircle-plus::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: inherit;\n  border-radius: inherit;\n  transform: rotate(90deg);\n}\n\n/*\n    crossButton Component CSS\n*/\n.buttonCircle-cross {\n  display: inline-block;\n  color: #333;\n  line-height: 1;\n  width: 0.2em;\n  height: 1.2em;\n  background: currentColor;\n  border-radius: 0.1em;\n  position: relative;\n  transform: rotate(45deg);\n}\n\n.buttonCircle-cross::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: inherit;\n  border-radius: inherit;\n  transform: rotate(90deg);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "* {\n    box-sizing: border-box;\n}\n\n/*\n    addInputComponent CSS\n*/\n.addInput-flex {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 100%;\n}\n\n.addInput-flex__add {\n    width: 30px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.addInput-flex__input {\n    width: 80%;\n    height: 30px;\n    border-radius: 15px;\n    border: none;\n    margin-right: 1%;\n}\n\n/* \n    cardComponent CSS\n*/\n\n.card-border {\n    border: 3px solid aliceblue;\n}\n\n.card-flex {\n    display: flex;\n    align-items: center;\n    width: 100%;\n}\n\n.card-flex__show {\n    width: 100%;\n    height: 100%;\n    display: flex;\n}\n\n.card-flex__show__checkbox {\n    transform: scale(1.3);\n    margin: 0 2%;\n}\n\n.card-flex__show__input {\n    width: 100%;\n    height: 100%;\n    text-align: center;\n}\n\n.card-flex__delete {\n    height: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n/*\n    buttonCircle CSS\n*/\n.buttonCircle {\n    width: 30px;\n    height: 30px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    background-color: inherit;\n    border-radius: 50%;\n    cursor: pointer;\n}\n\n.buttonCircle:hover {\n    background-color: rgba(202, 202, 202);\n}\n\n/*\n    plusButton CSS\n*/\n.buttonCircle-plus {\n  display: inline-block;\n  color: #333;\n  line-height: 1;\n  width: 0.2em;\n  height: 1.2em;\n  background: currentColor;\n  border-radius: 0.1em;\n  position: relative;\n}\n\n.buttonCircle-plus::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: inherit;\n  border-radius: inherit;\n  transform: rotate(90deg);\n}\n\n/*\n    crossButton Component CSS\n*/\n.buttonCircle-cross {\n  display: inline-block;\n  color: #333;\n  line-height: 1;\n  width: 0.2em;\n  height: 1.2em;\n  background: currentColor;\n  border-radius: 0.1em;\n  position: relative;\n  transform: rotate(45deg);\n}\n\n.buttonCircle-cross::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: inherit;\n  border-radius: inherit;\n  transform: rotate(90deg);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

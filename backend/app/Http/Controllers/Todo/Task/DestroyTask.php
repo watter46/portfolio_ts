@@ -3,18 +3,20 @@
 namespace App\Http\Controllers\Todo\Task;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\UseCases\Task\Destroy as DestroyUseCase;
+use App\Http\Requests\Todo\Task\DestroyRequest;
 
 class DestroyTask extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  App\Http\Requests\Todo\Task\DestroyRequest  $request
      */
-    public function __invoke(Request $request)
+    public function __invoke(DestroyRequest $request, DestroyUseCase $destroyUC): void
     {
-        //
+        $data = $request->validated();
+
+        $destroyUC($data);
     }
 }

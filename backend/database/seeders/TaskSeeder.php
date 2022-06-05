@@ -15,9 +15,19 @@ class TaskSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i < 5; $i++) {
+        for ($i = 1; $i < 3; $i++) {
             Task::create([
                 'title_id' => 1,
+                'task_position' => $i * 1024,
+                'done' => false,
+                'is_showing' => false,
+                'task' => "タスク" . $i
+            ]);
+        }
+
+        for ($i = 3; $i < 5; $i++) {
+            Task::create([
+                'title_id' => 2,
                 'task_position' => $i * 1024,
                 'done' => false,
                 'is_showing' => false,

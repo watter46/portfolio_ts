@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Todo\Title;
+namespace App\Http\Resources\Todo\Task;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UpdateResource extends JsonResource
+class CreateResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -13,11 +13,15 @@ class UpdateResource extends JsonResource
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
-    {   
+    {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'title_position' => $this->title_position
+            'title_id' => $this->title_id,
+            'task' => $this->task,
+            'done' => $this->done,
+            'is_showing' => $this->is_showing,
+            'task_position' => $this->task_position,
+            'comments' => $this->comments
         ];
     }
 }
