@@ -11,7 +11,7 @@ class Update
     public function __invoke(array $data)
     {
         if (!array_key_exists('updatePositionList', $data)) {
-            Task::upsert($data, ['id'], ['title_id', 'task', 'done', 'is_showing', 'task_position']);
+            Task::upsert($data, ['id', 'title_id'], ['task', 'done', 'is_showing', 'task_position']);
 
             $result = Task::find($data['id']);
 
@@ -20,7 +20,7 @@ class Update
         else {
             $data = $data['updatePositionList'];
 
-            Task::upsert($data, ['id'], ['title_id', 'task', 'done', 'is_showing', 'task_position']);
+            Task::upsert($data, ['id', 'title_id'], ['task', 'done', 'is_showing', 'task_position']);
 
             $ids = array_column($data, 'id');
             $result = Task::orderBy('task_position', 'asc')->find($ids);

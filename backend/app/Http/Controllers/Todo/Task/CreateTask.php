@@ -18,8 +18,8 @@ class CreateTask extends Controller
     {
         $data = $request->validated();
         
-        $getTitle = $createUC($data);
+        $getTask = $createUC($data);
 
-        return $getTitle;
+        return $getTask;
     }
 }

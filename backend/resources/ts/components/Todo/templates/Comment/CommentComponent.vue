@@ -3,12 +3,14 @@ import DeleteComment from './DeleteComment.vue'
 import ShowComment from './ShowComment.vue'
 
 
-interface Props {
-  id: number,
-  comment: string,
-  titleIndex: number,
-  taskIndex: number,
-  commentIndex: number
+type Props = {
+  titleIndex: number;
+  taskIndex: number;
+  commentIndex: number;
+  id: number;
+  task_id: number;
+  comment: string;
+  comment_position: number;
 }
 
 defineProps<Props>();
@@ -17,11 +19,13 @@ defineProps<Props>();
 <template>
   <div class="card mb-1" style="background-color: purple;">
     <div class="card-flex">
-      <ShowComment  :id="id"
-                    :comment="comment"
-                    :title-index="titleIndex"
+      <ShowComment  :title-index="titleIndex"
                     :task-index="taskIndex"
-                    :comment-index="commentIndex" />
+                    :comment-index="commentIndex"
+                    :id="id"
+                    :task_id="task_id"
+                    :comment="comment"
+                    :comment_position="comment_position" />
       <DeleteComment  :id="id"
                       :comment="comment"
                       :task-index="taskIndex"

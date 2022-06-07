@@ -38,7 +38,10 @@ class UpdateRequest extends FormRequest
         if ($this->has('updatePositionList')) {
             return [
                 'updatePositionList.*.id' => 'required|integer',
+                'updatePositionList.*.title_id' => 'required|integer',
                 'updatePositionList.*.task' => 'required|string',
+                'updatePositionList.*.done' => 'required|boolean',
+                'updatePositionList.*.is_showing' => 'required|boolean',
                 'updatePositionList.*.task_position' => 'required|integer'
             ];
         }

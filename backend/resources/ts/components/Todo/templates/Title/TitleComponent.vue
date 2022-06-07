@@ -41,7 +41,7 @@ defineProps<Props>();
                  :group="{name: 'task'}"
                  animation="600"
                  item-key="id"
-                 @end="updateTaskPositionToApi">
+                 @end="updateTaskPositionToApi($event, titleIndex)">
         <template #item="{ element, index }">
           <TaskComponent :title-index="titleIndex"
                          :task-index="index"

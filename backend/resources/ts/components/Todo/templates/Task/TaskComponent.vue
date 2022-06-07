@@ -11,6 +11,7 @@ import { classSwitching__gridCols11,
          classSwitching__colSpan5,
          classSwitching__colSpan1,
          classSwitching__arrow } from '../../modules/classSwitching'
+import { updateCommentPositionToApi } from '../../modules/API/Comment/updateCommentPositionToApi'
 
 
 type Props = {
@@ -46,10 +47,11 @@ defineProps<Props>();
                       :task-index="taskIndex" />
         </div>
 
-      <AddComment :comment-list="commentList"
-                  :task-id="id"
-                  :title-index="titleIndex"
-                  :task-index="taskIndex" />
+      <AddComment :title-index="titleIndex"
+                  :task-index="taskIndex"
+                  :id="id"
+                  :task_id="id"
+                  :comment-list="commentList" />
     </div>
 
     <div :class="classSwitching__colSpan1" style="border: 1px solid red;">
@@ -60,13 +62,16 @@ defineProps<Props>();
       <draggable :list="commentList"
                  :group="{name: 'comment'}"
                  animation="600"
-                 item-key="id">
+                 item-key="id"
+                 @end="updateCommentPositionToApi($event, titleIndex, taskIndex)">
         <template #item="{ element, index }">
-          <CommentComponent :id="element.id"
-                            :comment="element.comment"
-                            :title-index="titleIndex"
+          <CommentComponent :title-index="titleIndex"
                             :task-index="taskIndex"
-                            :comment-index="index" />
+                            :comment-index="index"
+                            :id="element.id"
+                            :task_id="element.id"
+                            :comment="element.comment"
+                            :comment_position="element.comment_position" />
         </template>
       </draggable>
     </div>

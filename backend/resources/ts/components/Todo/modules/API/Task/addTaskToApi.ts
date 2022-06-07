@@ -11,7 +11,7 @@ type AddTaskType = {
   task_position: number;
 }
 
-export const taskInput = ref("")
+export let taskInput = ""
 
 
 export const addTaskToApi = (input: string, titleIndex: number, title_id: number, taskList: TaskType[]) => {
@@ -29,5 +29,5 @@ export const addTaskToApi = (input: string, titleIndex: number, title_id: number
   .then((response: AxiosResponse<TaskType>) => state.allData[titleIndex].tasks?.push(response.data))
   .catch((e: AxiosError<{ error: string }>) => console.log(e.message))
 
-  taskInput.value = ""
+  taskInput = ""
 }

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { StateType, TaskType } from '../../Store/type'
-
 import { deleteTaskToApi } from '../../modules/API/Task/deleteTaskToApi';
 
 interface Props {

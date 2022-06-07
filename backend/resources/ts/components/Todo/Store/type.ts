@@ -34,3 +34,5 @@ export type GridStateType = {
 export type ResponseTitleArrayType = TitleType[]
 
 export type ResponseTaskArrayType = TaskType[]
+
+export type ResponseCommentArrayType = CommentType[]
