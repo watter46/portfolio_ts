@@ -3,8 +3,6 @@ import type { CommentType } from '../../../Store/type'
 import axios, { AxiosResponse, AxiosError } from 'axios'
 import { getCommentPosition } from '../../getPosition/getCommentPosition'
 import { state } from '../../../Store/state'
-import { ref } from 'vue'
-
 
 type AddCommentType = (
   input: string,
@@ -13,8 +11,6 @@ type AddCommentType = (
   task_id: number,
   commentList: CommentType[]
 ) => void
-
-export let commentInput = ""
 
 export const addCommentToApi: AddCommentType = (input, titleIndex, taskIndex, task_id, commentList) => {
 
@@ -30,6 +26,4 @@ export const addCommentToApi: AddCommentType = (input, titleIndex, taskIndex, ta
   axios.post('/api/todo/comment/post', addCommentData)
   .then((response: AxiosResponse<CommentType>) => state.allData[titleIndex].tasks?.[taskIndex].comments?.push(response.data))
   .catch((e: AxiosError<{ error: string }>) => console.log(e.message))
-
-  commentInput = ""
 }

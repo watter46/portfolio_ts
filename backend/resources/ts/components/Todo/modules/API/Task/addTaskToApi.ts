@@ -11,9 +11,6 @@ type AddTaskType = {
   task_position: number;
 }
 
-export let taskInput = ""
-
-
 export const addTaskToApi = (input: string, titleIndex: number, title_id: number, taskList: TaskType[]) => {
 
   const task_position = getTaskPosition(taskList)
@@ -28,6 +25,4 @@ export const addTaskToApi = (input: string, titleIndex: number, title_id: number
   axios.post('/api/todo/task/post', addTaskData)
   .then((response: AxiosResponse<TaskType>) => state.allData[titleIndex].tasks?.push(response.data))
   .catch((e: AxiosError<{ error: string }>) => console.log(e.message))
-
-  taskInput = ""
 }

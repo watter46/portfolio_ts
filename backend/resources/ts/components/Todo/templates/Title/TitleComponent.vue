@@ -17,6 +17,14 @@ type Props = {
 }
 
 defineProps<Props>();
+
+// const onChange = (event: any) => {
+//   if (event.added) {
+//     console.log("addedあるんご")
+//   } else {
+//     console.log("ナインゴラン")
+//   }
+// }
 </script>
 
 <template>

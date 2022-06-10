@@ -9,8 +9,6 @@ type AddTitleType = {
   title: string;
 }
 
-export let titleInput = ""
-
 export const addTitleToApi = (input: string) => {
 
   const title_position = getTitlePosition(state.allData)
@@ -24,6 +22,4 @@ export const addTitleToApi = (input: string) => {
   axios.post('/api/todo/title/post', addTitleData)
   .then((response: AxiosResponse<TitleType>) => state.allData.push(response.data))
   .catch((e: AxiosError<{ error: string }>) => console.log(e.message))
-
-  titleInput = ""
 }

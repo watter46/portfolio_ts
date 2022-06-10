@@ -14,6 +14,7 @@ export const updateTaskPositionToApi = (event: any, titleIndex: number) => {
 
   const [ previousPosition, nextPosition, newPosition ] = calculatePosition('task', event)
 
+
   if (newPosition !== previousPosition &&
       newPosition !== nextPosition &&
       newPosition > 0 &&
