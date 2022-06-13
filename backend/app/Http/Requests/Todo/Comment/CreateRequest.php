@@ -13,7 +13,7 @@ class CreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'task_id' => 'required|integer',
+            'comment' => 'required|string',
+            'comment_position' => 'required|integer'
         ];
     }
 }

@@ -23,9 +23,21 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'id' => 'required|integer',
-            'title' => 'required|string'
-        ];
+        if (!$this->has('updatePositionList')) {
+            $rules = [];
+            if ($this->has('id')) $rules['id'] = 'required|integer';
+            if ($this->has('title')) $rules['title'] = 'required|string';
+            if ($this->has('title_position')) $rules['title_position'] = 'required|integer';
+
+            return $rules;
+        }
+
+        if ($this->has('updatePositionList')) {
+            return [
+                'updatePositionList.*.id' => 'required|integer',
+                'updatePositionList.*.title' => 'required|string',
+                'updatePositionList.*.title_position' => 'required|integer'
+            ];
+        }
     }
 }

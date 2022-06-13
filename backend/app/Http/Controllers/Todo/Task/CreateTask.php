@@ -3,18 +3,23 @@
 namespace App\Http\Controllers\Todo\Task;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\UseCases\Task\Create as CreateUseCase;
+use App\Http\Requests\Todo\Task\CreateRequest;
 
 class CreateTask extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CreateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(CreateRequest $request, CreateUseCase $createUC)
     {
-        //
+        $data = $request->validated();
+        
+        $getTask = $createUC($data);
+
+        return $getTask;
     }
 }

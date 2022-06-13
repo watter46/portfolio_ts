@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Todo\Title;
+namespace App\Http\Resources\Todo\Comment;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,10 +14,12 @@ class UpdateResource extends JsonResource
      */
     public function toArray($request)
     {   
+        clock($this);
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'title_position' => $this->title_position
+            'task_id' => $this->task_id,
+            'comment' => $this->comment,
+            'comment_position' => $this->comment_position
         ];
     }
 }

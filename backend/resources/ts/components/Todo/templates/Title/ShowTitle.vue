@@ -1,49 +1,40 @@
 <script setup lang="ts">
-import type { StateType } from '../../Store/type'
-
-import { reactive, inject } from 'vue'
+import { reactive } from 'vue'
 import { editTitleToApi } from '../../modules/API/Title/editTitleToApi'
-import { key as StateKey } from '../../Store/InjectionKey/StateKey'
 
 
 interface Props {
   id: number,
   title: string,
-  titleIndex: number
+  titleIndex: number,
+  title_position: number
 }
 
 const props = defineProps<Props>();
 
-const state = inject(StateKey) as StateType
 
-
-const titleState = reactive<{value: string, edit: boolean}>({
-  value: props.title,
-  edit: false
+const titleState = reactive<{input: string, is_edit: boolean}>({
+  input: props.title,
+  is_edit: false
 })
-
-
-const editTitle = () => {
-  
-  editTitleToApi(props.id, titleState.value, props.titleIndex)
-
-  console.log("変更されました")
-}
 </script>
 
 <template>
   <div class="card-flex__show">
     <div
-      v-if="!titleState.edit"
-      v-text="titleState.value"
-      @click="titleState.edit = true">
+      v-if="!titleState.is_edit"
+      v-text="titleState.input"
+      @click="titleState.is_edit = true">
     </div>
       <input
-        v-if="titleState.edit"
+        v-if="titleState.is_edit"
         type="text"
-        v-model="titleState.value"
-        @change="editTitle"
-        @blur="titleState.edit = false"
+        v-model="titleState.input"
+        @change="editTitleToApi(titleState.input,
+                                props.id,
+                                props.titleIndex,
+                                props.title_position)"
+        @blur="titleState.is_edit = false"
         v-focus
       >
   </div>

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Todo\Comment;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Todo\Comment\UpdateRequest;
+use App\UseCases\Comment\Update as UpdateUseCase;
 
 class UpdateComment extends Controller
 {
@@ -13,8 +14,12 @@ class UpdateComment extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(UpdateRequest $request, UpdateUseCase $updateUC)
     {
-        //
+        $data = $request->validated();
+        
+        $getComment = $updateUC($data);
+        
+        return $getComment;
     }
 }

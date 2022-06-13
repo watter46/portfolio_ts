@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Todo\Task;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Todo\Task\UpdateRequest;
+use App\UseCases\Task\Update as UpdateUseCase;
 
 class UpdateTask extends Controller
 {
@@ -13,8 +14,12 @@ class UpdateTask extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(UpdateRequest $request, UpdateUseCase $updateUC)
     {
-        //
+        $data = $request->validated();
+
+        $getTask = $updateUC($data);
+        
+        return $getTask;
     }
 }

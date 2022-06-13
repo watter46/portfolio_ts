@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import type { CommentType, StateType, TaskType } from '../../Store/type'
-import { key as StateKey } from '../../Store/InjectionKey/StateKey'
-import { inject } from 'vue'
+import { deleteCommentToApi } from '../../modules/API/Comment/deleteCommentToApi' 
 
 
 interface Props {
@@ -12,21 +10,12 @@ interface Props {
   commentIndex: number
 }
 
-const props = defineProps<Props>();
-
-const state = inject(StateKey) as StateType
-
-const deleteComment = () => {
-  const taskList = state.allData[props.titleIndex].tasks as TaskType[]
-  const commentList = taskList[props.taskIndex].comments as CommentType[]
-
-  commentList.splice(props.commentIndex, 1)
-}
+defineProps<Props>();
 </script>
 
 <template>
   <div class="card-flex__delete">
-    <span type="button" class="buttonCircle" @click="deleteComment()">
+    <span type="button" class="buttonCircle" @click="deleteCommentToApi(titleIndex, taskIndex, commentIndex, id)">
       <span class="buttonCircle-cross"></span>
     </span>
   </div>

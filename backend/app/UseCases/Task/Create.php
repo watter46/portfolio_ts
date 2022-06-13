@@ -2,14 +2,15 @@
 
 namespace App\UseCases\Task;
 
+use App\Http\Resources\Todo\Task\CreateResource;
 use App\Models\Todo\Task;
 
 class Create
 {
-    public function invoke(Task $task): Task
+    public function __invoke(array $data)
     {
-        // $task->save();
-        // // 他にも処理がある場合はここに色々書く
-        // return $task;
+        $data = Task::create($data);
+        
+        return new CreateResource($data);
     }
 }

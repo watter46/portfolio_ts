@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import type { StateType, TaskType } from '../../Store/type'
-
-import { inject } from 'vue'
-import { key as StateKey } from '../../Store/InjectionKey/StateKey'
-
+import { deleteTaskToApi } from '../../modules/API/Task/deleteTaskToApi';
 
 interface Props {
   id: number,
@@ -12,22 +8,12 @@ interface Props {
   titleIndex: number
 }
 
-const props = defineProps<Props>();
-
-const state = inject(StateKey) as StateType
-
-const deleteTask = () => {
-  const deleteTaskList = state.allData[props.titleIndex].tasks as TaskType[]
-
-  const deleteIndex = deleteTaskList.findIndex(tasks => tasks.id === props.id)
-
-  deleteTaskList.splice(deleteIndex, 1)
-}
+defineProps<Props>();
 </script>
 
 <template>
   <div class="card-flex__delete">
-    <span type="button" class="buttonCircle" @click="deleteTask()">
+    <span type="button" class="buttonCircle" @click="deleteTaskToApi(titleIndex, taskIndex, id)">
       <span class="buttonCircle-cross"></span>
     </span>
   </div>

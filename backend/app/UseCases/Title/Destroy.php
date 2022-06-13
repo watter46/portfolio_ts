@@ -8,6 +8,6 @@ class Destroy
 {
     public function __invoke(array $data): void
     {
-        Title::where('id', $data['id'])->delete();
+        Title::destroy($data['id']);
     }
 }

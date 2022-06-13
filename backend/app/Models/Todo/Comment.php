@@ -9,7 +9,7 @@ class Comment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','task_id', 'comment_position', 'comment'];
+    protected $fillable = ['task_id', 'comment_position', 'comment'];
 
     public function tasks() {
         return $this->belongsTo('App\Models\Todo\Task');

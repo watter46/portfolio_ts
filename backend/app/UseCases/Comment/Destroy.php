@@ -6,10 +6,8 @@ use App\Models\Todo\Comment;
 
 class Destroy
 {
-    public function invoke(Comment $comment): Comment
+    public function __invoke(array $data): void
     {
-        // $task->save();
-        // // 他にも処理がある場合はここに色々書く
-        // return $task;
+        Comment::destroy($data['id']);
     }
 }
