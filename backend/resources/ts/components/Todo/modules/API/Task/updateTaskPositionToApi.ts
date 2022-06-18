@@ -7,6 +7,32 @@ import { cloneDeep as _cloneDeep } from 'lodash'
 
 
 export const updateTaskPositionToApi = (event: any, titleIndex: number) => {
+  const updatePosition = (event: any) => {
+  console.log("insertData")
+  
+  console.log(event)
+  const newIndex = event.newDraggableIndex
+  const element = event.item.__draggable_context.element
+  const parentElement = event.to.parentElement.__draggable_context.element
+  const tasks = parentElement.tasks
+  
+  const getInsertData = () => {
+    const getPreviousPosition = newIndex !== 0 ?  tasks[newIndex - 1].task_position : tasks[newIndex + 1].task_position - 512
+    const getNextPosition = newIndex + 1 in tasks ?  tasks[newIndex + 1].task_position : 1024
+
+    const calculateNewPosition = (previousPosition: number, nextPosition: number) => Math.floor((previousPosition + nextPosition) / 2)
+
+    const newPosition = calculateNewPosition(getPreviousPosition, getNextPosition)
+
+    const insertData = {
+      id: element.id,
+      title_id: parentElement.id,
+      task_position: newPosition
+    }
+    return insertData
+  }
+  console.log(getInsertData())
+}
   const taskIndex = event.item.__draggable_context.index
 
   const updateTaskData: TaskType = event.item.__draggable_context.element
