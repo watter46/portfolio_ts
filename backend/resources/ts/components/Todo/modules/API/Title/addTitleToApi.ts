@@ -1,7 +1,7 @@
 import type { TitleType } from '../../../Store/type'
 
 import axios, { AxiosResponse, AxiosError } from 'axios'
-import { getTitlePosition } from '../../getPosition/getTitlePosition'
+import { getTitlePosition } from '../../API/getPosition/getTitlePosition'
 import { state } from '../../../Store/state'
 
 type AddTitleType = {

@@ -4,35 +4,26 @@ import axios, { AxiosResponse, AxiosError } from 'axios'
 import { state } from '../../../Store/state'
 
 type editTaskType = (
-  task: string,
+  taskInput: string,
   props: {
     titleIndex: number,
     taskIndex: number,
-    id: number,
-    title_id: number,
-    task: string,
-    task_position: number,
-    done: boolean,
-    is_showing: boolean
+    taskList: TaskType
   }
 ) => void
 
 
-export const editTaskToApi: editTaskType = (task, props) => {
+export const editTaskToApi: editTaskType = (taskInput, props) => {
 
-  const editTaskData = {
-    id: props.id,
-    title_id: props.title_id,
-    task: task,
-    done: props.done,
-    is_showing: props.is_showing,
-    task_position: props.task_position
-  }
+  const editTaskData = props.taskList
+
+  editTaskData.task = taskInput
 
   /* APIと通信 */
-  axios.patch('/api/todo/task/' + props.id + '/patch', editTaskData)
+  axios.patch('/api/todo/task/' + props.taskList.id + '/patch', editTaskData)
   .then((response: AxiosResponse<TaskType>) => {
-    Object.assign(state.allData[props.titleIndex].tasks?.[props.taskIndex], response.data)
+    const editTask = state.allData[props.titleIndex].tasks?.[props.taskIndex] as TaskType
+    Object.assign(editTask, response.data)
   })
   .catch((e: AxiosError<{ error: string }>) => console.log(e.message))
 }

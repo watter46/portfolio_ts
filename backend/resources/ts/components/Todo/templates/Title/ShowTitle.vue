@@ -21,21 +21,20 @@ const titleState = reactive<{input: string, is_edit: boolean}>({
 
 <template>
   <div class="card-flex__show">
-    <div
-      v-if="!titleState.is_edit"
-      v-text="titleState.input"
-      @click="titleState.is_edit = true">
+    <div class="card-flex__show__input"
+         v-if="!titleState.is_edit"
+         v-text="titleState.input"
+         @click="titleState.is_edit = true">
     </div>
-      <input
-        v-if="titleState.is_edit"
-        type="text"
-        v-model="titleState.input"
-        @change="editTitleToApi(titleState.input,
-                                props.id,
-                                props.titleIndex,
-                                props.title_position)"
-        @blur="titleState.is_edit = false"
-        v-focus
-      >
+    <input class="card-flex__show__input"
+           v-if="titleState.is_edit"
+           type="text"
+           v-model="titleState.input"
+           @change="editTitleToApi(titleState.input,
+                                    props.id,
+                                    props.titleIndex,
+                                    props.title_position)"
+           @blur="titleState.is_edit = false"
+           v-focus>
   </div>
 </template>

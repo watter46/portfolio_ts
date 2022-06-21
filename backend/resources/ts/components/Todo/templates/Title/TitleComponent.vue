@@ -2,65 +2,44 @@
 import draggable from 'vuedraggable'
 import DeleteTitle from './DeleteTitle.vue'
 import TaskComponent from '../Task/TaskComponent.vue'
-import AddTask from '../Task/AddTask.vue'
+import AddTitle from './AddTitle.vue'
 import ShowTitle from './ShowTitle.vue'
 
-import { TaskType } from '../../Store/type'
-import { updateTaskPositionToApi } from '../../modules/API/Task/updateTaskPositionToApi'
+import { TaskType, TitleType } from '../../Store/type'
+import { updateTitlePositionToApi } from '../../modules/API/Title/updateTitlePositionToApi'
 
 type Props = {
-  titleIndex: number;
-  id: number;
-  title: string;
-  title_position: number;
-  taskList: TaskType[];
+  allData: TitleType[]
 }
 
 defineProps<Props>();
-
-// const onChange = (event: any) => {
-//   if (event.added) {
-//     console.log("addedあるんご")
-//   } else {
-//     console.log("ナインゴラン")
-//   }
-// }
 </script>
 
 <template>
-  <div class="card card-border" style="background-color: grey;">
-      <div class="card-flex">
-        <ShowTitle :title-index="titleIndex"
-                   :id="id"
-                   :title="title"
-                   :title_position="title_position"/>
+  <AddTitle style="background-color: grey; height: 50px;" />
+  <draggable  class="grid gap-3"
+              :list="allData"
+              :group="{name: 'title'}"
+              animation="600"
+              item-key="id"
+              @end="updateTitlePositionToApi">
+    <template #item="{ element, index }">
+      <div class="card card-border" style="background-color: grey;">
+        <div class="card-flex">
+          <ShowTitle :title-index="index"
+                     :id="element.id"
+                     :title="element.title"
+                     :title_position="element.title_position"/>
 
-        <DeleteTitle :title-index="titleIndex"
-                     :id="id"
-                     :title="title" />
+          <DeleteTitle :title-index="index"
+                      :id="element.id"
+                      :title="element.title" />
+        </div>
+
+        <TaskComponent :title-index="index"
+                       :title_id="element.id"
+                       :task-list="element.tasks" />
       </div>
-      
-      <AddTask class="my-3"
-               :title-index="titleIndex"
-               :title_id="id"
-               :task-list="taskList" />
-
-      <draggable :list="taskList"
-                 :group="{name: 'task'}"
-                 animation="600"
-                 item-key="id"
-                 @end="updateTaskPositionToApi($event, titleIndex)">
-        <template #item="{ element, index }">
-          <TaskComponent :title-index="titleIndex"
-                         :task-index="index"
-                         :id="element.id"
-                         :title_id="element.title_id"
-                         :task="element.task"
-                         :task_position="element.task_position"
-                         :done="element.done"
-                         :is_showing="element.is_showing"
-                         :comment-list="element.comments" />
-        </template>
-      </draggable>
-    </div>
+    </template>
+  </draggable>
 </template>

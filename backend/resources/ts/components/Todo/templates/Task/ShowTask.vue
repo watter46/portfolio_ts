@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { editTaskToApi } from '../../modules/API/Task/editTaskToApi'
+import { TaskType } from '../../Store/type';
 
 type Props = {
   titleIndex: number;
   taskIndex: number;
-  id: number;
-  title_id: number;
-  task: string;
-  task_position: number;
-  done: boolean;
-  is_showing: boolean;
+  taskList: TaskType;
 }
 
 type TaskStateType = {
@@ -23,9 +19,9 @@ type TaskStateType = {
 const props = defineProps<Props>();
 
 const taskState = reactive<TaskStateType>({
-  input: props.task,
-  is_done: props.done,
-  is_showing: props.is_showing,
+  input: props.taskList.task,
+  is_done: props.taskList.done,
+  is_showing: props.taskList.is_showing,
   is_edit: false
 })
 </script>

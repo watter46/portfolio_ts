@@ -56,7 +56,7 @@ export const getTaskPosition = (event: any) => {
 
 export const getCommentPosition = (event: any) => {
   const newIndex: number = event.newIndex
-  const parentElement: CommentType[] = event.to.parentElement.__draggable_context.element.tasks
+  const parentElement: CommentType[] = event.to.parentElement.__draggable_context.element.comments
 
   if (parentElement.length !== 1) {
     const previousPosition: number =  newIndex !== 0 ? parentElement[newIndex - 1].comment_position : parentElement[newIndex + 1].comment_position - 512

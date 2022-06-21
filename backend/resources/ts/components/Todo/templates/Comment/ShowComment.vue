@@ -1,21 +1,25 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { editCommentToApi } from '../../modules/API/Comment/editCommentToApi';
+import { CommentType } from '../../Store/type';
 
-interface Props {
-  titleIndex: number,
-  taskIndex: number,
-  commentIndex: number,
-  id: number,
-  task_id: number,
-  comment: string,
-  comment_position: number,
+
+type Props = {
+  titleIndex: number;
+  taskIndex: number;
+  commentIndex: number;
+  commentList: CommentType;
+}
+
+type CommentStateType = {
+  input: string;
+  is_edit: boolean;
 }
 
 const props = defineProps<Props>();
 
-const commentState = reactive<{input: string, is_edit: boolean}>({
-  input: props.comment,
+const commentState = reactive<CommentStateType>({
+  input: props.commentList.comment,
   is_edit: false
 })
 </script>

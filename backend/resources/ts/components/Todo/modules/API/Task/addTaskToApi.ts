@@ -1,7 +1,7 @@
 import type { TaskType } from '../../../Store/type'
 
 import axios, { AxiosResponse, AxiosError } from 'axios'
-import { getTaskPosition } from '../../getPosition/getTaskPosition'
+import { getTaskPosition } from '../getPosition/getTaskPosition'
 import { state } from '../../../Store/state'
 import { ref } from 'vue'
 

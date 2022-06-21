@@ -1,7 +1,7 @@
 import type { CommentType } from '../../../Store/type'
 
 import axios, { AxiosResponse, AxiosError } from 'axios'
-import { getCommentPosition } from '../../getPosition/getCommentPosition'
+import { getCommentPosition } from '../../API/getPosition/getCommentPosition'
 import { state } from '../../../Store/state'
 
 type AddCommentType = (

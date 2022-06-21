@@ -7,7 +7,6 @@ import { ref } from 'vue'
 type Props = {
   titleIndex: number;
   taskIndex: number;
-  id: number;
   task_id: number;
   commentList: CommentType[];
 }

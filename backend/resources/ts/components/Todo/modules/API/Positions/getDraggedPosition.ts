@@ -1,6 +1,6 @@
 import { getTitlePosition, getTaskPosition, getCommentPosition } from "./getPositions"
 
-export const getNewPosition = (columnName: string, event: any) => {
+export const getDraggedPosition = (columnName: string, event: any) => {
   if (columnName === 'title') {
     return getTitlePosition(event)
   }
