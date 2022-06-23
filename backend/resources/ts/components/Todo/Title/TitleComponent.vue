@@ -27,6 +27,22 @@ defineProps<Props>();
       <div class="card card-border" style="background-color: grey;">
         <div class="card-flex">
           <ShowTitle :title-index="index"
+                     :titles="element" />
+
+          <!-- <DeleteTitle :title-index="index"
+                       :props="element" /> -->
+        </div>
+
+        <!-- <TaskComponent :title-index="index"
+                       :props="element" /> -->
+      </div>
+    </template>
+  </draggable>
+</template>
+
+<!-- <div class="card card-border" style="background-color: grey;">
+        <div class="card-flex">
+          <ShowTitle :title-index="index"
                      :id="element.id"
                      :title="element.title"
                      :title_position="element.title_position"/>
@@ -39,7 +55,4 @@ defineProps<Props>();
         <TaskComponent :title-index="index"
                        :title_id="element.id"
                        :task-list="element.tasks" />
-      </div>
-    </template>
-  </draggable>
-</template>
+      </div> -->

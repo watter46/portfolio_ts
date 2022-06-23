@@ -49,6 +49,7 @@ defineProps<Props>();
           <DeleteTask :title-index="titleIndex"
                       :task-index="index"
                       :id="element.id"
+                      :done="element.done"
                       :task="element.task" />
         </div>
 
