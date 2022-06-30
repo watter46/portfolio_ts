@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import type { TaskType } from '../../../Store/type'
+import type { TaskType } from 'resources/ts/Store/type';
 
-import { addTaskToApi } from './API/addTaskToApi'
 import { ref } from 'vue'
+import { addTaskToApi } from './API/addTaskToApi'
 
-
-interface Props {
+type TaskProps = {
   titleIndex: number;
-  title_id: number,
-  taskList: TaskType[];
+  title_id: number;
+  tasks: TaskType[];
 }
 
-const props = defineProps<Props>();
+
+const taskProps = defineProps<TaskProps>();
 
 const taskInput = ref("")
 
 const addTask = () => {
-  addTaskToApi(taskInput.value, props.titleIndex, props.title_id, props.taskList)
+  addTaskToApi(taskInput.value, taskProps)
 
   taskInput.value = ""
 }

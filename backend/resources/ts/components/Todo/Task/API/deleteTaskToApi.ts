@@ -1,26 +1,33 @@
+import type { TaskProps } from '../Functions/type'
+
 import axios,{ AxiosError } from 'axios'
 import { state } from '../../../../Store/state'
-import { confirmDeleteTask } from '../Functions/Alert/confirmDeleteTask'
+import { alertNotDoneTask } from '../Functions/Alert/confirmDeleteTask'
 
-type Props = {
-  titleIndex: number;
-  taskIndex: number;
-  done: boolean;
-  id: number;
-  task: string;
-}
 
-export const deleteTaskToApi = (props: Props) => {
-  const is_confirm = confirmDeleteTask(props.done, props.task)
+export const deleteTaskToApi = (taskProps: TaskProps, deleteTaskList: number[]) => {
+  const tasks = taskProps.tasks
 
-  if (is_confirm) {
-    /* API通信 */
-    axios.delete('/api/todo/task/' + props.id + '/delete', {
-      data: { id: props.id }
-    })
-    .then(() => console.log("delete 成功"))
-    .catch((e: AxiosError<{ error: string }>) => console.log(e.message))
-
-    state.allData[props.titleIndex].tasks?.splice(props.taskIndex, 1)
+  if (!tasks.done) {
+    alertNotDoneTask()
+  } 
+  else {
+    console.log("削除できます")
+    const id = tasks.id
+    console.log(id)
+    console.log(deleteTaskList)
   }
+
+  // if (is_done) {
+    
+  //   // /* API通信 */
+  //   axios.delete('/api/todo/task/' + tasks.id + '/delete', {
+  //     data: { id: tasks.id }
+  //   })
+  //   .then(() => console.log("delete 成功"))
+  //   .catch((e: AxiosError<{ error: string }>) => console.log(e.message))
+
+  //   /* allDataから対象のタスクを削除 */
+  //   state.allData[taskProps.titleIndex].tasks?.splice(taskProps.taskIndex, 1)
+  // }
 }

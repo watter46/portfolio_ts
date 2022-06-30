@@ -16,43 +16,35 @@ defineProps<Props>();
 </script>
 
 <template>
+  <!-- AddTitle Component: タイトルを追加 -->
   <AddTitle style="background-color: grey; height: 50px;" />
-  <draggable  class="grid gap-3"
-              :list="allData"
-              :group="{name: 'title'}"
-              animation="600"
-              item-key="id"
-              @end="updateTitlePositionToApi">
+
+  <!-- draggableライブラリ: タイトルの入れ替え -->
+  <draggable class="grid gap-3"
+             :list="allData"
+             :group="{name: 'title'}"
+             animation="600"
+             item-key="id"
+             @end="updateTitlePositionToApi">
     <template #item="{ element, index }">
       <div class="card card-border" style="background-color: grey;">
         <div class="card-flex">
+
+          <!-- ShowTitle Component: タイトルの表示、編集 -->
           <ShowTitle :title-index="index"
                      :titles="element" />
 
-          <!-- <DeleteTitle :title-index="index"
-                       :props="element" /> -->
+          <!-- DeleteTitle Component: タイトルの削除 -->
+          <DeleteTitle :title-index="index"
+                       :titles="element" />
         </div>
 
-        <!-- <TaskComponent :title-index="index"
-                       :props="element" /> -->
+
+        <!-- TaskComponent: Task一覧 -->
+        <TaskComponent :title-index="index"
+                       :title_id="element.id"
+                       :tasks="element.tasks" />
       </div>
     </template>
   </draggable>
 </template>
-
-<!-- <div class="card card-border" style="background-color: grey;">
-        <div class="card-flex">
-          <ShowTitle :title-index="index"
-                     :id="element.id"
-                     :title="element.title"
-                     :title_position="element.title_position"/>
-
-          <DeleteTitle :title-index="index"
-                      :id="element.id"
-                      :title="element.title" />
-        </div>
-
-        <TaskComponent :title-index="index"
-                       :title_id="element.id"
-                       :task-list="element.tasks" />
-      </div> -->

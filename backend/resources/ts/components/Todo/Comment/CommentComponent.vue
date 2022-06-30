@@ -14,7 +14,7 @@ type Props = {
   titleIndex: number;
   taskIndex: number;
   task_id: number;
-  commentList: CommentType[];
+  comments: CommentType[];
 }
 
 defineProps<Props>();
@@ -25,10 +25,10 @@ defineProps<Props>();
   <AddComment :title-index="titleIndex"
               :task-index="taskIndex"
               :task_id="task_id"
-              :comment-list="commentList" />
+              :comments="comments" />
 
-  <!-- draggableライブラリ: コメントのposition変更 -->
-  <draggable :list="commentList"
+  <!-- draggableライブラリ: コメントの入れ替え -->
+  <draggable :list="comments"
              :group="{name: 'comment'}"
              animation="600"
              item-key="id"
@@ -41,14 +41,13 @@ defineProps<Props>();
           <ShowComment  :title-index="titleIndex"
                         :task-index="taskIndex"
                         :comment-index="index"
-                        :comment-list="element" />
+                        :comments="element" />
 
           <!-- DeleteComment Component: コメントの削除 -->
-          <DeleteComment  :id="element.id"
-                          :comment="element.comment"
-                          :task-index="taskIndex"
-                          :title-index="titleIndex"
-                          :comment-index="index" />
+          <DeleteComment :title-index="titleIndex"
+                         :task-index="taskIndex"
+                         :comment-index="index"
+                         :comments="element" />
         </div>
       </div>
     </template>

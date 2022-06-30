@@ -4,19 +4,19 @@ import { addCommentToApi } from './API/addCommentToApi'
 import { ref } from 'vue'
 
 
-type Props = {
+type CommentProps = {
   titleIndex: number;
   taskIndex: number;
   task_id: number;
-  commentList: CommentType[];
+  comments: CommentType[];
 }
 
-const props = defineProps<Props>();
+const commentProps = defineProps<CommentProps>();
 
 const commentInput = ref("")
 
 const addComment = () => {
-  addCommentToApi(commentInput.value, props.titleIndex, props.taskIndex, props.task_id, props.commentList)
+  addCommentToApi(commentInput.value, commentProps)
 
   commentInput.value = ""
 }

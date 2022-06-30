@@ -1,20 +1,22 @@
 <script setup lang="ts">
+import { TaskType } from 'resources/ts/Store/type';
 import { deleteTaskToApi } from './API/deleteTaskToApi';
 
-type Props = {
+type TaskProps = {
   titleIndex: number;
   taskIndex: number;
-  id: number;
-  done: boolean;
-  task: string;
+  tasks: TaskType;
+  deleteState: {
+    deleteTaskList: number[];
+  }
 }
 
-const props = defineProps<Props>();
+const taskProps = defineProps<TaskProps>();
 </script>
 
 <template>
   <div class="card-flex__delete">
-    <span type="button" class="buttonCircle" @click="deleteTaskToApi(props)">
+    <span type="button" class="buttonCircle" @click="deleteTaskToApi(taskProps, deleteState.deleteTaskList)">
       <span class="buttonCircle-cross"></span>
     </span>
   </div>

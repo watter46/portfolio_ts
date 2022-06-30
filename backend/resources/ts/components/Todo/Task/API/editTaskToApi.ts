@@ -1,28 +1,17 @@
-import type { TaskType } from '../../../../Store/type'
+import type { TaskProps } from '../Functions/type'
+import type { TaskType } from 'resources/ts/Store/type'
 
 import axios, { AxiosResponse, AxiosError } from 'axios'
 import { state } from '../../../../Store/state'
 
-type editTaskType = (
-  taskInput: string,
-  props: {
-    titleIndex: number,
-    taskIndex: number,
-    taskList: TaskType
-  }
-) => void
 
-
-export const editTaskToApi: editTaskType = (taskInput, props) => {
-
-  const editTaskData = props.taskList
-
-  editTaskData.task = taskInput
+export const editTaskToApi = (taskProps: TaskProps) => {
+  const tasks = taskProps.tasks
 
   /* APIと通信 */
-  axios.patch('/api/todo/task/' + props.taskList.id + '/patch', editTaskData)
+  axios.patch('/api/todo/task/' + tasks.id + '/patch', tasks)
   .then((response: AxiosResponse<TaskType>) => {
-    const editTask = state.allData[props.titleIndex].tasks?.[props.taskIndex] as TaskType
+    const editTask = state.allData[taskProps.titleIndex].tasks?.[taskProps.taskIndex] as TaskType
     Object.assign(editTask, response.data)
   })
   .catch((e: AxiosError<{ error: string }>) => console.log(e.message))

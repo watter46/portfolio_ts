@@ -1,34 +1,39 @@
 <script setup lang="ts">
+import CheckBox from './CheckBox.vue'
 import { ref } from 'vue'
 import { editTaskToApi } from './API/editTaskToApi'
 import { TaskType } from '../../../Store/type';
 
-type Props = {
+type TaskProps = {
   titleIndex: number;
   taskIndex: number;
-  taskList: TaskType;
+  tasks: TaskType;
+  deleteState: {
+    deleteTaskList: number[];
+  }
 }
 
-const props = defineProps<Props>();
+const taskProps = defineProps<TaskProps>();
 
 const is_edit = ref(false)
 </script>
 
 <template>
   <div class="card-flex__show">
-    <div class="card-flex__show__checkbox">
-      <input type="checkbox" v-model="taskList.done">
-    </div>
+    <!-- CheckBox Component: タスクの状態を表示 -->
+    <CheckBox :tasks="tasks"
+              :delete-state="deleteState" />
+
     <div class="card-flex__show__input"
          v-if="!is_edit"
-         v-text="taskList.task"
+         v-text="tasks.task"
          @click="is_edit = true">
     </div>
     <input class="card-flex__show__input"
            v-if="is_edit"
            type="text"
-           v-model="taskList.task"
-           @change="editTaskToApi(taskList.task, props)"
+           v-model="tasks.task"
+           @change="editTaskToApi(taskProps)"
            @blur="is_edit = false"
            v-focus>
   </div>

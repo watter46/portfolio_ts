@@ -1,28 +1,27 @@
-import type { TaskType } from '../../../../Store/type'
+import type { TaskType } from 'resources/ts/Store/type'
 
 import axios, { AxiosResponse, AxiosError } from 'axios'
 import { getTaskPosition } from '../../../modules/Todo/getPosition/getTaskPosition'
 import { state } from '../../../../Store/state'
-import { ref } from 'vue'
 
-type AddTaskType = {
+type TaskProps = {
+  titleIndex: number;
   title_id: number;
-  task: string;
-  task_position: number;
+  tasks: TaskType[];
 }
 
-export const addTaskToApi = (input: string, titleIndex: number, title_id: number, taskList: TaskType[]) => {
+export const addTaskToApi = (input: string, taskProps: TaskProps) => {
 
-  const task_position = getTaskPosition(taskList)
+  const task_position = getTaskPosition(taskProps.tasks)
 
-  const addTaskData: AddTaskType = {
-    title_id: title_id,
+  const addTaskData = {
+    title_id: taskProps.title_id,
     task: input,
     task_position: task_position,
   }
 
   /* APIと通信 */
   axios.post('/api/todo/task/post', addTaskData)
-  .then((response: AxiosResponse<TaskType>) => state.allData[titleIndex].tasks?.push(response.data))
+  .then((response: AxiosResponse<TaskType>) => state.allData[taskProps.titleIndex].tasks?.push(response.data))
   .catch((e: AxiosError<{ error: string }>) => console.log(e.message))
 }

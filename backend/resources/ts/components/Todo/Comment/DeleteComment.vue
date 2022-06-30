@@ -1,21 +1,21 @@
 <script setup lang="ts">
+import type { CommentType } from 'resources/ts/Store/type';
 import { deleteCommentToApi } from './API/deleteCommentToApi' 
 
 
-interface Props {
-  id: number,
-  comment: string,
-  titleIndex: number,
-  taskIndex: number,
-  commentIndex: number
+type CommentProps = {
+  titleIndex: number;
+  taskIndex: number;
+  commentIndex: number;
+  comments: CommentType;
 }
 
-defineProps<Props>();
+const commentProps = defineProps<CommentProps>();
 </script>
 
 <template>
   <div class="card-flex__delete">
-    <span type="button" class="buttonCircle" @click="deleteCommentToApi(titleIndex, taskIndex, commentIndex, id)">
+    <span type="button" class="buttonCircle" @click="deleteCommentToApi(commentProps)">
       <span class="buttonCircle-cross"></span>
     </span>
   </div>

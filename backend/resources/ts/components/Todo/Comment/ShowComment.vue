@@ -4,22 +4,16 @@ import { editCommentToApi } from './API/editCommentToApi';
 import { CommentType } from '../../../Store/type';
 
 
-type Props = {
+type CommentProps = {
   titleIndex: number;
   taskIndex: number;
   commentIndex: number;
-  commentList: CommentType;
+  comments: CommentType;
 }
 
-type CommentStateType = {
-  input: string;
-  is_edit: boolean;
-}
+const commentProps = defineProps<CommentProps>();
 
-const props = defineProps<Props>();
-
-const commentState = reactive<CommentStateType>({
-  input: props.commentList.comment,
+const commentState = reactive({
   is_edit: false
 })
 </script>
@@ -28,14 +22,14 @@ const commentState = reactive<CommentStateType>({
   <div class="card-flex__show">
     <div class="card-flex__show__input"
          v-if="!commentState.is_edit"
-         v-text="commentState.input"
+         v-text="comments.comment"
          @click="commentState.is_edit = true">
     </div>
     <input class="card-flex__show__input"
            v-if="commentState.is_edit"
            type="text"
-           v-model="commentState.input"
-           @change="editCommentToApi(commentState.input, props)"
+           v-model="comments.comment"
+           @change="editCommentToApi(commentProps)"
            @blur="commentState.is_edit = false"
            v-focus>
   </div>
