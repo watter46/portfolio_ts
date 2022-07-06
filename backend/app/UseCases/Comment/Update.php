@@ -11,7 +11,7 @@ class Update
     public function __invoke(array $data)
     {
         if (!array_key_exists('updatePositionList', $data)) {
-            Comment::upsert($data, ['id', 'task_id'], ['comment', 'comment_position']);
+            Comment::upsert($data, ['id'], ['task_id', 'comment', 'comment_position']);
 
             $result = Comment::find($data['id']);
 
@@ -20,7 +20,7 @@ class Update
         else {
             $data = $data['updatePositionList'];
 
-            Comment::upsert($data, ['id', 'task_id'], ['comment', 'comment_position']);
+            Comment::upsert($data, ['id'], ['task_id', 'comment', 'comment_position']);
 
             $ids = array_column($data, 'id');
             $result = Comment::orderBy('comment_position', 'asc')->find($ids);
